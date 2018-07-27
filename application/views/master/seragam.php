@@ -57,7 +57,7 @@
 	                    </div>
 	                  </div>
 	                  <div class="form-group col-lg-12">
-	                    <label class="control-label col-sm-4 for="jk">Jenis kelamin :</label>
+	                    <label class="control-label col-sm-4" for="jk">Jenis kelamin :</label>
 	                    <div class="col-sm-8">
 	                      <select class="form-control" id="jk" name="jk">
 	                      		<option value="0">-- Pilih satu --</option>
@@ -101,7 +101,7 @@
 	                    </div>
 	                  </div>
 	                  <div class="form-group col-lg-12">
-	                    <label class="control-label col-sm-4 for="jk">Pilih Ukuran :</label>
+	                    <label class="control-label col-sm-4" for="jk">Pilih Ukuran :</label>
 	                    <div class="col-sm-8"> 
 	                    	<input type="checkbox" name="cb[]" value="S"> S<br>
 							<input type="checkbox" name="cb[]" value="M"> M<br>
@@ -111,7 +111,7 @@
 	                    </div>
 	                  </div>
 	                  <div class="form-group col-lg-12">
-	                    <label class="control-label col-sm-4 for="jk">Stok :</label>
+	                    <label class="control-label col-sm-4" for="jk">Stok :</label>
 	                    <div class="col-sm-8"> 
 	                    	<input type="text" class="form-control" name="Stok" onkeypress="return isNumber(event)">
 	                    </div>
@@ -150,13 +150,13 @@
 	                    </div>
 	                  </div>
 	                  <div class="form-group col-lg-12">
-	                    <label class="control-label col-sm-4 for="jk">Ukuran :</label>
+	                    <label class="control-label col-sm-4" for="jk">Ukuran :</label>
 	                    <div class="col-sm-8"> 
 	                    	<input type="text" id="up_uk" name="Ukuran" class="form-control" readonly="true" disabled="true">
 	                    </div>
 	                  </div>
 	                  <div class="form-group col-lg-12">
-	                    <label class="control-label col-sm-4 for="jk">Stok :</label>
+	                    <label class="control-label col-sm-4" for="jk">Stok :</label>
 	                    <div class="col-sm-8"> 
 	                    	<input type="number" id="up_Stok" name="Stok" class="form-control" onkeypress="return isNumber(event)">
 	                    </div>

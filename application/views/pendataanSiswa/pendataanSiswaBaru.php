@@ -29,7 +29,7 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="jk">Jenis Kelamin:</label>
+                      <label class="control-label col-sm-4" for="jk">Jenis Kelamin:</label>
                       <div class="col-sm-8">
                         <!-- jk-->
                           <select name="jk" class="selectpicker form-control" id="jk" title="Select Gender">
@@ -42,7 +42,7 @@
 
                 <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="tempat_l">Tempat Lahir :</label>
+                      <label class="control-label col-sm-4" for="tempat_l">Tempat Lahir :</label>
                       <div class="col-sm-8">
                         <!-- tempat_l-->
                         <input type="text" class="form-control" id="tempat_l" name="tempat_l">
@@ -59,7 +59,7 @@
 
                 <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="agama">Agama :</label>
+                      <label class="control-label col-sm-4" for="agama">Agama :</label>
                       <div class="col-sm-8">
                         <!-- agama-->
                           <select name="agama" class="selectpicker form-control" id="agama" title="Select Agama">
@@ -74,12 +74,12 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="anak_k">Anak ke :</label>
+                      <label class="control-label col-sm-4" for="anak_k">Anak ke :</label>
                       <div class="col-sm-3">
                         <!-- anak_k-->
                         <input type="number" class="form-control" id="anak_k" name="anak_k">
                       </div>
-                      <label class="control-label col-sm-2 for="dari">Dari :</label>
+                      <label class="control-label col-sm-2" for="dari">Dari :</label>
                       <div class="col-sm-3">
                         <!-- dari-->
                         <input type="number" class="form-control" id="dari" name="dari">
@@ -88,7 +88,7 @@
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="tahun_ajaran">Tahun Ajaran Masuk :</label>
+                      <label class="control-label col-sm-4" for="tahun_ajaran">Tahun Ajaran Masuk :</label>
                       <div class="col-sm-8">
                         <!-- tahun_ajaran-->
                           <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
@@ -97,7 +97,7 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="kategori">Kategori Masuk :</label>
+                      <label class="control-label col-sm-4" for="kategori">Kategori Masuk :</label>
                       <div class="col-sm-8">
                         <!-- kategori-->
                           <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
@@ -108,8 +108,8 @@
                   </div>
                   <div class="row">
                     <div class="form-group col-lg-6">   
-                      <label class="control-label col-sm-4 for="anak_k" align="left">Jumlah Saudara</label>
-                      <label class="control-label col-sm-3 for="kandung">Kandung :</label>
+                      <label class="control-label col-sm-4" for="anak_k" align="left">Jumlah Saudara</label>
+                      <label class="control-label col-sm-3" for="kandung">Kandung :</label>
                       <div class="col-sm-3">
                         <!-- kandung-->
                         <input type="number" class="form-control" id="kandung" name="kandung">
@@ -128,20 +128,20 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">   
-                      <label class="control-label col-sm-4 align="left">Keadaan Jasmani</label>
-                      <label class="control-label col-sm-4 for="berat">Berat Badan :</label>
+                      <label class="control-label col-sm-4" align="left">Keadaan Jasmani</label>
+                      <label class="control-label col-sm-4" for="berat">Berat Badan :</label>
                       <div class="col-sm-3">
                         <!-- berat-->
                         <input type="number" class="form-control" id="berat" name="berat">
                       </div>
-                      <label class="control-label col-sm-1 for="kandung">Kg</label>
+                      <label class="control-label col-sm-1" for="kandung">Kg</label>
                       <br/><br>
                       <label class="control-label col-sm-4 col-sm-offset-4" for="tinggi">Tinggi Badan :</label>
                       <div class="col-sm-3">
                         <!-- tinggi-->
                         <input type="number" class="form-control" id="tinggi" name="tinggi">
                       </div>
-                      <label class="control-label col-sm-1 for="kandung">Kg</label>
+                      <label class="control-label col-sm-1" for="kandung">Kg</label>
                       <br><br>
                       <label class="control-label col-sm-4 col-sm-offset-4" for="golDar">Golongan Darah :</label>
                       <div class="col-sm-3">
@@ -164,7 +164,7 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="bahasa">Bahasa Sehari :</label>
+                      <label class="control-label col-sm-4" for="bahasa">Bahasa Sehari :</label>
                       <div class="col-sm-8">
                         <!-- bahasa-->
                         <input type="text" class="form-control" id="bahasa" name="bahasa">
@@ -257,7 +257,7 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="namaIbu">Nama Ibu :</label>
+                      <label class="control-label col-sm-4" for="namaIbu">Nama Ibu :</label>
                       <div class="col-sm-8">
                         <!-- namaIbu-->
                         <input type="text" class="form-control" id="namaIbu" name="namaIbu">
@@ -266,14 +266,14 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="tempat_lAyah">Tempat Lahir Ayah :</label>
+                      <label class="control-label col-sm"4 for="tempat_lAyah">Tempat Lahir Ayah :</label>
                       <div class="col-sm-8">
                         <!-- tempat_lAyah-->
                         <input type="text" class="form-control" id="tempat_lAyah" name="tempat_lAyah">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="tempat_lIbu">Tempat Lahir Ibu :</label>
+                      <label class="control-label col-sm-4" for="tempat_lIbu">Tempat Lahir Ibu :</label>
                       <div class="col-sm-8">
                         <!-- tempat_lIbu-->
                         <input type="text" class="form-control" id="tempat_lIbu" name="tempat_lIbu">
@@ -298,14 +298,14 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="pekerjaanAyah">Pekerjaan Ayah :</label>
+                      <label class="control-label col-sm-4" for="pekerjaanAyah">Pekerjaan Ayah :</label>
                       <div class="col-sm-8">
                         <!-- pekerjaanAyah-->
                         <input type="text" class="form-control" id="pekerjaanAyah" name="pekerjaanAyah">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="pekerjaanIbu">Pekerjaan Ibu :</label>
+                      <label class="control-label col-sm-4" for="pekerjaanIbu">Pekerjaan Ibu :</label>
                       <div class="col-sm-8">
                         <!-- pekerjaanIbu-->
                         <input type="text" class="form-control" id="pekerjaanIbu" name="pekerjaanIbu">
@@ -314,7 +314,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="pendidikanAyah">Pendidikan Terakhir Ayah :</label>
+                      <label class="control-label col-sm-4" for="pendidikanAyah">Pendidikan Terakhir Ayah :</label>
                       <div class="col-sm-8">
                         <!-- pendidikanAyah-->
                           <select name="pendidikanAyah" class="selectpicker form-control" id="pendidikanAyah" title="Select Pendidikan">
@@ -333,7 +333,7 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4 for="pendidikanIbu">Pendidikan Terakhir Ibu :</label>
+                      <label class="control-label col-sm-4" for="pendidikanIbu">Pendidikan Terakhir Ibu :</label>
                       <div class="col-sm-8">
                         <!-- pendidikanIbu-->
                           <select name="pendidikanIbu" class="selectpicker form-control" id="pendidikanIbu" title="Select Pendidikan">

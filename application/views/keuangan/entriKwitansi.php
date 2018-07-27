@@ -13,7 +13,7 @@
                     </div>
                   </div>
                   <div class="form-group col-lg-6">
-                    <label class="control-label col-sm-4 for="tgl">Tanggal :</label>
+                    <label class="control-label col-sm-4" for="tgl">Tanggal :</label>
                     <div class="col-sm-8">
                       <input type="text" class="form-control" id="tgl" placeholder="YYYY-MM-DD" name="tgl">
                     </div>
@@ -28,7 +28,7 @@
                     </div>
                   </div>
                   <div class="form-group col-lg-6">
-                    <label class="control-label col-sm-4 for="jml">Sejumlah (Rp) :</label>
+                    <label class="control-label col-sm-4" for="jml">Sejumlah (Rp) :</label>
                     <div class="col-sm-8">
                       <input type="text" class="form-control" onkeyup="terbilang();" id="jml" name="jml">
                     </div>
