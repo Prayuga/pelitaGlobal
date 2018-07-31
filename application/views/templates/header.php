@@ -193,9 +193,6 @@
                                     <a href="<?php echo base_url('master/tahunAjaran');?>">Tahun Ajaran</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('master/kategori');?>">Kategori</a>
-                                </li>
-                                <li>
                                     <a href="<?php echo base_url('master/kelas');?>">Kelas</a>
                                 </li>
                                 <li>

@@ -8,6 +8,7 @@ class master extends CI_Controller {
 		parent::__construct();
 		$this->load->model('stationary_model');
 		$this->load->model('seragam_model');
+		$this->load->model('tahunajaran_model');
 	}
 	
 	// public function stationary(){
