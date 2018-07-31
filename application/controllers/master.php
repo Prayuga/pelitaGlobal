@@ -41,22 +41,6 @@ class master extends CI_Controller {
 		redirect('master/stationary');
 	}
 
-	public function tahunAjaran(){
-		$this->Login_model->keamanan();
-		//$data['stationary'] = $this->stationary_model->get_s();
-		$this->load->view('templates/header');
-		$this->load->view('master/tahunAjaran'/*, $data*/);
-		$this->load->view('templates/footer');
-	}
-
-	public function kategori(){
-		$this->Login_model->keamanan();
-		//$data['stationary'] = $this->stationary_model->get_s();
-		$this->load->view('templates/header');
-		$this->load->view('master/kategori'/*, $data*/);
-		$this->load->view('templates/footer');
-	}
-
 	public function kelas(){
 		$this->Login_model->keamanan();
 		//$data['stationary'] = $this->stationary_model->get_s();
@@ -64,6 +48,42 @@ class master extends CI_Controller {
 		$this->load->view('master/kelas'/*, $data*/);
 		$this->load->view('templates/footer');
 	}
+
+	public function tahunAjaran(){
+		$this->Login_model->keamanan();
+		$data['tahunAjaran'] = $this->tahunajaran_model->get_TA();
+		$data['kategorikelas'] = $this->tahunajaran_model->get_KK();
+		$this->load->view('templates/header');
+		$this->load->view('master/tahunAjaran', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function add_tahunAjaran(){
+		$this->tahunajaran_model->add_TA();
+		redirect('master/tahunAjaran');
+	}
+
+	public function add_kategorikelas(){
+		$this->tahunajaran_model->add_KK();
+		redirect('master/tahunAjaran');
+	}
+
+	public function update_tahunAjaran($id_tahunAjaran){
+		$this->tahunajaran_model->update_TA($id_tahunAjaran);
+		redirect('master/tahunAjaran');
+	}
+
+	public function delete_kategorikelas($id_kategorikelas){
+		$this->tahunajaran_model->delete_KK($id_kategorikelas);
+		redirect('master/tahunAjaran');
+	}
+
+
+	public function update_kategorikelas($id_kategorikelas){
+		$this->tahunajaran_model->update_KK($id_kategorikelas);
+		redirect('master/tahunAjaran');
+	}
+
 	//end fungsi atk
 
 	// fungsi seragam
