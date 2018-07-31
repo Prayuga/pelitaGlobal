@@ -39,15 +39,23 @@
                       </div>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="tempat_l">Tempat Lahir :</label>
-                      <div class="col-sm-8">
-                        <!-- tempat_l-->
-                        <input type="text" class="form-control" id="tempat_l" name="tempat_l">
-                      </div>
+                  <div class="form-group col-lg-6">
+                    <label class="control-label col-sm-4" for="nama_p">Nama Panggilan :</label>
+                    <div class="col-sm-8">
+                      <!-- nama_p-->
+                      <input type="text" class="form-control" id="nama_p" name="nama_p">
                     </div>
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <label class="control-label col-sm-4" for="tempat_l">Tempat Lahir :</label>
+                    <div class="col-sm-8">
+                      <!-- tempat_l-->
+                      <input type="text" class="form-control" id="tempat_l" name="tempat_l">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="tgl_l">Tanggal Lahir :</label>
                       <div class="col-sm-8">
@@ -55,57 +63,32 @@
                         <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_l" name="tgl_l">
                       </div>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="agama">Agama :</label>
                       <div class="col-sm-8">
                         <!-- agama-->
                           <select name="agama" class="selectpicker form-control" id="agama" title="Select Agama">
-                                 <option value="0">-- Choose One --</option>
-                                 <option value="1">Islam</option>
-                                 <option value="2">Kristen</option>
-                                 <option value="3">Katholik</option>
-                                 <option value="4">Hindu</option>
-                                 <option value="5">Buddha</option>
-                                 <option value="6">Kong Hu Cu</option>
+                            <?php foreach ($agama as $agama_item) { ?>
+                              <option value="<?php echo $agama_item['ID_Agama']; ?>"><?php echo $agama_item['Agama']; ?></option>
+                            <?php } ?>
                           </select>
                       </div>
                     </div>
-                    <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="anak_k">Anak ke :</label>
-                      <div class="col-sm-3">
-                        <!-- anak_k-->
-                        <input type="number" class="form-control" id="anak_k" name="anak_k">
-                      </div>
-                      <label class="control-label col-sm-2" for="dari">Dari :</label>
-                      <div class="col-sm-3">
-                        <!-- dari-->
-                        <input type="number" class="form-control" id="dari" name="dari">
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-lg-6">
+                    <label class="control-label col-sm-4" for="anak_k">Anak ke :</label>
+                    <div class="col-sm-3">
+                      <!-- anak_k-->
+                      <input type="number" class="form-control" id="anak_k" name="anak_k">
+                    </div>
+                    <label class="control-label col-sm-2" for="dari">Dari :</label>
+                    <div class="col-sm-3">
+                      <!-- dari-->
+                      <input type="number" class="form-control" id="dari" name="dari">
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="tahun_ajaran">Tahun Ajaran Masuk :</label>
-                      <div class="col-sm-8">
-                        <!-- tahun_ajaran-->
-                          <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
-                            <option value="All">All</option>
-                          </select>
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="kategori">Kategori Masuk :</label>
-                      <div class="col-sm-8">
-                        <!-- kategori-->
-                          <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
-                                 <option value="0">All</option>
-                          </select>
-                      </div>
-                    </div>
-                  </div>
+                </div>
                   <div class="row">
                     <div class="form-group col-lg-6">   
                       <label class="control-label col-sm-4" for="anak_k" align="left">Jumlah Saudara</label>
@@ -155,6 +138,28 @@
                       </div>
                     </div>
                   </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                      <label class="control-label col-sm-4" for="tahun_ajaran">Tahun Ajaran Masuk :</label>
+                      <div class="col-sm-8">
+                        <!-- tahun_ajaran-->
+                          <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
+                            <option value="All">All</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label class="control-label col-sm-4" for="kategori">Kategori Masuk :</label>
+                      <div class="col-sm-8">
+                        <!-- kategori-->
+                          <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
+                            <?php foreach ($kategori as $kategori_item) { ?>
+                              <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
+                            <?php } ?>
+                          </select>
+                      </div>
+                    </div>
+                </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="pendidikan_sebelum">Pendidikan Sebelumnya :</label>
@@ -266,7 +271,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm"4 for="tempat_lAyah">Tempat Lahir Ayah :</label>
+                      <label class="control-label col-sm-4" for="tempat_lAyah">Tempat Lahir Ayah :</label>
                       <div class="col-sm-8">
                         <!-- tempat_lAyah-->
                         <input type="text" class="form-control" id="tempat_lAyah" name="tempat_lAyah">
