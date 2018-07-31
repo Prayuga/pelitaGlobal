@@ -133,6 +133,9 @@
                                     <a href="<?php echo base_url('pendataanSiswa/view'); ?>">Pendataan Siswa Baru</a>
                                 </li>
                                 <li>
+                                    <a href="<?php echo base_url('pendataanSiswa/kelas'); ?>">Pendataan Kelas</a>
+                                </li>
+                                <li>
                                     <a href="forms.html">Registrasi Ulang</a>
                                 </li>
                             </ul>
