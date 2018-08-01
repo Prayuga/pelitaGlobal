@@ -17,6 +17,11 @@ class PendataanSiswa_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_tahunAjaran(){
+        $query = $this->db->get_where('mstahunajaran', array('flagactive' => 'Y'));
+        return $query->result_array();
+    }
+
     public function add_sw(){
         $data = array(
             //disini

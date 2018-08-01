@@ -172,10 +172,7 @@
                             <a href="tables.html"><i class="fa fa-files-o fa-fw"></i> Laporan<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url('laporan/siswaglobal');?>">Data Keseluruhan Siswa</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('laporan/siswakelas');?>">Data Siswa per-kelas</a>
+                                    <a href="<?php echo base_url('laporan/siswa_all');?>">Data Siswa Global</a>
                                 </li>
                                 <li>
                                     <a href="#">Pelunasan Biaya Sekolah</a>

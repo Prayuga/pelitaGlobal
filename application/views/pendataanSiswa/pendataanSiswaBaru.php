@@ -60,7 +60,9 @@
                       <div class="col-sm-8">
                         <!-- tahun_ajaran-->
                           <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
-                            <option value="All">All</option>
+                            <?php foreach ($tahun_ajaran as $ta_item) { ?>
+                              <option value="<?php echo $ta_item['ID_TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
+                            <?php } ?>
                           </select>
                       </div>
                     </div>
