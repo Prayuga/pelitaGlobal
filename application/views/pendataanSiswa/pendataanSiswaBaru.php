@@ -8,6 +8,7 @@
 </script>
 
 <!-- ini isi halamannya -->
+<?php echo form_open('pendataanSiswa/add_siswa');?>
   <div class="row">
     <div class="col-lg-12">
       <h3 class="page-header">Pendataan Siswa Baru</h3> 
@@ -19,7 +20,6 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                <form class="form-horizontal" method="post" action="">
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="nama_s">Nama Siswa :</label>
@@ -54,6 +54,27 @@
                       <input type="text" class="form-control" id="tempat_l" name="tempat_l">
                     </div>
                   </div>
+                </div><div class="row">
+                    <div class="form-group col-lg-6">
+                      <label class="control-label col-sm-4" for="tahun_ajaran">Thn Ajaran Masuk :</label>
+                      <div class="col-sm-8">
+                        <!-- tahun_ajaran-->
+                          <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
+                            <option value="All">All</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label class="control-label col-sm-4" for="kategori">Kategori Masuk :</label>
+                      <div class="col-sm-8">
+                        <!-- kategori-->
+                          <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
+                            <?php foreach ($kategori as $kategori_item) { ?>
+                              <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
+                            <?php } ?>
+                          </select>
+                      </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
@@ -64,15 +85,7 @@
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="agama">Agama :</label>
-                      <div class="col-sm-8">
-                        <!-- agama-->
-                          <select name="agama" class="selectpicker form-control" id="agama" title="Select Agama">
-                            <?php foreach ($agama as $agama_item) { ?>
-                              <option value="<?php echo $agama_item['ID_Agama']; ?>"><?php echo $agama_item['Agama']; ?></option>
-                            <?php } ?>
-                          </select>
-                      </div>
+                      <label class="control-label col-sm-12" style="font-weight: normal; font-size: 9pt; color: red;" id="alertss"></label>
                     </div>
                 </div>
                 <div class="row">
@@ -88,6 +101,17 @@
                       <input type="number" class="form-control" id="dari" name="dari">
                     </div>
                   </div>
+                    <div class="form-group col-lg-6">
+                      <label class="control-label col-sm-4" for="agama">Agama :</label>
+                      <div class="col-sm-8">
+                        <!-- agama-->
+                          <select name="agama" class="selectpicker form-control" id="agama" title="Select Agama">
+                            <?php foreach ($agama as $agama_item) { ?>
+                              <option value="<?php echo $agama_item['ID_Agama']; ?>"><?php echo $agama_item['Agama']; ?></option>
+                            <?php } ?>
+                          </select>
+                      </div>
+                    </div>
                 </div>
                   <div class="row">
                     <div class="form-group col-lg-6">   
@@ -98,13 +122,13 @@
                         <input type="number" class="form-control" id="kandung" name="kandung">
                       </div>
                       <br/><br>
-                      <label class="control-label col-sm-4 col-sm-offset-3" for="angkat">Angkat :</label>
+                      <label class="control-label col-sm-3 col-sm-offset-4" for="angkat">Angkat :</label>
                       <div class="col-sm-3">
                         <!-- angkat-->
                         <input type="number" class="form-control" id="angkat" name="angkat">
                       </div>
                       <br><br>
-                      <label class="control-label col-sm-4 col-sm-offset-3" for="tiri">Tiri :</label>
+                      <label class="control-label col-sm-3 col-sm-offset-4" for="tiri">Tiri :</label>
                       <div class="col-sm-3">
                         <!-- tiri-->
                         <input type="number" class="form-control" id="tiri" name="tiri">
@@ -129,7 +153,7 @@
                       <label class="control-label col-sm-4 col-sm-offset-4" for="golDar">Golongan Darah :</label>
                       <div class="col-sm-3">
                         <!-- golDar-->
-                          <select name="golDar" class="selectpicker form-control" id="golDar" title="Select Golongan Darah">
+                          <select name="golDar" class="selectpicker form-control" id="golDar" title="Select">
                             <option value="A">A</option>
                             <option value="AB">AB</option>
                             <option value="O">O</option>
@@ -138,28 +162,6 @@
                       </div>
                     </div>
                   </div>
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="tahun_ajaran">Tahun Ajaran Masuk :</label>
-                      <div class="col-sm-8">
-                        <!-- tahun_ajaran-->
-                          <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
-                            <option value="All">All</option>
-                          </select>
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-6">
-                      <label class="control-label col-sm-4" for="kategori">Kategori Masuk :</label>
-                      <div class="col-sm-8">
-                        <!-- kategori-->
-                          <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
-                            <?php foreach ($kategori as $kategori_item) { ?>
-                              <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
-                            <?php } ?>
-                          </select>
-                      </div>
-                    </div>
-                </div>
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="pendidikan_sebelum">Pendidikan Sebelumnya :</label>
@@ -192,7 +194,6 @@
                       </div>
                     </div>
                   </div>
-              </form> 
               </div>    
           </div>
         </div>
@@ -309,6 +310,7 @@
                         <input type="text" class="form-control" id="pekerjaanAyah" name="pekerjaanAyah">
                       </div>
                     </div>
+                    
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="pekerjaanIbu">Pekerjaan Ibu :</label>
                       <div class="col-sm-8">
@@ -382,26 +384,52 @@
       </div>
     </div>
   </div>
+<?php echo form_close(); ?>
 
-        <script>
-             $(document).ready(function () {
-               $('#tgl_l').datetimepicker({
-                    format: 'YYYY-MM-DD',
-                    maxDate: $.now()
-                }); 
-               $('#tgl_2').datetimepicker({
-                    format: 'YYYY-MM-DD',
-                    maxDate: $.now()
-                });
-               $('#tgl_3').datetimepicker({
-                    format: 'YYYY-MM-DD',
-                    maxDate: $.now()
-                });
+    <script>
+         $(document).ready(function () {
+           $('#tgl_l').datetimepicker({
+                format: 'YYYY-MM-DD',
+                maxDate: $.now()
+            }); 
+           $('#tgl_2').datetimepicker({
+                format: 'YYYY-MM-DD',
+                maxDate: $.now()
             });
+           $('#tgl_3').datetimepicker({
+                format: 'YYYY-MM-DD',
+                maxDate: $.now()
+            });
+        });
 
-               function cok(){
-                alert('Fitur ini masih dalam proses');
-               }
-        </script>
+           function cok(){
+            alert('Fitur ini masih dalam proses');
+           }
+    </script>
+    <script>
+        $('#tgl_l').blur(function(){
+            var tgl = $('#tgl_l').val();
+            var kategori = $('#kategori').val();
+            if(tgl=="" || kategori==""){
+              alert("Tanggal lahir dan Umur tidak boleh kosong");
+            }else{
+              $.ajax({
+                  url: "<?=base_url();?>pendataanSiswa/get_umur",
+                  //data: $("#a").serialize(),
+                  data:{
+                    tgl: tgl,
+                    kategori:kategori
+                  },
+                  type: "POST",
+                  success:function(data){
+                      $('#alertss').html(data);
+                  },
+                  error:function(jqXHR,textStatus, errorThrown){
+                      alert('error');
+                  }
+              });
+            }
+        });
+    </script>
 </div>
 <!-- /#page-wrapper -->
