@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class PendataanSiswa_model extends CI_Model {
 
 	public function __construct(){
+		parent::__construct();
 		$this->load->database();
 	}	
 
@@ -16,5 +17,30 @@ class PendataanSiswa_model extends CI_Model {
 		$query = $this->db->get_where('mskategorikelas', array('flagactive' => 'Y'));
 		return $query->result_array();
 	}
+        
+        public function getSiswaBaru(){
+                $str = "Select NomorIndukSiswa,NamaSiswa FROM `mssiswa` where ID_Kelas is NULL";
+                $query = $this->db->query($str);
+                return $query;
+        }
+        
+	public function get_Tahun(){
+		$query = $this->db->get_where('mstahunajaran', array('flagactive' => 'Y'));
+		return $query->result_array();
+	}
 	
+        public function getKelas($thn, $kat){
+                $this->db->select('ID_Kelas,NamaKelas');
+                $query = $this->db->get_where('msheaderkelas', array('ID_Kategori'=> $kat,'ID_TahunAjaran'=>$thn,'flagactive' => 'Y') );
+                //return $this->db->last_query(); cek query string
+                return $query;
+        }
+        
+        public function updateKelas($id, $ar){
+            $str = "update mssiswa set ID_Kelas = ".$id." where NomorIndukSiswa = '".$ar."'";
+            $str2 = "insert into msdetailkelas values (NULL,".$id.",".$ar.",'Y')";
+            $this->db->query($str);
+            $this->db->query($str2);
+            return $this->db->last_query();
+        }
 }
