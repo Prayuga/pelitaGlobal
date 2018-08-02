@@ -75,7 +75,8 @@
                                     <tr>
                                         <th width="20%" style="text-align: center;">ID Kategori</th>
                                         <th width="20%" style="text-align: center;">Nama Kategori</th>
-                                        <th width="50%" style="text-align: center;">Keterangan</th>
+                                        <th width="20%" style="text-align: center;">Minimal Umur</th>
+                                        <th width="30%" style="text-align: center;">Keterangan</th>
                                         <th width="10%" style="text-align: center;">Action</th>
                                     </tr>
                                 </thead>
@@ -84,6 +85,7 @@
                                     <tr>
                                         <td style="text-align: center;"><?php echo $kategorikelas_item['SingkatanKategori']; ?></td>
                                         <td style="text-align: center;"><?php echo $kategorikelas_item['NamaKategori']; ?></td>
+                                        <td style="text-align: center;"><?php echo $kategorikelas_item['MinUmur']; ?> tahun</td>
                                         <td style="text-align: center;"><?php echo $kategorikelas_item['Keterangan']; ?></td>
                                         <td align="center">
                                             <a href="#" style="font-style: none; font-size: 15pt; color: red;"><i class="fa fa-trash fa-fw" data-toggle="modal" data-target="#modalDelete<?php echo $kategorikelas_item['ID_Kategori']; ?>"></i></a>
@@ -263,7 +265,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Kategori Kelas</h4>
+            <h4 class="modal-title" id="myModalLabel">Update Kategori Kelas</h4>
           </div>
           <?php echo form_open('master/update_kategorikelas/'.$kategorikelas_item['ID_Kategori']); ?>
               <div class="modal-body">
@@ -281,6 +283,17 @@
                     </div>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="namaKategori" value="<?php echo $kategorikelas_item['NamaKategori']; ?>" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <h5 style="font-weight: bold;">Minimal Umur :</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" name="minUmur" value="<?php echo $kategorikelas_item['MinUmur']; ?>" required>
+                    </div>
+                    <div class="col-md-1" align="right">
+                        <h5 style="font-weight: bold;">Tahun</h5>
                     </div>
                 </div>
                 <div class="row">

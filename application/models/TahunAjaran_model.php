@@ -61,6 +61,7 @@ class TahunAjaran_model extends CI_Model {
 		$data = array(
 			'SingkatanKategori' => $this->input->post('singkatanKategori'),
 			'NamaKategori' => $this->input->post('namaKategori'),
+			'MinUmur' => $this->input->post('minUmur'),
 			'Keterangan' =>	$this->input->post('keterangan')
 		);
 
