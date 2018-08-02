@@ -73,12 +73,6 @@ class pendataanSiswa extends CI_Controller {
         }
         
 
-    public function index()
-    {
-        $this->Login_model->keamanan();
-        $this->load->view('pendataanSiswa/pendataanSiswaBaru');
-    }
-
     public function baru(){
         $this->Login_model->keamanan();
         $data['agama'] = $this->pendataansiswa_model->get_Agama();
