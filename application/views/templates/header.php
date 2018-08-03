@@ -130,7 +130,10 @@
                             <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Pendataan Siswa<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url('pendataanSiswa/baru'); ?>">Pendataan Siswa Baru</a>
+                                    <a href="<?php echo base_url('pendataanSiswa/siswabaru'); ?>">Pendataan Siswa Baru</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('pendataanSiswa/kelas'); ?>">Pendataan Kelas</a>
                                 </li>
                                 <li>
                                     <a href="forms.html">Registrasi Ulang</a>
