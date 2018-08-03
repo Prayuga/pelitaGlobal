@@ -90,7 +90,20 @@ class PendataanSiswa_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query->result_array();
     }
-
+ public function getKelas($thn, $kat){
+                $this->db->select('ID_Kelas,NamaKelas');
+                $query = $this->db->get_where('msheaderkelas', array('ID_Kategori'=> $kat,'ID_TahunAjaran'=>$thn,'flagactive' => 'Y') );
+                //return $this->db->last_query(); cek query string
+                return $query;
+        }
+        
+        public function updateKelas($id, $ar){
+            $str = "update mssiswa set ID_Kelas = ".$id." where NomorIndukSiswa = '".$ar."'";
+            $str2 = "insert into msdetailkelas values (NULL,".$id.",".$ar.",'Y')";
+            $this->db->query($str);
+            $this->db->query($str2);
+            return $this->db->last_query();
+        }
     public function get_countSiswa(){
         $sql = "SELECT COUNT(*) as jumlah FROM mssiswa";
         $query = $this->db->query($sql);
