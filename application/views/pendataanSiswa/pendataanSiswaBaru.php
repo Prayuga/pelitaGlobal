@@ -293,14 +293,14 @@
                       <label class="control-label col-sm-4" for="tgl_lAyah">Tanggal Lahir Ayah:</label>
                       <div class="col-sm-8">
                         <!-- tgl_lAyah-->
-                        <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_lAyah" name="tgl_lAyah">
+                        <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_2" name="tgl_lAyah">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="tgl_lIbu">Tanggal Lahir Ibu:</label>
                       <div class="col-sm-8">
                         <!-- tgl_lIbu-->
-                        <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_lIbu" name="tgl_lIbu">
+                        <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_3" name="tgl_lIbu">
                       </div>
                     </div>
                 </div>
@@ -368,6 +368,13 @@
                         <!-- alamatOrtu-->
                         <textarea type="text" class="form-control" id="alamatOrtu" name="alamatOrtu" rows="2"></textarea>
                       </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                      <label class="control-label col-sm-4" for="telpOrtu">Nomor Telp :</label>
+                      <div class="col-sm-8">
+                        <!-- telp-->
+                        <input type="text" class="form-control" id="telpOrtu" name="telpOrtu">
+                      </div>  
                     </div>
                 </div>
               </form> 

@@ -299,10 +299,16 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 *
 	 * @param	string	$sql	an SQL query
 	 * @return	mixed
-	 */
+	 
 	protected function _execute($sql)
 	{
 		return $this->conn_id->query($this->_prep_query($sql));
+	}*/
+	protected function _execute($sql)
+	{
+		$results = $this->conn_id->query($this->_prep_query($sql));
+		@mysqli_next_result($this->conn_id); // Fix 'command out of sync' error
+		return $results;
 	}
 
 	// --------------------------------------------------------------------
