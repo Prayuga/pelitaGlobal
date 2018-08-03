@@ -15,7 +15,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Tahun Ajaran</label>
-                                        <select class="form-control selectpicker" data-live-search="true" name="tahunAjaran" title="Select Tahun Ajaran">
+                                        <select id="sel_thn" class="form-control selectpicker" data-live-search="true" name="tahunAjaran" title="Select Tahun Ajaran">
                                             <?php foreach ($tahun_ajaran as $ta_item) { ?>
                                                 <option value="<?php echo $ta_item['ID_TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
                                             <?php } ?>
@@ -25,7 +25,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Kategori</label>
-                                        <select class="form-control selectpicker" data-live-search="true" name="kategori" title="Select Kategori">
+                                        <select id="sel_kat" class="form-control selectpicker" data-live-search="true" name="kategori" title="Select Kategori">
                                             <?php foreach ($kategori as $kategori_item) { ?>
                                                 <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
                                             <?php } ?>
@@ -43,7 +43,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label style="opacity: 0;">Button</label>
-                                        <input type="submit" class="btn btn-primary form-control" value="Search"> 
+                                        <input type="submit" id="btn_s" class="btn btn-primary form-control" value="Search"> 
                                     </div>
                                 </div>
                             </div>
@@ -61,27 +61,14 @@
                                                 <th width="40px">Umur</th>
                                                 <th width="150px">Diterima di Kelas</th>
                                                 <th width="100px">Agama</th>
-                                                <th width="200px">Nama Orang Tua</th>
+                                                <th width="200px">Nama Ayah</th>
+                                                <th width="200px">Nama Ibu</th>
                                                 <th width="200px">Alamat</th>
                                                 <th width="200px">Nomor Telepon</th>
-                                                <th width="200px">Keterangan</th>
+                                                <!--<th width="200px">Keterangan</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>1658</td>
-                                                <td>Trident</td>
-                                                <td>Perempuan</td>
-                                                <td>Jakarta</td>
-                                                <td>18 Agustus 2010</td>
-                                                <td>8 tahun</td>
-                                                <td>A</td>
-                                                <td>Hindu</td>
-                                                <td>Prayuga</td>
-                                                <td>Jalan Gereja No.14</td>
-                                                <td class="center">08973520211</td>
-                                                <td align="center">-</td>
-                                            </tr>
                                             
                                         </tbody>
                                     </table>
@@ -140,5 +127,34 @@
             $('#dataTables-example').DataTable({
                 responsive: true
             });
+            
+            $('#btn_s').click(function (){
+                var thn = $('#sel_thn').val();
+                var kat = $('#sel_kat').val();
+                alert(thn+kat);
+                /*$.ajax({
+                    url : "<?php echo base_url('pendataanSiswa/getKelas')?>",
+                    type: "POST",
+                    data: {
+                        thn : thn,
+                        kat : kat
+                    },
+                    datatype: 'json',
+                    beforeSend: function() {
+                        $('#loading').show();
+                    },
+                    success: function(data)
+                    {
+                       //alert(data);
+                       $('#sel_kls').html(data);
+                       $('#loading').hide();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert('Error Data');
+                    }
+                });*/
+            });
+            
         });
         </script>
