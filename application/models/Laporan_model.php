@@ -41,4 +41,16 @@ class Laporan_model extends CI_Model {
 	// 	$this->db->where('id_stationary', $id_stationary);
 	// 	return $this->db->update('msstationary', $data);
 	// }
+        
+        public function getSiswa(){
+            $str = "SELECT a.NomorIndukSiswa,"
+                    . "a.NamaSiswa,a.JenisKelamin,a.TempatLahir,"
+                    . "a.TanggalLahir,a.UmurSaatMendaftar,b.NamaKelas,"
+                    . "d.Agama,c.NamaAyah,c.NamaIbu,a.Alamat,a.NoTelp "
+                    . "from mssiswa a,msheaderkelas b,msorangtua c,msagama d "
+                    . "where a.NomorIndukSiswa = c.ID_Siswa and a.ID_Kelas = b.ID_Kelas "
+                    . "and a.ID_Agama = d.ID_Agama and a.FlagActive='Y' ";
+            $query = $this->db->query($str);
+            return $query;
+        }
 }

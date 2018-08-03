@@ -50,7 +50,7 @@
                             <br/>
                             <div class="row">
                                 <div class="col-md-12" style="overflow-x: scroll;">
-                                    <table width="1450px" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <table width="1450px" class="table table-striped table-bordered table-hover table-responsive" id="mytable">
                                         <thead>
                                             <tr>
                                                 <th width="20px">NIS</th>
@@ -124,9 +124,13 @@
         <!-- /#page-wrapper -->
         <script>
         $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true
+            var table = $('#mytable').DataTable({
+                "ajax": {
+                    "url": "<?php echo base_url('laporan/getJsonSiswa')?>",
+                    "type": "POST"
+                }
             });
+             
             
             $('#btn_s').click(function (){
                 var thn = $('#sel_thn').val();

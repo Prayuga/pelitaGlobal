@@ -7,6 +7,7 @@ class laporan extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('tahunajaran_model');
+		$this->load->model('Laporan_model');
 	}
 	
 	public function siswa_all(){
@@ -17,4 +18,33 @@ class laporan extends CI_Controller {
 		$this->load->view('laporan/laporanSiswaAll', $data);
 		$this->load->view('templates/footer');
 	}
+        
+        public function getJsonSiswa(){
+            $list = $this->Laporan_model->getSiswa();
+            $data = array();
+            $no = 0;
+            foreach($list->result() as $siswa){
+                $no++;
+                $row = array();
+                $row[] = $siswa->NomorIndukSiswa;
+                $row[] = $siswa->NamaSiswa;
+                $row[] = $siswa->JenisKelamin;
+                $row[] = $siswa->TempatLahir;
+                $row[] = $siswa->TanggalLahir;
+                $row[] = $siswa->UmurSaatMendaftar;
+                $row[] = $siswa->NamaKelas;
+                $row[] = $siswa->Agama;
+                $row[] = $siswa->NamaAyah;
+                $row[] = $siswa->NamaIbu;
+                $row[] = $siswa->Alamat;
+                $row[] = $siswa->NoTelp;
+                
+                $data[] = $row;
+            }
+            $output = array (
+                "data" => $data,
+            );
+            echo json_encode($output);
+            
+        }
 }
