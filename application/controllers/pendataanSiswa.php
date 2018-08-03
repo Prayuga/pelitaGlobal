@@ -89,7 +89,7 @@ class pendataanSiswa extends CI_Controller {
         $data = $this->pendataansiswa_model->get_u($tgl, $kategori);
         $year = date("Y");
         foreach ($data as $row) {
-            echo "* Umur per-Oktober ".$year." : ".$row['tahun']." tahun ".$row['bulan']." bulan";
+            echo "* Umur per-Oktober ".$year." : ".$row['tahun']." tahun ".$row['bulan']." bulan".$row['stat'].$kategori;
             if($row['stat'] == 'N'){
                 echo ", Umur Kurang";
             }
@@ -97,7 +97,25 @@ class pendataanSiswa extends CI_Controller {
     }
 
     public function add_siswa(){
-        $this->pendataansiswa_model->add_sw();
+        $tgl = $this->input->post('tgl_l');
+        $kategori = $this->input->post('kategori');
+        $data = $this->pendataansiswa_model->get_u($tgl, $kategori);
+        foreach ($data as $row) {
+            $umur = $row['tahun']." tahun ".$row['bulan']." bulan";
+            if($row['stat'] == 'Y'){
+                $surat = 'N';
+            }else{
+                $surat = '-';
+            }
+            
+        }
+
+        $data_s = $this->pendataansiswa_model->get_countSiswa();
+        foreach ($data_s as $row_s) {
+            $count = $row_s['jumlah']+1;
+        }
+
+        $this->pendataansiswa_model->add_sw($umur, $count, $surat);
         redirect('pendataanSiswa/baru');
     }
     
