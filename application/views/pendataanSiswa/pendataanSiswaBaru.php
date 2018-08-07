@@ -208,7 +208,6 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                <form class="form-horizontal" method="post" action="">
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="tinggalPada">Tinggal Pada :</label>
@@ -242,7 +241,6 @@
                       <label class="control-label col-sm-1">Km</label>
                     </div>
                 </div>
-              </form> 
               </div>    
           </div>
         </div>
@@ -255,7 +253,6 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                <form class="form-horizontal" method="post" action="">
                   <div class="row">
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="namaAyah">Nama Ayah :</label>
@@ -376,14 +373,13 @@
                         <input type="text" class="form-control" id="telpOrtu" name="telpOrtu">
                       </div>  
                     </div>
-                </div>
-              </form> 
+                </div> 
               </div> 
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button  class="btn btn-primary pull-right btn-lg" style="margin-bottom: 10px;" onclick="cok()">Submit</button>
+                      <input type="Submit" class="btn btn-primary pull-right btn-lg" style="margin-bottom: 10px;" value="Submit">
                     </div>
                   </div>  
                 </div>
@@ -410,10 +406,6 @@
                 maxDate: $.now()
             });
         });
-
-           function cok(){
-            alert('Fitur ini masih dalam proses');
-           }
     </script>
     <script>
         $('#tgl_l').blur(function(){

@@ -18,6 +18,7 @@ class pendataanSiswa extends CI_Controller {
 		$this->Login_model->keamanan();
 		$data['agama'] = $this->pendataansiswa_model->get_Agama();
 		$data['kategori'] = $this->pendataansiswa_model->get_Kategori();
+        $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
 		$this->load->view('templates/header');
 		$this->load->view('pendataanSiswa/pendataanSiswaBaru', $data);
 		$this->load->view('templates/footer');
@@ -73,15 +74,6 @@ class pendataanSiswa extends CI_Controller {
         }
         
 
-    public function baru(){
-        $this->Login_model->keamanan();
-        $data['agama'] = $this->pendataansiswa_model->get_Agama();
-        $data['kategori'] = $this->pendataansiswa_model->get_Kategori();
-        $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
-        $this->load->view('templates/header');
-        $this->load->view('pendataanSiswa/pendataanSiswaBaru', $data);
-        $this->load->view('templates/footer');
-    }
 
     public function get_umur(){
         $tgl = $this->input->post('tgl');
@@ -89,7 +81,7 @@ class pendataanSiswa extends CI_Controller {
         $data = $this->pendataansiswa_model->get_u($tgl, $kategori);
         $year = date("Y");
         foreach ($data as $row) {
-            echo "* Umur per-Oktober ".$year." : ".$row['tahun']." tahun ".$row['bulan']." bulan".$row['stat'].$kategori;
+            echo "* Umur per-Oktober ".$year." : ".$row['tahun']." tahun ".$row['bulan']." bulan ".$row['stat'];
             if($row['stat'] == 'N'){
                 echo ", Umur Kurang";
             }
@@ -116,7 +108,7 @@ class pendataanSiswa extends CI_Controller {
         }
 
         $this->pendataansiswa_model->add_sw($umur, $count, $surat);
-        redirect('pendataanSiswa/baru');
+        redirect('pendataanSiswa/siswabaru');
     }
     
 }
