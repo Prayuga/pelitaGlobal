@@ -17,7 +17,7 @@
                                         <label>Tahun Ajaran</label>
                                         <select id="sel_thn" class="form-control selectpicker" data-live-search="true" name="tahunAjaran" title="Select Tahun Ajaran">
                                             <?php foreach ($tahun_ajaran as $ta_item) { ?>
-                                                <option value="<?php echo $ta_item['ID_TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
+                                                <option value="<?php echo $ta_item['TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -35,15 +35,18 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Kelas</label>
-                                        <select class="form-control selectpicker" data-live-search="true" name="kelas" title="Select Kategori">
-                                            <option>2017/2018</option>
+                                        <select id="sel_kls" class="form-control selectpicker" data-live-search="true" name="kelas" title="Select Kelas">
+                                            <?php foreach ($kelas as $kelas_item) { ?>
+                                            <option value="<?php echo $kelas_item['ID_Kelas']; ?>"><?php echo $kelas_item['NamaKelas']; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label style="opacity: 0;">Button</label>
-                                        <input type="submit" id="btn_s" class="btn btn-primary form-control" value="Search"> 
+                                        <button class="btn btn-primary form-control">
+                                            <i class="fa fa-print fa-fw"></i> Print
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -130,34 +133,26 @@
                     "type": "POST"
                 }
             });
-             
             
-            $('#btn_s').click(function (){
+            $('#sel_thn').change(function (){
                 var thn = $('#sel_thn').val();
+                var newUrl = "<?php echo base_url('laporan/getSiswaByTahun')?>";
+                newUrl += "/"+thn;
+                table.ajax.url( newUrl ).load();
+            });
+            
+            $('#sel_kat').change(function (){
                 var kat = $('#sel_kat').val();
-                alert(thn+kat);
-                /*$.ajax({
-                    url : "<?php echo base_url('pendataanSiswa/getKelas')?>",
-                    type: "POST",
-                    data: {
-                        thn : thn,
-                        kat : kat
-                    },
-                    datatype: 'json',
-                    beforeSend: function() {
-                        $('#loading').show();
-                    },
-                    success: function(data)
-                    {
-                       //alert(data);
-                       $('#sel_kls').html(data);
-                       $('#loading').hide();
-                    },
-                    error: function (jqXHR, textStatus, errorThrown)
-                    {
-                        alert('Error Data');
-                    }
-                });*/
+                var newUrl = "<?php echo base_url('laporan/getSiswaByKat')?>";
+                newUrl += "/"+kat;
+                table.ajax.url( newUrl ).load();
+            });
+            
+            $('#sel_kls').change(function (){
+                var kls = $('#sel_kls').val();
+                var newUrl = "<?php echo base_url('laporan/getSiswaByKls')?>";
+                newUrl += "/"+kls;
+                table.ajax.url( newUrl ).load();
             });
             
         });

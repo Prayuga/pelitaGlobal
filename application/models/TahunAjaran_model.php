@@ -68,4 +68,9 @@ class TahunAjaran_model extends CI_Model {
 		$this->db->where('ID_Kategori', $id_kategorikelas);
 		return $this->db->update('mskategorikelas', $data);
 	}
+
+	public function get_Kls(){
+		$query = $this->db->get_where('msheaderkelas', array('flagactive' => 'Y'));
+		return $query->result_array();
+	}
 }

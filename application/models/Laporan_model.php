@@ -53,4 +53,25 @@ class Laporan_model extends CI_Model {
             $query = $this->db->query($str);
             return $query;
         }
+        
+        public function getSiswaByTahun($thn){
+            $str = "SELECT a.NomorIndukSiswa, a.NamaSiswa,a.JenisKelamin,a.TempatLahir, a.TanggalLahir,a.UmurSaatMendaftar,b.NamaKelas, d.Agama,c.NamaAyah,c.NamaIbu,a.Alamat,a.NoTelp from mssiswa a,msheaderkelas b,msorangtua c,msagama d where a.NomorIndukSiswa = c.ID_Siswa and a.ID_Kelas = b.ID_Kelas and a.ID_Agama = d.ID_Agama and a.FlagActive='Y' and "
+                    . "b.ID_TahunAjaran = '".$thn."' ";
+            $query = $this->db->query($str);
+            return $query;
+        }
+        
+        public function getSiswaByKat($kat){
+            $str = "SELECT a.NomorIndukSiswa, a.NamaSiswa,a.JenisKelamin,a.TempatLahir, a.TanggalLahir,a.UmurSaatMendaftar,b.NamaKelas, d.Agama,c.NamaAyah,c.NamaIbu,a.Alamat,a.NoTelp from mssiswa a,msheaderkelas b,msorangtua c,msagama d where a.NomorIndukSiswa = c.ID_Siswa and a.ID_Kelas = b.ID_Kelas and a.ID_Agama = d.ID_Agama and a.FlagActive='Y' "
+                    . " and a.ID_Kategori = ".$kat." ";
+            $query = $this->db->query($str);
+            return $query;
+        }
+        
+        public function getSiswaByKls($kls){
+            $str = "SELECT a.NomorIndukSiswa, a.NamaSiswa,a.JenisKelamin,a.TempatLahir, a.TanggalLahir,a.UmurSaatMendaftar,b.NamaKelas, d.Agama,c.NamaAyah,c.NamaIbu,a.Alamat,a.NoTelp from mssiswa a,msheaderkelas b,msorangtua c,msagama d where a.NomorIndukSiswa = c.ID_Siswa and a.ID_Kelas = b.ID_Kelas and a.ID_Agama = d.ID_Agama and a.FlagActive='Y' "
+                    . " and a.ID_Kelas = ".$kls." ";
+            $query = $this->db->query($str);
+            return $query;
+        }
 }
