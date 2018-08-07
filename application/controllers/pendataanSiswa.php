@@ -18,7 +18,7 @@ class pendataanSiswa extends CI_Controller {
 		$this->Login_model->keamanan();
 		$data['agama'] = $this->pendataansiswa_model->get_Agama();
 		$data['kategori'] = $this->pendataansiswa_model->get_Kategori();
-        $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
+                $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
 		$this->load->view('templates/header');
 		$this->load->view('pendataanSiswa/pendataanSiswaBaru', $data);
 		$this->load->view('templates/footer');
