@@ -61,7 +61,7 @@
                         <!-- tahun_ajaran-->
                           <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
                             <?php foreach ($tahun_ajaran as $ta_item) { ?>
-                              <option value="<?php echo $ta_item['ID_TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
+                              <option value="<?php echo $ta_item['TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
                             <?php } ?>
                           </select>
                       </div>
@@ -72,7 +72,7 @@
                         <!-- kategori-->
                           <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
                             <?php foreach ($kategori as $kategori_item) { ?>
-                              <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
+                              <option value="<?php echo $kategori_item['SingkatanKategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
                             <?php } ?>
                           </select>
                       </div>
@@ -150,7 +150,7 @@
                         <!-- tinggi-->
                         <input type="number" class="form-control" id="tinggi" name="tinggi">
                       </div>
-                      <label class="control-label col-sm-1" for="kandung">Kg</label>
+                      <label class="control-label col-sm-1" for="kandung">Cm</label>
                       <br><br>
                       <label class="control-label col-sm-4 col-sm-offset-4" for="golDar">Golongan Darah :</label>
                       <div class="col-sm-3">

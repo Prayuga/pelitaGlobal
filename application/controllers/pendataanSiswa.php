@@ -8,17 +8,52 @@ class pendataanSiswa extends CI_Controller {
 		$this->load->model('pendataansiswa_model');
 	}
 	
-	public function index()
-	{
-		$this->Login_model->keamanan();
-		$this->load->view('pendataanSiswa/pendataanSiswaBaru');
-	}
+	// public function index()
+	// {
+	// 	$this->Login_model->keamanan();
+	// 	$this->load->view('pendataanSiswa/pendataanSiswaBaru');
+	// }
+
+    public function editSiswa($idsiswa = ""){
+        $idsiswa = str_ireplace("&","/",$idsiswa);
+        $this->Login_model->keamanan();
+        $data['siswa'] = $this->pendataansiswa_model->get_siswa($idsiswa);
+        $data['ortu'] = $this->pendataansiswa_model->get_ortu($idsiswa);
+
+
+        $data['agama'] = $this->pendataansiswa_model->get_Agama();
+        $data['kategori'] = $this->pendataansiswa_model->get_Kategori();
+        $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
+
+        $this->load->view('templates/header');
+        $this->load->view('pendataanSiswa/editSiswa', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function cariSiswa(){
+        $data = $this->pendataansiswa_model->get_listSiswa();
+
+        echo "<table width='100%' class='table table-striped table-bordered table-hover'><thead><tr>";
+        echo "<th>Nomor Induk Siswa</th>";
+        echo "<th>Nama Siswa</th>";
+        echo "<th>Action</th>";
+        echo "</tr></thead><tbody>";
+        foreach ($data as $row) {
+            echo "<tr>";
+            echo "<td align='center' width='35%'>".$row['NomorIndukSiswa']."</td>";
+            echo "<td align='center' width='40%'>".$row['NamaSiswa']."</td>";
+            echo "<td align='center' width='25%'><a href='http://localhost:81/pelitaGlobal/pendataanSiswa/editSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-primary'><i class='fa fa-clipboard fa-fw'></i></a></td>";
+            echo "</tr>";
+        }
+        echo "</tbody></table>";
+        
+    }
 	
 	public function siswabaru(){
 		$this->Login_model->keamanan();
 		$data['agama'] = $this->pendataansiswa_model->get_Agama();
 		$data['kategori'] = $this->pendataansiswa_model->get_Kategori();
-                $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
+        $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
 		$this->load->view('templates/header');
 		$this->load->view('pendataanSiswa/pendataanSiswaBaru', $data);
 		$this->load->view('templates/footer');
@@ -34,46 +69,54 @@ class pendataanSiswa extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
         
-        public function getJsonKelas(){
-		$list = $this->pendataansiswa_model->getSiswaBaru();
-		$data = array();
-		$no = 0;
-		foreach($list->result() as $siswa) {
-			$no ++;
-			$row = array();
-			$row[] = $siswa->NomorIndukSiswa;
-			$row[] = $siswa->NamaSiswa;
-			$row[] = '<input type="checkbox" id="cx-'.$siswa->NomorIndukSiswa.'" name="chbox[]"
-               value="'.$siswa->NomorIndukSiswa.'" />';
+    public function getJsonKelas(){
+	$list = $this->pendataansiswa_model->getSiswaBaru();
+	$data = array();
+	$no = 0;
+	foreach($list->result() as $siswa) {
+		$no ++;
+		$row = array();
+		$row[] = $siswa->NomorIndukSiswa;
+		$row[] = $siswa->NamaSiswa;
+		$row[] = '<input type="checkbox" id="cx-'.$siswa->NomorIndukSiswa.'" name="chbox[]"
+           value="'.$siswa->NomorIndukSiswa.'" />';
 
-			$data[] = $row;
-		}
+		$data[] = $row;
+	}
 
-		$output = array (
-				"data" => $data,
-		);
-		echo json_encode($output);
+	$output = array (
+			"data" => $data,
+	);
+	echo json_encode($output);
+    }
+    
+    public function updateKelas(){
+        $id = $this->input->post('id');
+        $arr = $this->input->post('array');
+        foreach($arr as $ar){
+            $this->pendataansiswa_model->updateKelas($id, $ar);
         }
-        
-        public function updateKelas(){
-            $id = $this->input->post('id');
-            $arr = $this->input->post('array');
-            foreach($arr as $ar){
-                $this->pendataansiswa_model->updateKelas($id, $ar);
-            }
+    }
+    
+    public function updateSiswa($idsiswa){
+        $this->pendataansiswa_model->update_sw($idsiswa);
+        redirect('pendataanSiswa/editSiswa/'.$idsiswa);
+    }
+    
+    public function updateOrtu($idsiswa){
+        $this->pendataansiswa_model->update_ortu($idsiswa);
+        redirect('pendataanSiswa/editSiswa/'.$idsiswa);
+    }
+    
+    public function getKelas(){
+        $thn = $this->input->post('thn');
+        $kat = $this->input->post('kat');
+        $data = $this->pendataansiswa_model->getKelas($thn, $kat);
+        echo '<option class="form-control" value="">-- Pilih Kelas --</option>';
+        foreach($data->result() as $row){
+                echo '<option class="form-control" value="'.$row->ID_Kelas.'">'.$row->NamaKelas.'</option>';
         }
-        
-        public function getKelas(){
-            $thn = $this->input->post('thn');
-            $kat = $this->input->post('kat');
-            $data = $this->pendataansiswa_model->getKelas($thn, $kat);
-            echo '<option class="form-control" value="">-- Pilih Kelas --</option>';
-            foreach($data->result() as $row){
-                    echo '<option class="form-control" value="'.$row->ID_Kelas.'">'.$row->NamaKelas.'</option>';
-            }
-        }
-        
-
+    }
 
     public function get_umur(){
         $tgl = $this->input->post('tgl');
@@ -81,7 +124,7 @@ class pendataanSiswa extends CI_Controller {
         $data = $this->pendataansiswa_model->get_u($tgl, $kategori);
         $year = date("Y");
         foreach ($data as $row) {
-            echo "* Umur per-Oktober ".$year." : ".$row['tahun']." tahun ".$row['bulan']." bulan ".$row['stat'];
+            echo "* Umur per-Oktober ".$year." : ".$row['tahun']." tahun ".$row['bulan']." bulan ";
             if($row['stat'] == 'N'){
                 echo ", Umur Kurang";
             }
@@ -94,7 +137,7 @@ class pendataanSiswa extends CI_Controller {
         $data = $this->pendataansiswa_model->get_u($tgl, $kategori);
         foreach ($data as $row) {
             $umur = $row['tahun']." tahun ".$row['bulan']." bulan";
-            if($row['stat'] == 'Y'){
+            if($row['stat'] == 'N'){
                 $surat = 'N';
             }else{
                 $surat = '-';

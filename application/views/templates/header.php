@@ -136,7 +136,7 @@
                                     <a href="<?php echo base_url('pendataanSiswa/kelas'); ?>">Pendataan Kelas</a>
                                 </li>
                                 <li>
-                                    <a href="forms.html">Registrasi Ulang</a>
+                                    <a href="<?php echo base_url('pendataanSiswa/editSiswa'); ?>">Edit Siswa</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
