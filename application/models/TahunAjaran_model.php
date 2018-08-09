@@ -17,6 +17,12 @@ class TahunAjaran_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_KELAS(){
+        $sql = "SELECT k.ID_Kelas, k.ID_TahunAjaran,  t.TahunAjaran, k.ID_Kategori, kk.NamaKategori, k.NamaKelas, k.Keterangan FROM msheaderkelas k, mstahunajaran t, mskategorikelas kk WHERE k.ID_Kategori = kk.ID_Kategori AND t.ID_TahunAjaran = k.ID_TahunAjaran AND k.FlagActive = 'Y'";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+	}
+
 	public function add_TA(){
 		$data = array(
 			'TahunAjaran' => $this->input->post('tahunAjaran'),
@@ -37,6 +43,17 @@ class TahunAjaran_model extends CI_Model {
 		return $this->db->insert('mskategorikelas', $data);
 	}
 
+	public function add_KLS(){
+		$data = array(
+			'ID_Kategori' => $this->input->post('kategori'),
+			'ID_TahunAjaran' => $this->input->post('tahun_ajaran'),
+			'NamaKelas' =>	$this->input->post('namakelas'),
+			'Keterangan' =>	$this->input->post('keterangan')
+		);
+
+		return $this->db->insert('msheaderkelas', $data);
+	}
+
 	public function update_TA($id_tahunAjaran){
 		$data = array(
 			'TahunAjaran' => $this->input->post('tahunAjaran'),
@@ -54,6 +71,26 @@ class TahunAjaran_model extends CI_Model {
 
 		$this->db->where('ID_Kategori', $id_kategorikelas);
 		return $this->db->update('mskategorikelas', $data);
+	}
+
+	public function update_KLS($id_kelas){
+		$data = array(
+			'ID_Kategori' => $this->input->post('kategori'),
+			'ID_TahunAjaran' => $this->input->post('tahun_ajaran'),
+			'NamaKelas' =>	$this->input->post('namakelas'),
+			'Keterangan' =>	$this->input->post('keterangan')
+		);
+
+		$this->db->where('ID_Kelas', $id_kelas);
+		return $this->db->update('msheaderkelas', $data);
+	}
+	public function delete_KLS($id_kelas){
+		$data = array(
+			'flagactive' => 'N'
+		);
+
+		$this->db->where('ID_Kelas', $id_kelas);
+		return $this->db->update('msheaderkelas', $data);
 	}
 
 

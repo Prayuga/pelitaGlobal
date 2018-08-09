@@ -124,7 +124,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a href="<?php echo base_url('home'); ?>"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Pendataan Siswa<span class="fa arrow"></span></a>
@@ -136,7 +136,7 @@
                                     <a href="<?php echo base_url('pendataanSiswa/kelas'); ?>">Pendataan Kelas</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('pendataanSiswa/editSiswa'); ?>">Edit Siswa</a>
+                                    <a href="<?php echo base_url('pendataanSiswa/editSiswa'); ?>">Ubah Data Siswa</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -190,10 +190,7 @@
                             <a href="#"><i class="fa fa-pencil-square-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url('master/tahunAjaran');?>">Tahun Ajaran</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('master/kelas');?>">Kelas</a>
+                                    <a href="<?php echo base_url('master/tahunAjaran');?>">Tahun Ajaran, Kategori, dan Kelas</a>
                                 </li>
                                 <li>
                                     <a href="#">Jenis Pembayaran</a>

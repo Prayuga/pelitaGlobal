@@ -54,6 +54,7 @@ class master extends CI_Controller {
 		$this->Login_model->keamanan();
 		$data['tahunAjaran'] = $this->tahunajaran_model->get_TA();
 		$data['kategorikelas'] = $this->tahunajaran_model->get_KK();
+		$data['kelas'] = $this->tahunajaran_model->get_KELAS();
 		$this->load->view('templates/header');
 		$this->load->view('master/tahunAjaran', $data);
 		$this->load->view('templates/footer');
@@ -69,6 +70,11 @@ class master extends CI_Controller {
 		redirect('master/tahunAjaran');
 	}
 
+	public function add_kelas(){
+		$this->tahunajaran_model->add_KLS();
+		redirect('master/tahunAjaran');
+	}
+
 	public function update_tahunAjaran($id_tahunAjaran){
 		$this->tahunajaran_model->update_TA($id_tahunAjaran);
 		redirect('master/tahunAjaran');
@@ -76,6 +82,16 @@ class master extends CI_Controller {
 
 	public function delete_kategorikelas($id_kategorikelas){
 		$this->tahunajaran_model->delete_KK($id_kategorikelas);
+		redirect('master/tahunAjaran');
+	}
+
+	public function update_kelas($id_kelas){
+		$this->tahunajaran_model->update_KLS($id_kelas);
+		redirect('master/tahunAjaran');
+	}
+
+	public function delete_kelas($id_kelas){
+		$this->tahunajaran_model->delete_KLS($id_kelas);
 		redirect('master/tahunAjaran');
 	}
 
