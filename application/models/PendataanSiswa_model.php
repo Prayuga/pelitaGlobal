@@ -18,6 +18,11 @@ class PendataanSiswa_model extends CI_Model {
 		$query = $this->db->get_where('mskategorikelas', array('flagactive' => 'Y'));
 		return $query->result_array();
 	}
+
+    public function get_singkatanKelas($idKategori){
+        $query = $this->db->get_where('mskategorikelas', array('ID_Kategori' => $idKategori));
+        return $query->result_array();
+    }
         
     public function getSiswaBaru(){
         $str = "Select NomorIndukSiswa,NamaSiswa FROM `mssiswa` where ID_Kelas is NULL";
@@ -54,7 +59,7 @@ class PendataanSiswa_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function add_sw($umur, $count, $surat){
+    public function add_sw($umur, $count, $surat, $kategori_k){
 
         $Jumlah = $count;
         $NamaSiswa = $this->input->post('nama_s');
@@ -91,7 +96,7 @@ class PendataanSiswa_model extends CI_Model {
         }else if($numlength==3){
             $Jumlah_new=$Jumlah;
         }
-        $NomorIndukSiswa = substr($TahunAjaranMasuk,0,4).$ID_Kategori."/".$Jumlah_new."/PGM";
+        $NomorIndukSiswa = substr($TahunAjaranMasuk,0,4).$kategori_k."/".$Jumlah_new."/PGM";
         
         $ID_Siswa = $NomorIndukSiswa;
         $NamaAyah = $this->input->post('namaAyah');
@@ -242,6 +247,18 @@ class PendataanSiswa_model extends CI_Model {
 
         $this->db->where('ID_Siswa', $idsiswa);
         return $this->db->update('msorangtua', $data);
+
+    }
+
+    public function update_surat($idsiswa){
+        $idsiswa = str_ireplace("&","/",$idsiswa);
+
+        $data = array(
+            'FlagSuratPernyataan' => $this->input->post('status')
+        );
+
+        $this->db->where('NomorIndukSiswa', $idsiswa);
+        return $this->db->update('mssiswa', $data);
 
     }
 

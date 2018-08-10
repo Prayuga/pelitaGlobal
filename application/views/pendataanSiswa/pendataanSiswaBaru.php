@@ -72,7 +72,7 @@
                         <!-- kategori-->
                           <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
                             <?php foreach ($kategori as $kategori_item) { ?>
-                              <option value="<?php echo $kategori_item['SingkatanKategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
+                              <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
                             <?php } ?>
                           </select>
                       </div>

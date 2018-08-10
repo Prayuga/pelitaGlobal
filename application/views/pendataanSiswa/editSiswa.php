@@ -36,6 +36,9 @@
     <li role="presentation">
     	<a href="#dataortu" aria-controls="dataortu" role="tab" data-toggle="tab">Data Orang Tua</a>
     </li>
+    <li role="presentation">
+    	<a href="#surat_p" aria-controls="dataortu" role="tab" data-toggle="tab">Surat Pernyataan</a>
+    </li>
   </ul>
 
   <!-- Tab panes -->
@@ -468,6 +471,42 @@
 ?>
 <!-- /tab content dataortu -->
     </div>
+    <div role="tabpanel" class="tab-pane" id="surat_p" align="center">
+		<h5 style="font-weight: bold;">
+			Surat Pernyataan Umur Kurang
+			<br/><br/>
+			Umur saat mendaftar : <span style="color: #e56d12;"><?php echo $siswa_item['UmurSaatMendaftar']; ?></span>
+		</h3>
+		<br/>
+<?php 
+	foreach ($siswa as $siswa_item) {
+		$idsiswa = str_ireplace("/","&",$siswa_item['NomorIndukSiswa']);
+		if($siswa_item['FlagSuratPernyataan']=='N'){
+			echo form_open('pendataanSiswa/updateSurat/'.$idsiswa); 
+?>
+<select class="selectpicker" name="status">
+	<option value="Y">Sudah Menyerahkan</option>
+	<option value="N" selected="selected">Belum Menyerahkan</option>
+</select>
+<input type="submit" name="submit" class="btn btn-primary" value="Submit">
+<?php
+			echo form_close();
+		}else if($siswa_item['FlagSuratPernyataan']=='Y'){
+			echo form_open('pendataanSiswa/updateSurat/'.$idsiswa); 
+?>
+<select class="selectpicker" name="status">
+	<option value="Y" selected="selected">Sudah Menyerahkan</option>
+	<option value="N">Belum Menyerahkan</option>
+</select>
+<input type="submit" name="submit" class="btn btn-primary" value="Submit">
+<?php
+			echo form_close();
+		}else if($siswa_item['FlagSuratPernyataan']=='-'){
+
+		}
+	}
+?>
+    </div>
   </div>
 <?php } ?>
 </div>
@@ -526,7 +565,7 @@
 			$('#myTabs a[href="#dataortu"]').tab('show'); // Select tab by name
 			$('#myTabs a:first').tab('show'); // Select first tab
 			$('#myTabs a:last').tab('show'); // Select last tab
-			//$('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
+			$('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)
 		});
 	</script>
     <script>
