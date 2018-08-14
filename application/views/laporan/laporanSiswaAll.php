@@ -96,6 +96,7 @@
                 buttons: [
                     {
                         extend: 'print',
+                        text: '<i class="fa fa-print fa-fw"> </i> Print',
                         className: 'btn btn-primary',
                         title: 'Data Siswa Pelita Global',
                         customize: function ( win ) {
