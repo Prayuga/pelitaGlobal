@@ -43,15 +43,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary form-control">
-                                            <i class="fa fa-print fa-fw"></i> Print
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                             <br/>
-                            <div class="row">
+                            <div class="row" id="tblSiswa">
                                 <div class="col-md-12" style="overflow-x: scroll;">
                                     <table width="1450px" class="table table-striped table-bordered table-hover table-responsive" id="mytable">
                                         <thead>
@@ -87,41 +82,6 @@
             </div>
             <!-- /.row -->
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Informasi</h4>
-                  </div>
-                  <div class="modal-body">
-                    <div class="row" align="center">
-                        <table>
-                            <tr>
-                                <td class="col-md-4">Tanggal Lahir</td>
-                                <td class="col-md-2">:</td>
-                                <td class="col-md-6">18 Agustus 2010</td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">Agama</td>
-                                <td class="col-md-2">:</td>
-                                <td class="col-md-6">Hindu</td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">Keadaan Jasmani</td>
-                                <td class="col-md-2">:</td>
-                                <td class="col-md-6">Sehat</td>
-                            </tr>
-                        </table>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
             
         </div>
         <!-- /#page-wrapper -->
@@ -131,7 +91,26 @@
                 "ajax": {
                     "url": "<?php echo base_url('laporan/getJsonSiswa')?>",
                     "type": "POST"
-                }
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        className: 'btn btn-primary',
+                        title: 'Data Siswa Pelita Global',
+                        customize: function ( win ) {
+                            $(win.document.body)
+                                .css( 'font-size', '10pt' )
+                                .prepend(
+                                    '<img src="<?php echo base_url('assets/images')?>/logo.png" style="position:absolute; top:20%; left:45%; width:170px; opacity:0.1" />'
+                                );
+
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' );
+                        }
+                    }
+                ]
             });
             
             $('#sel_thn').change(function (){
@@ -156,4 +135,5 @@
             });
             
         });
+        
         </script>

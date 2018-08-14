@@ -1,0 +1,40 @@
+page[size="A4"] {
+  background: white;
+  width: 330mm;
+  height: 210mm;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0cm rgba(0,0,0,0.5);
+}
+@media print {
+  body, page[size="A4"] {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+@page{
+	margin:0;
+}
+.bolds{
+	font-weight: bold;
+}
+#isiHal{
+	margin-top: 257px;
+	margin-left: 355px;
+}
+.rows{
+	height: 15px;
+	vertical-align: top;
+}
+.jarak{
+	height: 8px;
+}
+#isiskpi{
+	margin-top: 110px;
+	margin-left: 355px;
+}
+#isiskpi2{
+	margin-top: 65px;
+	margin-left: 355px;
+}
