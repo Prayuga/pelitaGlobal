@@ -39,4 +39,17 @@ class KasRT_model extends CI_Model {
 		$this->db->where('ID_JenisPengeluaran', $id_jenis);
 		return $this->db->update('msjenispengeluaran', $data);
 	}
+        
+
+	public function add_kasBulan(){
+		$data = array(
+			'Bulan' => $this->input->post('bln'),
+			'Tahun' => $this->input->post('thn'),
+                        'StartDate' => $this->input->post('start'),
+                        'EndDate' => $this->input->post('end'),
+                        'Keterangan' => $this->input->post('ket')
+		);
+
+		return $this->db->insert('trheaderpengeluaran', $data);
+	}
 }

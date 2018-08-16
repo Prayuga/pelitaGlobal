@@ -54,7 +54,7 @@
             </table>
             
             <center>
-             <button id="btsub" class="btn btn-lg btn-primary" style="width:180px">Submit</button>
+             <button id="btsub" class="btn btn-md btn-primary" style="width:180px">Submit</button>
             </center>
         </div>
     </div>

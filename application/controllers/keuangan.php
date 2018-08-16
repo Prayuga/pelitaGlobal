@@ -6,6 +6,7 @@ class keuangan extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+                $this->load->model('kasrt_model');
 	}
 
 	// public function index()
@@ -31,6 +32,21 @@ class keuangan extends CI_Controller {
 		$this->load->view('keuangan/kasBulan'/*, $data*/);
 		$this->load->view('templates/footer');
 	}
+        
+        
+        public function addKasBulan(){
+                $res = $this->kasrt_model->add_kasBulan();
+                
+                if($res==true){
+                    $this->session->set_flashdata('alert','alert-success');
+                    $this->session->set_flashdata('msg','Sukses menambah seragam');
+                }else{
+                    $this->session->set_flashdata('alert','alert-danger');
+                    $this->session->set_flashdata('msg','Gagal menambah seragam');
+                }
+                redirect('keuangan/kasBulan');
+                
+        }
 
 }
 
