@@ -9,6 +9,7 @@ class master extends CI_Controller {
 		$this->load->model('stationary_model');
 		$this->load->model('seragam_model');
 		$this->load->model('tahunajaran_model');
+		$this->load->model('kasrt_model');
 	}
 	
 	// public function stationary(){
@@ -27,6 +28,19 @@ class master extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function kasRT(){
+		$this->Login_model->keamanan();
+		$data['jeniskas'] = $this->kasrt_model->get_jenis();
+		$this->load->view('templates/header');
+		$this->load->view('master/kasRT', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function add_jenisKas(){
+		$this->kasrt_model->add_jenis();
+		redirect('master/kasRT');
+	}
+
 	public function add_stationary(){
 		$this->stationary_model->add_s();
 		redirect('master/stationary');
@@ -37,9 +51,19 @@ class master extends CI_Controller {
 		redirect('master/stationary');
 	}
 
+	public function update_jenisKas($id_jenis){
+		$this->kasrt_model->update_jenis($id_jenis);
+		redirect('master/kasRT');
+	}
+
 	public function delete_stationary($id_stationary){
 		$this->stationary_model->delete_s($id_stationary);
 		redirect('master/stationary');
+	}
+
+	public function delete_jenisKas($id_jenis){
+		$this->kasrt_model->delete_jenis($id_jenis);
+		redirect('master/kasRT');
 	}
 
 	public function kelas(){

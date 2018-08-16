@@ -148,7 +148,10 @@
                                     <a href="<?php echo base_url('keuangan'); ?>">Entri Data & Cetak Kwitansi</a>
                                 </li>
                                 <li>
-                                    <a href="#">Entri Data Kas</a>
+                                    <a href="<?php echo base_url('keuangan/kasBulan'); ?>">Entri Data Kas Bulan Baru</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('keuangan/KasHarian'); ?>">Entri Data Kas Harian</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -193,13 +196,16 @@
                                     <a href="<?php echo base_url('master/tahunAjaran');?>">Tahun Ajaran, Kategori, dan Kelas</a>
                                 </li>
                                 <li>
-                                    <a href="#">Jenis Pembayaran</a>
-                                </li>
-                                <li>
                                     <a href="<?php echo base_url('master/seragam');?>">Seragam</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo base_url('master/stationary');?>">Stationary</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('master/kasRT');?>">Kas Rumah Tangga</a>
+                                </li>
+                                <li>
+                                    <a href="#">Jenis Pembayaran</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
