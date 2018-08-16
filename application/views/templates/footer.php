@@ -24,6 +24,8 @@
     <script src="<?=base_url();?>assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?=base_url();?>assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="<?=base_url();?>assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="<?=base_url();?>assets/vendor/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="<?=base_url();?>assets/vendor/datatables/js/buttons.print.min.js"></script>
     <!-- Bootstrap select JavaScript -->
     <script src="<?=base_url();?>assets/vendor/bootstrap/js/bootstrap-select.js"></script>
 
