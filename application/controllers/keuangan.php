@@ -19,9 +19,12 @@ class keuangan extends CI_Controller {
 
 	public function kasHarian(){
 		$this->Login_model->keamanan();
-		//$data['stationary'] = $this->stationary_model->get_s();
+		
+		$data['jenis'] = $this->kasrt_model->get_jenis();
+		$data['bulanTahun'] = $this->kasrt_model->get_currentMonth();
+
 		$this->load->view('templates/header');
-		$this->load->view('keuangan/kasHarian'/*, $data*/);
+		$this->load->view('keuangan/kasHarian', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -34,19 +37,31 @@ class keuangan extends CI_Controller {
 	}
         
         
-        public function addKasBulan(){
-                $res = $this->kasrt_model->add_kasBulan();
-                
-                if($res==true){
-                    $this->session->set_flashdata('alert','alert-success');
-                    $this->session->set_flashdata('msg','Sukses menambah seragam');
-                }else{
-                    $this->session->set_flashdata('alert','alert-danger');
-                    $this->session->set_flashdata('msg','Gagal menambah seragam');
-                }
-                redirect('keuangan/kasBulan');
-                
+    public function addKasBulan(){
+        $res = $this->kasrt_model->add_kasBulan();
+        
+        if($res==true){
+            $this->session->set_flashdata('alert','alert-success');
+            $this->session->set_flashdata('msg','Sukses!');
+        }else{
+            $this->session->set_flashdata('alert','alert-danger');
+            $this->session->set_flashdata('msg','Gagal!');
         }
+        redirect('keuangan/kasBulan');
+    }
+
+    public function entriKasHarian(){
+    	$res = $this->kasrt_model->add_kasHarian();
+        
+        if($res==true){
+            $this->session->set_flashdata('alert','alert-success');
+            $this->session->set_flashdata('msg','Sukses!');
+        }else{
+            $this->session->set_flashdata('alert','alert-danger');
+            $this->session->set_flashdata('msg','Gagal!');
+        }
+        redirect('keuangan/kasHarian');
+    }
 
 }
 
