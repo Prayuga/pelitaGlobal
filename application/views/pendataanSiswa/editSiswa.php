@@ -8,7 +8,7 @@
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-md-10 col-md-offset-2">
-									<label class="pull-left" style="margin-right: 10px; margin-top: 5px;">Search By :</label> &nbsp;
+									<label class="pull-left" style="margin-right: 10px; margin-top: 5px;">Cari Berdasarkan:	</label> &nbsp;
 									<input type="radio" name="option" value="NomorIndukSiswa" class="pull-left klik" style="margin-top: 5px;" id="nis"> 
 									<label class="pull-left klik" style="margin-right: 10px; margin-top: 5px;" for="nis">Nomor Induk Siswa</label> &nbsp;
 									<input type="radio" name="option" value="NamaSiswa" class="pull-left klik" style="margin-top: 5px;" id="nama"> 
@@ -17,7 +17,7 @@
 										<input type="text" name="input" class="form-control" id="inputs">
 									</div>
 									<input type="hidden" name="jenis" id="jenis">
-									<input type="submit" name="submit" value="Search" class="btn btn-primary" id="cari">
+									<input type="submit" name="submit" value="Cari" class="btn btn-primary" id="cari">
 								</div>
 							</div>
 						</div>

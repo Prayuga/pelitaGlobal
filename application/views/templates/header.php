@@ -184,7 +184,7 @@
                                     <a href="#">Pelunasan Biaya Sekolah</a>
                                 </li>
                                 <li>
-                                    <a href="#">Kas</a>
+                                    <a href="<?php echo base_url('laporan/kasRT');?>">Kas Rumah Tangga</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

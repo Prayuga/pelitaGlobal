@@ -51,7 +51,24 @@ class keuangan extends CI_Controller {
     }
 
     public function entriKasHarian(){
-    	$res = $this->kasrt_model->add_kasHarian();
+    	$data['saldos'] = $this->kasrt_model->get_sum($this->input->post('idHeader'));
+        if($data != NULL){
+        	foreach ($data['saldos'] as $row) {
+        		$dbt = $row['debit'];
+        		$krdt = $row['kredit'];
+        		$saldo_awal = $dbt - $krdt;
+        	}
+        }else{
+            $saldo_awal = 0;
+        }
+
+    	if($this->input->post('tipe')=='kredit'){
+    		$saldo_akhir = $saldo_awal - $this->input->post('jumlah');
+    	}else if($this->input->post('tipe')=='debit'){
+    		$saldo_akhir = $saldo_awal + $this->input->post('jumlah');
+    	}
+
+    	$res = $this->kasrt_model->add_kasHarian($saldo_akhir);
         
         if($res==true){
             $this->session->set_flashdata('alert','alert-success');
@@ -60,6 +77,7 @@ class keuangan extends CI_Controller {
             $this->session->set_flashdata('alert','alert-danger');
             $this->session->set_flashdata('msg','Gagal!');
         }
+
         redirect('keuangan/kasHarian');
     }
 

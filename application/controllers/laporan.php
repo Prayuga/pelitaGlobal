@@ -8,13 +8,27 @@ class laporan extends CI_Controller {
 		parent::__construct();
 		$this->load->model('tahunajaran_model');
 		$this->load->model('Laporan_model');
+        $this->load->model('kasRT_model');
 	}
+
+    public function kasRT(){
+        $this->Login_model->keamanan();
+        $data['bulanTahun'] = $this->kasRT_model->get_allHeader();
+        $data['jenis'] = $this->kasRT_model->get_jenis();
+        $this->load->view('templates/header');
+        $this->load->view('laporan/kasRT', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function get_siswaByJenis(){
+        
+    }
 	
 	public function siswa_all(){
 		$this->Login_model->keamanan();
 		$data['tahun_ajaran'] = $this->tahunajaran_model->get_TA();
 		$data['kategori'] = $this->tahunajaran_model->get_KK();
-                $data['kelas'] = $this->tahunajaran_model->get_Kls();
+        $data['kelas'] = $this->tahunajaran_model->get_Kls();
 		$this->load->view('templates/header');
 		$this->load->view('laporan/laporanSiswaAll', $data);
 		$this->load->view('templates/footer');

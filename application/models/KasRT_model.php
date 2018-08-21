@@ -12,6 +12,12 @@ class KasRT_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_allHeader(){
+		$str = "SELECT Bulan, Tahun, ID_HeaderPengeluaran FROM trheaderpengeluaran ORDER BY ID_HeaderPengeluaran desc";
+		$query = $this->db->query($str);
+		return $query->result_array();
+	}
+
 	public function get_currentMonth(){
 		$str = "SELECT Bulan, Tahun, DATE_FORMAT(StartDate, '%e %M %Y') as mulai, DATE_FORMAT(EndDate, '%e %M %Y') as selesai, ID_HeaderPengeluaran FROM trheaderpengeluaran WHERE now() BETWEEN StartDate and EndDate";
 		$query = $this->db->query($str);
@@ -19,7 +25,7 @@ class KasRT_model extends CI_Model {
 	}
 
 	public function get_sum($idHeader){
-		$str = "SELECT SUM(Debit) as debit, SUM(Kredit) as kredit, FROM trdetailpengeluaran WHERE ID_HeaderPengeluaran = '".$idHeader."'";
+		$str = "SELECT SUM(Debit) as debit, SUM(Kredit) as kredit FROM trdetailpengeluaran WHERE ID_HeaderPengeluaran = '".$idHeader."'";
 		$query = $this->db->query($str);
 		return $query->result_array();
 	}
@@ -66,7 +72,7 @@ class KasRT_model extends CI_Model {
 	}
         
 
-	public function add_kasHarian(){
+	public function add_kasHarian($saldo){
 		$tipe = $this->input->post('tipe');
 
 		$data = array(
@@ -74,7 +80,7 @@ class KasRT_model extends CI_Model {
 			'ID_JenisPengeluaran' => $this->input->post('jenis'),
             'Keterangan' => $this->input->post('keterangan'),
             $tipe => $this->input->post('jumlah'),
-            'Saldo' => $this->input->post('ket')
+            'Saldo' => $saldo
 		);
 
 		return $this->db->insert('trdetailpengeluaran', $data);
