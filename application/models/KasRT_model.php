@@ -7,16 +7,16 @@ class KasRT_model extends CI_Model {
 		$this->load->database();
 	}	
 
-	public function get_kasJenis(){
-		$str = "SELECT Keterangan, CONCAT('Rp', FORMAT(Kredit, 2)) as Kredit, DATE_FORMAT(Tanggal, '%e %M %Y %T') as tanggal, CONCAT('Rp', FORMAT(sum(Kredit), 2)) as jumlah FROM trdetailpengeluaran WHERE ID_HeaderPengeluaran = '".$this->input->post('bulanTahun')."' AND ID_JenisPengeluaran = '".$this->input->post('jenis')."' ";
+	public function get_kasJenis($bln, $jenis){
+		$str = "SELECT Keterangan, CONCAT('Rp', FORMAT(Kredit, 2)) as Kredit, DATE_FORMAT(Tanggal, '%e %M %Y %T') as tanggal, CONCAT('Rp', FORMAT(sum(Kredit), 2)) as jumlah FROM trdetailpengeluaran WHERE ID_HeaderPengeluaran = '".$bln."' AND ID_JenisPengeluaran = '".$jenis."' GROUP BY ID_DetailPengeluaran";
 		$query = $this->db->query($str);
-		return $query->result_array();
+		return $query;
 	}
 
-	public function get_kasTanggal(){
-		$str = "SELECT b.Bulan, b.Tahun, DATE_FORMAT(a.Tanggal, '%e %M %Y %T') as tanggal, c.JenisPengeluaran, a.Keterangan, CONCAT('Rp', FORMAT(a.Debit, 2)) as Debit, CONCAT('Rp', FORMAT(a.Kredit, 2)) as Kredit, CONCAT('Rp', FORMAT(a.Saldo, 2)) as Saldo FROM trdetailpengeluaran as a, trheaderpengeluaran as b, msjenispengeluaran as c WHERE a.ID_HeaderPengeluaran = b.ID_HeaderPengeluaran and a.ID_JenisPengeluaran = c.ID_JenisPengeluaran and a.Tanggal BETWEEN '".$this->input->post('dari')." 00:00:00' and '".$this->input->post('sampai')." 23:59:00' ";
+	public function get_kasTanggal($dari, $sampai){
+		$str = "SELECT b.Bulan, b.Tahun, DATE_FORMAT(a.Tanggal, '%e %M %Y %T') as tanggal, c.JenisPengeluaran, a.Keterangan, CONCAT('Rp', FORMAT(a.Debit, 2)) as Debit, CONCAT('Rp', FORMAT(a.Kredit, 2)) as Kredit, CONCAT('Rp', FORMAT(a.Saldo, 2)) as Saldo FROM trdetailpengeluaran as a, trheaderpengeluaran as b, msjenispengeluaran as c WHERE a.ID_HeaderPengeluaran = b.ID_HeaderPengeluaran and a.ID_JenisPengeluaran = c.ID_JenisPengeluaran and a.Tanggal BETWEEN '".$dari." 00:00:00' and '".$sampai." 23:59:00' ";
 		$query = $this->db->query($str);
-		return $query->result_array();
+		return $query;
 	}	
 
 	public function get_jenis(){

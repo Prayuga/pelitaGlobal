@@ -97,7 +97,7 @@
                     {
                         extend: 'print',
                         text: '<i class="fa fa-print fa-fw"> </i> Print',
-                        className: 'btn btn-primary',
+                        className: 'btn btn-success',
                         title: 'Data Siswa Pelita Global',
                         customize: function ( win ) {
                             $(win.document.body)

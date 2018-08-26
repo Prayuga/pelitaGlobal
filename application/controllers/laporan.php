@@ -20,59 +20,48 @@ class laporan extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function get_kasByJenis(){
-        $data = $this->kasRT_model->get_kasJenis();
+    public function get_kasByJenis($bln,$jenis){
+        $list = $this->kasRT_model->get_kasJenis($bln,$jenis);
+        $data = array();
+        $no = 1;
+        foreach($list->result() as $kas){
+            $row = array();
+            $row[] = $no;
+            $row[] = $kas->Keterangan;
+            $row[] = $kas->tanggal;
+            $row[] = $kas->Kredit;
+            $no++;
 
-        echo "<br/><table width='100%' class='table table-striped table-bordered table-hover'><thead><tr>";
-        echo "<th>No</th>";
-        echo "<th>Keterangan</th>";
-        echo "<th>Tanggal</th>";
-        echo "<th>Jumlah</th>";
-        echo "</tr></thead><tbody>";
-        $count=1;
-        foreach ($data as $row) {
-            $jumlah=$row['jumlah'];
-            echo "<tr>";
-            echo "<td align='center' width='10%'>".$count."</td>";
-            echo "<td align='center' width='25%'>".$row['Keterangan']."</td>";
-            echo "<td align='center' width='40%'>".$row['tanggal']."</td>";
-            echo "<td align='center' width='25%'>".$row['Kredit']."</td>";
-            echo "</tr>";
-            $count++;
+            $data[] = $row;
         }
-        echo "</tbody></table>";
-        echo "<h4 style='font-weight:bold;' class='pull-right'><button class='btn btn-success'><i class='fa fa-print fa-fw'></i> &nbsp; Print</button> &nbsp; Total : ".$jumlah."</h4>";
+        $output = array (
+            "data" => $data,
+        );
+        echo json_encode($output);
     }
 
-    public function get_kasByTanggal(){
-        $data = $this->kasRT_model->get_kasTanggal();
-
-        echo "<br/><table width='100%' class='table table-striped table-bordered table-hover'><thead><tr>";
-        echo "<th>No.</th>";
-        echo "<th>Bulan, Tahun</th>";
-        echo "<th>Tanggal</th>";
-        echo "<th>Jenis Pengeluaran</th>";
-        echo "<th>Keterangan</th>";
-        echo "<th>Debit</th>";
-        echo "<th>Kredit</th>";
-        echo "<th>Saldo</th>";
-        echo "</tr></thead><tbody>";
-        $count=1;
-        foreach ($data as $row) {
-            echo "<tr>";
-            echo "<td align='center' width='5%'>".$count."</td>";
-            echo "<td align='center' width='10%'>".$row['Bulan'].", ".$row['Tahun']."</td>";
-            echo "<td align='center' width='10%'>".$row['tanggal']."</td>";
-            echo "<td align='center' width='15%'>".$row['JenisPengeluaran']."</td>";
-            echo "<td align='center' width='15%'>".$row['Keterangan']."</td>";
-            echo "<td align='center' width='15%'>".$row['Debit']."</td>";
-            echo "<td align='center' width='15%'>".$row['Kredit']."</td>";
-            echo "<td align='center' width='15%'>".$row['Saldo']."</td>";
-            echo "</tr>";
-            $count++;
+    public function get_kasByTanggal($dari, $sampai){
+        $list = $this->kasRT_model->get_kasTanggal($dari, $sampai);
+        $data = array();
+        $no = 1;
+        foreach($list->result() as $siswa){
+            $row = array();
+            $row[] = $no;
+            $row[] = $siswa->Bulan.", ".$siswa->Tahun;
+            $row[] = $siswa->tanggal;
+            $row[] = $siswa->JenisPengeluaran;
+            $row[] = $siswa->Keterangan;
+            $row[] = $siswa->Debit;
+            $row[] = $siswa->Kredit;
+            $row[] = $siswa->Saldo;
+            $no++;
+            
+            $data[] = $row;
         }
-        echo "</tbody></table>";
-        echo "<button class='btn btn-success'><i class='fa fa-print fa-fw'></i> &nbsp; Print</button>";
+        $output = array (
+            "data" => $data,
+        );
+        echo json_encode($output);
     }
 	
 	public function siswa_all(){
