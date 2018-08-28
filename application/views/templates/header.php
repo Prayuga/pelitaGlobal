@@ -156,6 +156,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <!--
                         <li>
                             <a href="#"><i class="fa fa-list-alt fa-fw"></i> Inventory<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -172,8 +173,8 @@
                                     <a href="#">Transaksi ATK</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            <!-- /.nav-second-level 
+                        </li>-->
                         <li>
                             <a href="tables.html"><i class="fa fa-files-o fa-fw"></i> Laporan<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

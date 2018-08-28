@@ -5,8 +5,8 @@ body {
 }
 page[size="legal"] {
   background: white;
-  width: 330mm;
-  height: 210mm;
+  height: 330mm;
+  width: 210mm;
   display: block;
   margin: 0 auto;
   /*margin-bottom: 0.5cm;*/

@@ -44,7 +44,7 @@ class pendataanSiswa extends CI_Controller {
             echo "<td align='center' width='40%'>".$row['NamaSiswa']."</td>";
             echo "<td align='center' width='25%'>";
             echo"<a href='http://localhost:81/pelitaGlobal/pendataanSiswa/editSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-primary' data-toggle='tooltip' data-placement='bottom' title='Ubah Data Siswa'><i class='fa fa-clipboard fa-fw'></i></a> &nbsp;";
-            echo"<a href='http://localhost:81/pelitaGlobal/pendataanSiswa/printSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='Print Data Siswa'><i class='fa fa-print fa-fw'></i></a>";
+            echo"<a target='_blank' href='http://localhost:81/pelitaGlobal/pendataanSiswa/printSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='Print Data Siswa'><i class='fa fa-print fa-fw'></i></a>";
             echo "</td></tr>";
         }
         echo "</tbody></table>";
@@ -61,10 +61,8 @@ class pendataanSiswa extends CI_Controller {
         $data['agama'] = $this->pendataansiswa_model->get_Agama();
         $data['kategori'] = $this->pendataansiswa_model->get_Kategori();
         $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
-
-        $this->load->view('templates/header');
+        
         $this->load->view('pendataanSiswa/printSiswa', $data);
-        $this->load->view('templates/footer');
     }
 	
 	public function siswabaru(){

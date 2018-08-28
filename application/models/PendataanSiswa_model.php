@@ -87,6 +87,7 @@ class PendataanSiswa_model extends CI_Model {
         $GolonganDarah =    $this->input->post('golDar');
         $RiwayatPenyakit =    $this->input->post('riwayat');
         $PendidikanSebelumnya =    $this->input->post('pendidikan_sebelum');
+        $alergi =    $this->input->post('alergi');
 
         $numlength = strlen((string)$Jumlah);
         if($numlength==1){
@@ -157,7 +158,8 @@ class PendataanSiswa_model extends CI_Model {
             'TinggiBadan' =>    $TinggiBadan,
             'GolonganDarah' =>    $GolonganDarah,
             'RiwayatPenyakit' =>    $RiwayatPenyakit,
-            'PendidikanSebelumnya' =>    $PendidikanSebelumnya
+            'PendidikanSebelumnya' =>    $PendidikanSebelumnya,
+            'Alergi' => $alergi
         );
         return $this->db->insert('mssiswa', $data_s);
     }
@@ -185,6 +187,9 @@ class PendataanSiswa_model extends CI_Model {
         $GolonganDarah =    $this->input->post('golDar');
         $RiwayatPenyakit =    $this->input->post('riwayat');
         $PendidikanSebelumnya =    $this->input->post('pendidikan_sebelum');
+        $alergi =    $this->input->post('alergi');
+
+
 
         $data = array(
             'NamaSiswa' => $NamaSiswa,
@@ -207,7 +212,8 @@ class PendataanSiswa_model extends CI_Model {
             'TinggiBadan' =>    $TinggiBadan,
             'GolonganDarah' =>    $GolonganDarah,
             'RiwayatPenyakit' =>    $RiwayatPenyakit,
-            'PendidikanSebelumnya' =>    $PendidikanSebelumnya
+            'PendidikanSebelumnya' =>    $PendidikanSebelumnya,
+            'alergi' => $alergi
         );
 
         $this->db->where('NomorIndukSiswa', $idsiswa);

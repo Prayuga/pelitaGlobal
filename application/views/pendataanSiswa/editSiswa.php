@@ -165,7 +165,7 @@
 	                    	foreach ($agama as $agama_item) { 
 	                    		if($siswa_item['ID_Agama']==$agama_item['ID_Agama']){
 	                    ?>
-	                      <option value="<?php echo $agama_item['ID_Agama']; ?>" ><?php echo $agama_item['Agama']; ?></option>
+	                      <option value="<?php echo $agama_item['ID_Agama']; ?>" selected="selected"><?php echo $agama_item['Agama']; ?></option>
 	                    <?php }else{?>
 	                      <option value="<?php echo $agama_item['ID_Agama']; ?>"><?php echo $agama_item['Agama']; ?></option>
 	                    <?php }} ?>
@@ -574,5 +574,21 @@
             responsive: true
         });
     });
+    </script>
+    <script>
+         $(document).ready(function () {
+           $('#tgl_l').datetimepicker({
+                format: 'YYYY-MM-DD',
+                maxDate: $.now()
+            }); 
+           $('#tgl_2').datetimepicker({
+                format: 'YYYY-MM-DD',
+                maxDate: $.now()
+            });
+           $('#tgl_3').datetimepicker({
+                format: 'YYYY-MM-DD',
+                maxDate: $.now()
+            });
+        });
     </script>
 </div>
