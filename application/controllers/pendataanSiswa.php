@@ -6,17 +6,18 @@ class pendataanSiswa extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('pendataansiswa_model');
+                $this->Login_model->keamanan();
 	}
 	
 	// public function index()
 	// {
-	// 	$this->Login_model->keamanan();
+	// 	
 	// 	$this->load->view('pendataanSiswa/pendataanSiswaBaru');
 	// }
 
     public function editSiswa($idsiswa = ""){
         $idsiswa = str_ireplace("&","/",$idsiswa);
-        $this->Login_model->keamanan();
+        
         $data['siswa'] = $this->pendataansiswa_model->get_siswa($idsiswa);
         $data['ortu'] = $this->pendataansiswa_model->get_ortu($idsiswa);
 
@@ -53,7 +54,7 @@ class pendataanSiswa extends CI_Controller {
 
     public function printSiswa($idsiswa = ""){
         $idsiswa = str_ireplace("&","/",$idsiswa);
-        $this->Login_model->keamanan();
+        
         $data['siswa'] = $this->pendataansiswa_model->get_siswa($idsiswa);
         $data['ortu'] = $this->pendataansiswa_model->get_ortu($idsiswa);
 
@@ -66,7 +67,7 @@ class pendataanSiswa extends CI_Controller {
     }
 	
 	public function siswabaru(){
-		$this->Login_model->keamanan();
+		
 		$data['agama'] = $this->pendataansiswa_model->get_Agama();
 		$data['kategori'] = $this->pendataansiswa_model->get_Kategori();
         $data['tahun_ajaran'] = $this->pendataansiswa_model->get_tahunAjaran();
@@ -77,7 +78,7 @@ class pendataanSiswa extends CI_Controller {
 	
 	public function kelas(){
 
-		$this->Login_model->keamanan();
+		
 		$data['kategori'] = $this->pendataansiswa_model->get_Kategori();
                 $data['tahun'] = $this->pendataansiswa_model->get_Tahun();
 		$this->load->view('templates/header');

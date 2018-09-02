@@ -7,6 +7,7 @@ class frontend extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->model('frontend_model');
+                $this->Login_model->keamanan();
 	}
 
 	public function stationary(){

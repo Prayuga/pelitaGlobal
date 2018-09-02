@@ -10,6 +10,7 @@ class master extends CI_Controller {
 		$this->load->model('seragam_model');
 		$this->load->model('tahunajaran_model');
 		$this->load->model('kasrt_model');
+		$this->Login_model->keamanan();
 	}
 	
 	// public function stationary(){
@@ -21,7 +22,6 @@ class master extends CI_Controller {
 
 	//fungsi atk
 	public function stationary(){
-		$this->Login_model->keamanan();
 		$data['stationary'] = $this->stationary_model->get_s();
 		$this->load->view('templates/header');
 		$this->load->view('master/stationary', $data);
@@ -29,7 +29,6 @@ class master extends CI_Controller {
 	}
 
 	public function kasRT(){
-		$this->Login_model->keamanan();
 		$data['jeniskas'] = $this->kasrt_model->get_jenis();
 		$this->load->view('templates/header');
 		$this->load->view('master/kasRT', $data);
@@ -67,7 +66,6 @@ class master extends CI_Controller {
 	}
 
 	public function kelas(){
-		$this->Login_model->keamanan();
 		//$data['stationary'] = $this->stationary_model->get_s();
 		$this->load->view('templates/header');
 		$this->load->view('master/kelas'/*, $data*/);
@@ -75,7 +73,6 @@ class master extends CI_Controller {
 	}
 
 	public function tahunAjaran(){
-		$this->Login_model->keamanan();
 		$data['tahunAjaran'] = $this->tahunajaran_model->get_TA();
 		$data['kategorikelas'] = $this->tahunajaran_model->get_KK();
 		$data['kelas'] = $this->tahunajaran_model->get_KELAS();
@@ -129,15 +126,12 @@ class master extends CI_Controller {
 
 	// fungsi seragam
 	public function seragam(){
-
-		$this->Login_model->keamanan();
 		$this->load->view('templates/header');
 		$this->load->view('master/seragam');
 		$this->load->view('templates/footer');
 	}
 
 	public function addseragam(){
-		$this->Login_model->keamanan();
 		$jenis = $this->input->post('jk');
 		if ($jenis=='1') {
 			$jenis='Laki-laki';

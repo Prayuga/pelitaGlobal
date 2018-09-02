@@ -7,18 +7,19 @@ class keuangan extends CI_Controller {
 	{
 		parent::__construct();
                 $this->load->model('kasrt_model');
+                $this->Login_model->keamanan();
 	}
 
 	// public function index()
 	// {
-	// 	$this->Login_model->keamanan();
+	// 	
 	// 	$this->load->view('templates/header');
 	// 	$this->load->view('keuangan/entriKwitansi');
 	// 	$this->load->view('templates/footer');
 	// }
 
 	public function kasHarian(){
-		$this->Login_model->keamanan();
+		
 		
 		$data['jenis'] = $this->kasrt_model->get_jenis();
 		$data['bulanTahun'] = $this->kasrt_model->get_currentMonth();
@@ -29,7 +30,7 @@ class keuangan extends CI_Controller {
 	}
 
 	public function kasBulan(){
-		$this->Login_model->keamanan();
+		
 		//$data['jeniskas'] = $this->kasrt_model->get_jenis();
 		$this->load->view('templates/header');
 		$this->load->view('keuangan/kasBulan'/*, $data*/);
