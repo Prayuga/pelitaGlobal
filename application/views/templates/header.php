@@ -211,6 +211,20 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                    <?php if($this->session->userdata('ID_User')=='0000'){ //HANYA UNTUK ADMINISTRATOR ?>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Hak Akses Pengguna <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo base_url('user/masterUser');?>">Master Pengguna</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url('user/hakAkses');?>">Pengaturan Hak Akses</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    <?php } ?>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
