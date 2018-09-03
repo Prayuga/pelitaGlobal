@@ -70,6 +70,12 @@ class User_model extends CI_Model {
 		return $this->db->delete('msuser');
 	}
 
-	public fun
+	public function delete_auth($iduaer){
+            
+        }
+        
+        public function insert_auth(){
+            
+        }
 
 }
