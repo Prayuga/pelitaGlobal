@@ -70,4 +70,6 @@ class User_model extends CI_Model {
 		return $this->db->delete('msuser');
 	}
 
+	public fun
+
 }
