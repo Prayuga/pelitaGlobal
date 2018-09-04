@@ -25,7 +25,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2" id="isi">
+                        <div class="col-md-12" id="isi">
                             
                         </div>
                         
@@ -54,11 +54,7 @@
                   }
                 });
             });
-
-            $('#dataTables').DataTable({
-                responsive: true
-            });
         });
-    </script> 
+    </script>
 </div>
 <!-- /#page-wrapper -->
