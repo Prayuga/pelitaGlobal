@@ -18,7 +18,7 @@
     <link href="<?=base_url();?>assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?=base_url();?>assets/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/dist/css/style-login.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?=base_url();?>assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -33,38 +33,22 @@
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Welcome User!</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form action="<?php echo site_url('login/ceklogin'); ?>" method="POST">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="User ID" name="userId" type="text" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Login" name="submit">
-                            </fieldset>
-                        </form>
-                        <br/>
-                        <center style="color: #d34141;"><?php  
-                            $info = $this->session->flashdata('info');
-                            if(!empty($info)){
-                                echo $info;
-                            }
-                        ?></center>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="loginbox">
+        <img src="<?=base_url();?>assets/images/logo.png" class="logo">
+            <h1>Login Here</h1>
+            <form action="<?php echo site_url('login/ceklogin'); ?>" method="POST">
+                <p>Username</p>
+                <input type="text" name="userId" placeholder="Enter Username">
+                <p>Password</p>
+                <input type="password" name="password" placeholder="Enter Password">
+                <input type="submit" name="" value="Login">
+            </form>
+            <center style="color: #d34141;"><?php  
+                $info = $this->session->flashdata('info');
+                if(!empty($info)){
+                    echo $info;
+                }
+            ?></center>
     </div>
 
     <!-- jQuery -->

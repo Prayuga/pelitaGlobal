@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Admin Pelita Global</title>
 
     <!-- jquery-->
     <script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>
@@ -73,16 +73,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php 
-            $sql = 'SELECT * FROM `msmenu`';
-            $query = $this->db->query($sql);
-            if($query->num_rows() > 0){
-                foreach ($query->result() as $row) {
-                    echo $row ->Menu;
-                    echo "test";
-                }
-            }
-        ?></a>
+                <a class="navbar-brand" href="#">Pelita Global Mandiri</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -112,7 +103,7 @@
            <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+                        <!--<li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -120,97 +111,57 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
+                            </div> 
+                        </li>-->
                         <li>
                             <a href="<?php echo base_url('home'); ?>"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
+                        <?php 
+                            $sql = "SELECT a.ID_Menu, a.Menu, a.URL, a.Icon FROM msmenu as a, trauthorizemenu as b WHERE a.ID_Menu = b.ID_Menu AND b.ID_User = '".$this->session->userdata('ID_User')."' ";
+                            $query = $this->db->query($sql);
+                            if($query->num_rows() > 0){
+                                foreach ($query->result() as $row) {
+                        ?>
                         <li>
-                            <a href="#"><i class="fa fa-file-text-o fa-fw"></i> Pendataan Siswa<span class="fa arrow"></span></a>
+                            <a href="<?php echo $row->URL; ?>"><?php echo $row->Icon; ?> <?php echo $row->Menu; ?><span class="fa arrow"></span></a>
+                            <?php 
+                                $sqls = "SELECT a.ID_Submenu, a.SubMenu, a.URL FROM mssubmenu as a, trauthorizesubmenu as b WHERE a.ID_Submenu = b.ID_Submenu  AND b.ID_User = '".$this->session->userdata('ID_User')."' AND a.ID_Menu = '".$row->ID_Menu."' ";
+                                $querys = $this->db->query($sqls);
+                                if($querys->num_rows() > 0){
+                            ?>
+                                <ul class="nav nav-second-level">
+                                <?php
+                                        foreach ($querys->result() as $rows) {
+                                ?>
+                                    <li>
+                                        <a href="<?php echo base_url($rows->URL); ?>"><?php echo $rows->SubMenu; ?></a>
+                                    </li>
+                                <?php
+                                        }
+                                ?>
+                                </ul>
+                            <?php
+                                }
+                            ?>
+                        </li>
+                        <?php 
+                                }
+                            }
+                            if($this->session->userdata('ID_User')=='0000'){ //HANYA UNTUK ADMINISTRATOR 
+                        ?>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Hak Akses Pengguna <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url('pendataanSiswa/siswabaru'); ?>">Pendataan Siswa Baru</a>
+                                    <a href="<?php echo base_url('user/masterUser');?>">Master Pengguna</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('pendataanSiswa/kelas'); ?>">Pendataan Kelas</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('pendataanSiswa/editSiswa'); ?>">Ubah Data Siswa</a>
+                                    <a href="<?php echo base_url('user/hakAkses');?>">Pengaturan Hak Akses</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-money fa-fw"></i> Keuangan<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php echo base_url('keuangan'); ?>">Entri Data & Cetak Kwitansi</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('keuangan/kasBulan'); ?>">Entri Data Kas Bulan Baru</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('keuangan/KasHarian'); ?>">Entri Data Kas Harian</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <!--
-                        <li>
-                            <a href="#"><i class="fa fa-list-alt fa-fw"></i> Inventory<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Update Stok Seragam</a>
-                                </li>
-                                <li>
-                                    <a href="#">Update Stok ATK</a>
-                                </li>
-                                <li>
-                                    <a href="#">Transaksi Seragam Siswa</a>
-                                </li>
-                                <li>
-                                    <a href="#">Transaksi ATK</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level 
-                        </li>-->
-                        <li>
-                            <a href="tables.html"><i class="fa fa-files-o fa-fw"></i> Laporan<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php echo base_url('laporan/siswa_all');?>">Data Siswa Global</a>
-                                </li>
-                                <li>
-                                    <a href="#">Pelunasan Biaya Sekolah</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('laporan/kasRT');?>">Kas Rumah Tangga</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pencil-square-o fa-fw"></i> Master<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="<?php echo base_url('master/tahunAjaran');?>">Tahun Ajaran, Kategori, dan Kelas</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('master/seragam');?>">Seragam</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('master/stationary');?>">Stationary</a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('master/kasRT');?>">Kas Rumah Tangga</a>
-                                </li>
-                                <li>
-                                    <a href="#">Jenis Pembayaran</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                    <?php } ?>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
