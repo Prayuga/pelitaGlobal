@@ -120,4 +120,37 @@ class user extends CI_Controller {
 
 		//}
 	}
+        
+        public function changePassword(){
+            $this->load->view('templates/header');
+            $this->load->view('user/changePassword');
+            $this->load->view('templates/footer');
+        }
+        
+        public function doChangePassword(){
+            $id =  $this->session->userdata('ID_User');
+            $oldPass = $this->session->userdata('Password');
+            $oldPass2 = $this->input->post('oldPass');
+            $newPass = $this->input->post('newPass');
+            if($oldPass==$oldPass2){
+                $this->db->set('Password', $newPass);
+                $this->db->where('ID_User', $id);
+                $this->db->where('FlagActive', 'Y');
+                $this->db->update('msuser'); 
+                
+                $this->session->set_flashdata('alert','alert-success');
+		$this->session->set_flashdata('msg','Sukses mengganti password');
+                $this->load->view('templates/header');
+                $this->load->view('user/changePassword');
+                $this->load->view('templates/footer');
+            }else{
+                
+                $this->session->set_flashdata('alert','alert-danger');
+		$this->session->set_flashdata('msg','Gagal merubah password');
+                $this->load->view('templates/header');
+                $this->load->view('user/changePassword');
+                $this->load->view('templates/footer');
+            }
+            
+        }
 }
