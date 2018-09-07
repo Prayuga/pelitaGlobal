@@ -10,6 +10,7 @@ class master extends CI_Controller {
 		$this->load->model('seragam_model');
 		$this->load->model('tahunajaran_model');
 		$this->load->model('kasrt_model');
+		$this->load->model('jenispembayaran_model');
 		$this->Login_model->keamanan();
 	}
 	
@@ -35,6 +36,19 @@ class master extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function jenisPembayaran(){
+		$data['jenis'] = $this->jenispembayaran_model->get_jenisPembayaran();
+		$data['detail'] = $this->jenispembayaran_model->get_detailPembayaran();
+		$this->load->view('templates/header');
+		$this->load->view('master/jenisPembayaran', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function add_jenisPembayaran(){
+		$this->jenispembayaran_model->add_jenis();
+		redirect('master/jenisPembayaran');
+	}
+
 	public function add_jenisKas(){
 		$this->kasrt_model->add_jenis();
 		redirect('master/kasRT');
@@ -45,6 +59,11 @@ class master extends CI_Controller {
 		redirect('master/stationary');
 	}
 
+	public function update_jenisPembayaran($id_detail){
+		$this->jenispembayaran_model->update_jenisPembayaran($id_detail);
+		redirect('master/jenisPembayaran');
+	}
+
 	public function update_stationary($id_stationary){
 		$this->stationary_model->update_s($id_stationary);
 		redirect('master/stationary');
@@ -53,6 +72,11 @@ class master extends CI_Controller {
 	public function update_jenisKas($id_jenis){
 		$this->kasrt_model->update_jenis($id_jenis);
 		redirect('master/kasRT');
+	}
+
+	public function delete_jenisPembayaran($id_detail){
+		$this->jenispembayaran_model->delete_jenisPembayaran($id_detail);
+		redirect('master/jenisPembayaran');
 	}
 
 	public function delete_stationary($id_stationary){

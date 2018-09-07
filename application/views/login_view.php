@@ -38,7 +38,7 @@
             <h1>Login Here</h1>
             <form action="<?php echo site_url('login/ceklogin'); ?>" method="POST">
                 <p>Username</p>
-                <input type="text" name="userId" placeholder="Enter Username">
+                <input type="text" name="userId" placeholder="Enter User ID">
                 <p>Password</p>
                 <input type="password" name="password" placeholder="Enter Password">
                 <input type="submit" name="" value="Login">
