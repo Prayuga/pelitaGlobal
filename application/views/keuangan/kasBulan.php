@@ -4,15 +4,15 @@
       <h3 class="page-header">Entri Data Kas Bulan Baru</h3>
     </div>
         
-        <!-- notif crud-->
-       <div class="msg alert <?php echo $this->session->flashdata('alert');?>">
+        <!-- notif crud
+       <div class="msg alert <?php //echo $this->session->flashdata('alert');?>">
             <center>
-                <?php echo $this->session->flashdata('msg'); ?>
+                <?php //echo $this->session->flashdata('msg'); ?>
             </center>
        	</div>
         <script>
             $(".alert-success").delay(4000).fadeOut(1000, function () { $(this).remove(); });
-        </script>  
+        </script>  -->
         <!-- end notif crud --> 
         <div class="row">
           <div class="col-lg-12">
@@ -96,6 +96,14 @@
             }); 
        $('#end').datetimepicker({
                 format: 'YYYY-MM-DD'
-            }); 
+            });
+       <?php if( $this->session->flashdata('alert') != null){ ?>
+       swal({
+          title: "Success!",
+          text: "<?php echo $this->session->flashdata('alert'); ?>",
+          icon: "success",
+          button: "return to page",
+        });
+       <?php } ?>
     });
 </script>

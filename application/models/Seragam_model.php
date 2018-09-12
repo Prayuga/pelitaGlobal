@@ -31,7 +31,20 @@ class Seragam_model extends CI_Model {
 		$this->db->select('Id_seragam, Nama_seragam');
 		$this->db->where('flagactive','Y');
 		$query = $this->db->get('msheaderseragam');
-		return $query;
+		return $query->result_array();
+	}
+
+	public function getSeragam_siswa(){
+		$this->db->select('Id_seragam, Nama_seragam');
+		$this->db->where('flagactive','Y');
+		$query = $this->db->get('msheaderseragam');
+		return $query->result_array();
+	}
+
+	public function get_stok($id){
+		$str = "select  b.Id_detailseragam, a.Nama_seragam, a.JK, b.ukuran, b.stok from msheaderseragam a, msdetailseragam b WHERE a.Id_seragam = b.Id_seragam and b.Id_detailseragam = ".$id." and b.flagactive = 'Y'";
+		$query = $this->db->query($str);
+		return $query->result_array();
 	}
 
 	public function getDetailSeragam(){
@@ -55,4 +68,34 @@ class Seragam_model extends CI_Model {
 		$query = "update msdetailseragam set flagactive = 'N' where Id_detailseragam = ".$id."";
 		$this->db->query($query);
 	}
+    public function getSiswa_seragam($kat){
+        $query = $this->db->get_where('mssiswa', array('ID_Kategori' => $kat, 'FlagActive' => 'Y'));
+        return $query;
+    }
+
+    public function delete_trx($idsiswa){
+		$this->db->where('NomorIndukSiswa', $idsiswa);
+		$this->db->delete('trseragam');
+
+    }
+
+    public function add_trx($idsiswa){
+    	foreach ($_POST['detail_s'] as $det_s) {
+			$data = array(
+				'NomorIndukSiswa' => $idsiswa,
+				'ID_DetailSeragam' => $det_s
+			);
+
+			$this->db->insert('trseragam', $data);
+    	}
+    }
+
+    public function update_trx($final, $det_s){
+    	$data = array(
+			'stok' => $final
+		);
+
+		$this->db->where('ID_detailseragam', $det_s);
+		return $this->db->update('msdetailseragam', $data);
+    }
 }

@@ -268,6 +268,18 @@ class PendataanSiswa_model extends CI_Model {
 
     }
 
+    public function update_aktivasi($idsiswa){
+        $idsiswa = str_ireplace("&","/",$idsiswa);
+
+        $data = array(
+            'FlagActive' => $this->input->post('status')
+        );
+
+        $this->db->where('NomorIndukSiswa', $idsiswa);
+        return $this->db->update('mssiswa', $data);
+
+    }
+
     public function get_u($tgl, $kategori){
         $sql = "call getUmur('".$tgl."','".$kategori."')";
         $query = $this->db->query($sql);

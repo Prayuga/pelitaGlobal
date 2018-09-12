@@ -1,7 +1,7 @@
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h3 class="page-header">Edit Data Siswa</h3> 
+			<h3 class="page-header">Data Siswa</h3> 
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
@@ -38,6 +38,9 @@
     </li>
     <li role="presentation">
     	<a href="#surat_p" aria-controls="dataortu" role="tab" data-toggle="tab">Surat Pernyataan</a>
+    </li>
+    <li role="presentation">
+    	<a href="#aktif" aria-controls="dataortu" role="tab" data-toggle="tab">Status Siswa</a>
     </li>
   </ul>
 
@@ -476,7 +479,7 @@
 			Surat Pernyataan Umur Kurang
 			<br/><br/>
 			Umur saat mendaftar : <span style="color: #e56d12;"><?php echo $siswa_item['UmurSaatMendaftar']; ?></span>
-		</h3>
+		</h5>
 		<br/>
 <?php 
 	foreach ($siswa as $siswa_item) {
@@ -507,6 +510,42 @@
 	}
 ?>
     </div>
+    <!-- /tab surat pernyataan -->
+
+    <!-- tab status siswa-->
+    <div role="tabpanel" class="tab-pane" id="aktif" align="center">
+    	<h5 style="font-weight: bold;">
+			Status Aktif Siswa
+		</h5>
+		<br/>
+<?php 
+	foreach ($siswa as $siswa_item) {
+		$idsiswa = str_ireplace("/","&",$siswa_item['NomorIndukSiswa']);
+		if($siswa_item['FlagActive']=='N'){
+			echo form_open('pendataanSiswa/updateAktivasi/'.$idsiswa); 
+?>
+<select class="selectpicker" name="status">
+	<option value="Y">Aktif</option>
+	<option value="N" selected="selected">Tidak Aktif</option>
+</select>
+<input type="submit" name="submit" class="btn btn-primary" value="Submit">
+<?php
+			echo form_close();
+		}else if($siswa_item['FlagActive']=='Y'){
+			echo form_open('pendataanSiswa/updateAktivasi/'.$idsiswa); 
+?>
+<select class="selectpicker" name="status">
+	<option value="Y" selected="selected">Aktif</option>
+	<option value="N">Tidak Aktif</option>
+</select>
+<input type="submit" name="submit" class="btn btn-primary" value="Submit">
+<?php
+			echo form_close();
+		}
+	}
+?>
+    </div>
+    <!-- /tab status siswa-->
   </div>
 <?php } ?>
 </div>

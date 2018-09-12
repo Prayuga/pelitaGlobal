@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2018 at 12:18 PM
+-- Generation Time: Sep 12, 2018 at 04:31 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.28
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `msdetailjenispembayaran` (
   `Harga` int(11) NOT NULL,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y',
   `LastUpdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `msdetailjenispembayaran`
@@ -95,7 +95,8 @@ CREATE TABLE IF NOT EXISTS `msdetailjenispembayaran` (
 
 INSERT INTO `msdetailjenispembayaran` (`ID_DetailJenisPembayaran`, `ID_HeaderJenisPembayaran`, `DetailPembayaran`, `Keterangan`, `Harga`, `FlagActive`, `LastUpdate`) VALUES
 (1, 1, 'Pendaftaran', '', 150000, 'Y', '2018-09-07 12:17:47'),
-(2, 1, 'Gedung dan Fasilitas', '', 8000000, 'Y', '2018-09-07 13:45:26');
+(2, 1, 'Gedung dan Fasilitas', '', 8000000, 'Y', '2018-09-07 13:45:26'),
+(3, 3, 'tes', 'test', 100000, 'Y', '2018-09-11 23:24:35');
 
 -- --------------------------------------------------------
 
@@ -130,11 +131,10 @@ CREATE TABLE IF NOT EXISTS `msdetailseragam` (
 --
 
 INSERT INTO `msdetailseragam` (`ID_detailseragam`, `Id_seragam`, `ukuran`, `stok`, `flagactive`) VALUES
-(1, 1, 's', 22, 'y'),
+(1, 1, 's', 21, 'y'),
 (2, 1, 'm', 22, 'y'),
-(3, 1, 's', 21, 'y'),
 (4, 3, 's', 50, 'y'),
-(5, 3, 'm', 50, 'y'),
+(5, 3, 'm', 49, 'y'),
 (6, 3, 'l', 50, 'y');
 
 -- --------------------------------------------------------
@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `msmenu` (
   `URL` varchar(100) NOT NULL,
   `Icon` varchar(50) DEFAULT NULL,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `msmenu`
@@ -275,7 +275,8 @@ INSERT INTO `msmenu` (`ID_Menu`, `Menu`, `URL`, `Icon`, `FlagActive`) VALUES
 (2, 'PendataanSiswa', '#', '<i class="fa fa-file-text-o fa-fw"></i>', 'Y'),
 (3, 'Keuangan', '#', '<i class="fa fa-money fa-fw"></i>', 'Y'),
 (4, 'Laporan', '#', '<i class="fa fa-files-o fa-fw"></i>', 'Y'),
-(5, 'Master', '#', '<i class="fa fa-pencil-square-o fa-fw"></i>', 'Y');
+(5, 'Master', '#', '<i class="fa fa-pencil-square-o fa-fw"></i>', 'Y'),
+(6, 'Katering', '#', '<i class="fa fa-pencil-square-o fa-fw"></i>', 'Y');
 
 -- --------------------------------------------------------
 
@@ -397,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `mssubmenu` (
   `SubMenu` varchar(50) NOT NULL,
   `URL` varchar(100) NOT NULL,
   `FlagActive` char(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `mssubmenu`
@@ -406,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `mssubmenu` (
 INSERT INTO `mssubmenu` (`ID_Submenu`, `ID_Menu`, `SubMenu`, `URL`, `FlagActive`) VALUES
 (1, 2, 'Pendataan Siswa Baru', 'pendataanSiswa/siswabaru', 'Y'),
 (2, 2, 'Pendataan Kelas', 'pendataanSiswa/kelas', 'Y'),
-(3, 2, 'Ubah Data Siswa', 'pendataanSiswa/editSiswa', 'Y'),
+(3, 2, 'Data Siswa', 'pendataanSiswa/editSiswa', 'Y'),
 (4, 3, 'Entri Data & Cetak Kwitansi', '/keuangan', 'Y'),
 (5, 3, 'Entri Data Kas Bulan Baru', 'keuangan/kasBulan', 'Y'),
 (6, 3, 'Entri Data Kas Harian', 'keuangan/KasHarian', 'Y'),
@@ -417,7 +418,10 @@ INSERT INTO `mssubmenu` (`ID_Submenu`, `ID_Menu`, `SubMenu`, `URL`, `FlagActive`
 (11, 5, 'Seragam', 'master/seragam', 'Y'),
 (12, 5, 'Stationary', 'master/stationary', 'Y'),
 (13, 5, 'Kas Rumah Tangga', 'master/kasRT', 'Y'),
-(14, 5, 'Jenis Pembayaran', 'master/jenisPembayaran', 'Y');
+(14, 5, 'Jenis Pembayaran', 'master/jenisPembayaran', 'Y'),
+(15, 2, 'Pendataan Seragam', 'pendataanSiswa/seragam', 'Y'),
+(16, 6, 'Entri Data Katering', 'katering/entri', 'Y'),
+(17, 6, 'Print Data Katering', 'katering/print', 'Y');
 
 -- --------------------------------------------------------
 
@@ -475,7 +479,7 @@ CREATE TABLE IF NOT EXISTS `trauthorizemenu` (
   `ID_Menu` int(11) NOT NULL,
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trauthorizemenu`
@@ -483,10 +487,11 @@ CREATE TABLE IF NOT EXISTS `trauthorizemenu` (
 
 INSERT INTO `trauthorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `ID_User`, `TanggalPengisian`) VALUES
 (9, 2, '0001', '2018-09-03 12:44:33'),
-(10, 2, '0000', '2018-09-07 10:15:22'),
-(11, 3, '0000', '2018-09-07 10:15:22'),
-(12, 4, '0000', '2018-09-07 10:15:22'),
-(13, 5, '0000', '2018-09-07 10:15:22');
+(18, 2, '0000', '2018-09-12 21:13:22'),
+(19, 3, '0000', '2018-09-12 21:13:22'),
+(20, 4, '0000', '2018-09-12 21:13:22'),
+(21, 5, '0000', '2018-09-12 21:13:22'),
+(22, 6, '0000', '2018-09-12 21:13:22');
 
 -- --------------------------------------------------------
 
@@ -499,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `trauthorizesubmenu` (
   `ID_Submenu` int(11) NOT NULL,
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trauthorizesubmenu`
@@ -509,20 +514,23 @@ INSERT INTO `trauthorizesubmenu` (`ID_AuthorizeSubmenu`, `ID_Submenu`, `ID_User`
 (26, 1, '0001', '2018-09-03 12:44:33'),
 (27, 2, '0001', '2018-09-03 12:44:33'),
 (28, 3, '0001', '2018-09-03 12:44:33'),
-(29, 1, '0000', '2018-09-07 10:15:22'),
-(30, 2, '0000', '2018-09-07 10:15:22'),
-(31, 3, '0000', '2018-09-07 10:15:22'),
-(32, 4, '0000', '2018-09-07 10:15:22'),
-(33, 5, '0000', '2018-09-07 10:15:22'),
-(34, 6, '0000', '2018-09-07 10:15:22'),
-(35, 7, '0000', '2018-09-07 10:15:22'),
-(36, 8, '0000', '2018-09-07 10:15:22'),
-(37, 9, '0000', '2018-09-07 10:15:22'),
-(38, 10, '0000', '2018-09-07 10:15:22'),
-(39, 11, '0000', '2018-09-07 10:15:22'),
-(40, 12, '0000', '2018-09-07 10:15:22'),
-(41, 13, '0000', '2018-09-07 10:15:22'),
-(42, 14, '0000', '2018-09-07 10:15:22');
+(58, 1, '0000', '2018-09-12 21:13:22'),
+(59, 2, '0000', '2018-09-12 21:13:22'),
+(60, 3, '0000', '2018-09-12 21:13:22'),
+(61, 15, '0000', '2018-09-12 21:13:22'),
+(62, 4, '0000', '2018-09-12 21:13:22'),
+(63, 5, '0000', '2018-09-12 21:13:22'),
+(64, 6, '0000', '2018-09-12 21:13:22'),
+(65, 7, '0000', '2018-09-12 21:13:22'),
+(66, 8, '0000', '2018-09-12 21:13:22'),
+(67, 9, '0000', '2018-09-12 21:13:22'),
+(68, 10, '0000', '2018-09-12 21:13:22'),
+(69, 11, '0000', '2018-09-12 21:13:22'),
+(70, 12, '0000', '2018-09-12 21:13:22'),
+(71, 13, '0000', '2018-09-12 21:13:22'),
+(72, 14, '0000', '2018-09-12 21:13:22'),
+(73, 16, '0000', '2018-09-12 21:13:22'),
+(74, 17, '0000', '2018-09-12 21:13:22');
 
 -- --------------------------------------------------------
 
@@ -537,7 +545,18 @@ CREATE TABLE IF NOT EXISTS `trdetailpembayaran` (
   `Keterangan` text NOT NULL,
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trdetailpembayaran`
+--
+
+INSERT INTO `trdetailpembayaran` (`ID_DetailPembayaran`, `ID_HeaderPembayaran`, `Jumlah`, `Keterangan`, `ID_User`, `TanggalPengisian`) VALUES
+(1, 1, 50000, 'pembayaran pertama', '0000', '2018-09-10 10:27:12'),
+(2, 1, 150000, 'pembayaran kedua', '0000', '2018-09-10 10:27:12'),
+(3, 2, 20000, 'ke1', '0000', '2018-09-10 10:29:05'),
+(4, 2, 10000, 'ke2', '0000', '2018-09-10 10:29:05'),
+(5, 3, 10000, '', '0000', '2018-09-10 10:30:03');
 
 -- --------------------------------------------------------
 
@@ -577,11 +596,22 @@ CREATE TABLE IF NOT EXISTS `trheaderpembayaran` (
   `NomorIndukSiswa` varchar(20) NOT NULL,
   `ID_DetailJenisPembayaran` int(11) NOT NULL,
   `Saldo` int(11) NOT NULL DEFAULT '0',
+  `Discount` char(1) NOT NULL DEFAULT 'N',
+  `Jumlah` int(11) NOT NULL,
   `StatusLunas` char(1) NOT NULL DEFAULT 'N',
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trheaderpembayaran`
+--
+
+INSERT INTO `trheaderpembayaran` (`ID_HeaderPembayaran`, `NomorIndukSiswa`, `ID_DetailJenisPembayaran`, `Saldo`, `Discount`, `Jumlah`, `StatusLunas`, `ID_User`, `TanggalPengisian`, `FlagActive`) VALUES
+(1, '2017/KG-1/0005/PGM', 2, 200000, 'N', 0, 'N', '0000', '2018-09-10 10:26:29', 'Y'),
+(2, '2017/KG-1/0005/PGM', 1, 30000, 'N', 0, 'N', '0000', '2018-09-10 10:28:19', 'Y'),
+(3, '2017/KG-1/0010/PGM', 1, 10000, 'N', 0, 'N', '0000', '2018-09-10 10:29:42', 'Y');
 
 -- --------------------------------------------------------
 
@@ -605,6 +635,27 @@ CREATE TABLE IF NOT EXISTS `trheaderpengeluaran` (
 
 INSERT INTO `trheaderpengeluaran` (`ID_HeaderPengeluaran`, `Bulan`, `Tahun`, `StartDate`, `EndDate`, `Keterangan`, `FlagActive`) VALUES
 (1, 'Agustus', 2018, '2018-08-01', '2018-08-31', '', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trseragam`
+--
+
+CREATE TABLE IF NOT EXISTS `trseragam` (
+  `ID_Transaksi` int(11) NOT NULL,
+  `NomorIndukSiswa` varchar(20) NOT NULL,
+  `ID_DetailSeragam` int(11) NOT NULL,
+  `TanggalTransaksi` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trseragam`
+--
+
+INSERT INTO `trseragam` (`ID_Transaksi`, `NomorIndukSiswa`, `ID_DetailSeragam`, `TanggalTransaksi`) VALUES
+(4, '11/001/PGM', 1, '2018-09-12 20:49:26'),
+(5, '11/001/PGM', 5, '2018-09-12 20:49:27');
 
 -- --------------------------------------------------------
 
@@ -771,6 +822,12 @@ ALTER TABLE `trheaderpengeluaran`
   ADD PRIMARY KEY (`ID_HeaderPengeluaran`);
 
 --
+-- Indexes for table `trseragam`
+--
+ALTER TABLE `trseragam`
+  ADD PRIMARY KEY (`ID_Transaksi`);
+
+--
 -- Indexes for table `trstationary`
 --
 ALTER TABLE `trstationary`
@@ -789,7 +846,7 @@ ALTER TABLE `msagama`
 -- AUTO_INCREMENT for table `msdetailjenispembayaran`
 --
 ALTER TABLE `msdetailjenispembayaran`
-  MODIFY `ID_DetailJenisPembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `ID_DetailJenisPembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `msdetailkelas`
 --
@@ -829,7 +886,7 @@ ALTER TABLE `mskategorikelas`
 -- AUTO_INCREMENT for table `msmenu`
 --
 ALTER TABLE `msmenu`
-  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `msorangtua`
 --
@@ -844,7 +901,7 @@ ALTER TABLE `msstationary`
 -- AUTO_INCREMENT for table `mssubmenu`
 --
 ALTER TABLE `mssubmenu`
-  MODIFY `ID_Submenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `ID_Submenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `mstahunajaran`
 --
@@ -854,17 +911,17 @@ ALTER TABLE `mstahunajaran`
 -- AUTO_INCREMENT for table `trauthorizemenu`
 --
 ALTER TABLE `trauthorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `trauthorizesubmenu`
 --
 ALTER TABLE `trauthorizesubmenu`
-  MODIFY `ID_AuthorizeSubmenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+  MODIFY `ID_AuthorizeSubmenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `trdetailpembayaran`
 --
 ALTER TABLE `trdetailpembayaran`
-  MODIFY `ID_DetailPembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_DetailPembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `trdetailpengeluaran`
 --
@@ -874,12 +931,17 @@ ALTER TABLE `trdetailpengeluaran`
 -- AUTO_INCREMENT for table `trheaderpembayaran`
 --
 ALTER TABLE `trheaderpembayaran`
-  MODIFY `ID_HeaderPembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_HeaderPembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `trheaderpengeluaran`
 --
 ALTER TABLE `trheaderpengeluaran`
   MODIFY `ID_HeaderPengeluaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `trseragam`
+--
+ALTER TABLE `trseragam`
+  MODIFY `ID_Transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `trstationary`
 --

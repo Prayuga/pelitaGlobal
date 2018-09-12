@@ -45,7 +45,14 @@ class master extends CI_Controller {
 	}
 
 	public function add_jenisPembayaran(){
-		$this->jenispembayaran_model->add_jenis();
+		$res = $this->jenispembayaran_model->add_jenis();
+		if($res==true){
+            $this->session->set_flashdata('alert','alert-success');
+            $this->session->set_flashdata('msg','Sukses!');
+        }else{
+            $this->session->set_flashdata('alert','alert-danger');
+            $this->session->set_flashdata('msg','Gagal!');
+        }
 		redirect('master/jenisPembayaran');
 	}
 
