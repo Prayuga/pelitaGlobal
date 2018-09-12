@@ -91,7 +91,7 @@
                         <h5 style="font-weight: bold;">Harga :</h5>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="harga" required>
+                        <input type="text" class="form-control" name="harga" id="harga" required>
                     </div>
                 </div>
                 <div class="row">
@@ -104,7 +104,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <input type="submit" name="submit" class="btn btn-primary alerts" value="Submit">
+                <input type="submit" name="submit" class="btn btn-primary" value="Submit">
               </div>
             <?php echo form_close(); ?>
         </div>
@@ -212,7 +212,15 @@
     $(document).ready(function() {
         $('#dataTables').DataTable({
             responsive: true
+        });  
+        <?php if( $this->session->flashdata('alert') != null){ ?>
+       swal({
+          title: "Success!",
+          text: "<?php echo $this->session->flashdata('alert'); ?>",
+          icon: "success",
+          button: "return to page",
         });
+       <?php } ?>
     });
     </script>
     <script type="text/javascript">

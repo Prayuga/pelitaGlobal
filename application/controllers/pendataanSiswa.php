@@ -6,6 +6,7 @@ class pendataanSiswa extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('pendataansiswa_model');
+        $this->load->model('seragam_model');
                 $this->Login_model->keamanan();
 	}
 	
@@ -44,8 +45,8 @@ class pendataanSiswa extends CI_Controller {
             echo "<td align='center' width='35%'>".$row['NomorIndukSiswa']."</td>";
             echo "<td align='center' width='40%'>".$row['NamaSiswa']."</td>";
             echo "<td align='center' width='25%'>";
-            echo"<a href='http://localhost:81/pelitaGlobal/pendataanSiswa/editSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-primary' data-toggle='tooltip' data-placement='bottom' title='Ubah Data Siswa'><i class='fa fa-clipboard fa-fw'></i></a> &nbsp;";
-            echo"<a target='_blank' href='http://localhost:81/pelitaGlobal/pendataanSiswa/printSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='Print Data Siswa'><i class='fa fa-print fa-fw'></i></a>";
+            echo"<a href='".base_url()."pendataanSiswa/editSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-primary' data-toggle='tooltip' data-placement='bottom' title='Ubah Data Siswa'><i class='fa fa-clipboard fa-fw'></i></a> &nbsp;";
+            echo"<a target='_blank' href='".base_url()."pendataanSiswa/printSiswa/".str_ireplace("/","&",$row['NomorIndukSiswa'])."' style='font-style:none;' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='Print Data Siswa'><i class='fa fa-print fa-fw'></i></a>";
             echo "</td></tr>";
         }
         echo "</tbody></table>";
@@ -75,6 +76,18 @@ class pendataanSiswa extends CI_Controller {
 		$this->load->view('pendataanSiswa/pendataanSiswaBaru', $data);
 		$this->load->view('templates/footer');
 	}
+    
+    public function seragam($idsiswa=null){
+        if($idsiswa==null){
+            $idsiswa = $this->input->post('siswa');
+        }
+        $data['siswa'] = $this->pendataansiswa_model->get_siswa($idsiswa);
+        $data['kategori'] = $this->pendataansiswa_model->get_Kategori();
+        $data['seragam_h'] = $this->seragam_model->getSeragam_siswa();
+        $this->load->view('templates/header');
+        $this->load->view('pendataanSiswa/pendataanSeragam', $data);
+        $this->load->view('templates/footer');
+    }
 	
 	public function kelas(){
 
@@ -85,6 +98,27 @@ class pendataanSiswa extends CI_Controller {
 		$this->load->view('pendataanSiswa/pendataanKelas', $data);
 		$this->load->view('templates/footer');
 	}
+        
+    public function getSiswa_seragam($kat){
+        $list = $this->seragam_model->getSiswa_seragam($kat);
+        foreach($list->result() as $siswa) {
+
+            echo "<option value='".$siswa->NomorIndukSiswa."'>".$siswa->NamaSiswa."</option>";
+        }
+    }
+    
+    public function trx_seragam(){
+        $this->seragam_model->delete_trx($this->input->post('idSiswa'));
+        $this->seragam_model->add_trx($this->input->post('idSiswa'));
+        foreach ($_POST['detail_s'] as $det_s){
+            $var = $this->seragam_model->get_stok($det_s);
+            foreach ($var as $key) {
+                $final = $key['stok'] -1;
+            }
+            $this->seragam_model->update_trx($final, $det_s);
+        }
+        redirect('pendataanSiswa/seragam/'.$idsiswa);
+    }
         
     public function getJsonKelas(){
 	$list = $this->pendataansiswa_model->getSiswaBaru();
@@ -130,6 +164,11 @@ class pendataanSiswa extends CI_Controller {
         redirect('pendataanSiswa/editSiswa/'.$idsiswa);
     }
     
+    public function updateAktivasi($idsiswa){
+        $this->pendataansiswa_model->update_aktivasi($idsiswa);
+        redirect('pendataanSiswa/editSiswa/'.$idsiswa);
+    }
+    
     public function getKelas(){
         $thn = $this->input->post('thn');
         $kat = $this->input->post('kat');
@@ -156,8 +195,8 @@ class pendataanSiswa extends CI_Controller {
     public function add_siswa(){
         $tgl = $this->input->post('tgl_l');
         $kategori = $this->input->post('kategori');
-        $data_k = $this->pendataansiswa_model->get_singkatanKategori($kategori);
-        foreach ($data as $row_k) {
+        $data_k = $this->pendataansiswa_model->get_singkatanKelas($kategori);
+        foreach ($data_k as $row_k) {
             $kategori_k=$row_k['SingkatanKategori'];
             
         }

@@ -11,6 +11,8 @@
 
     <title>Admin Pelita Global</title>
 
+    <!--<link rel="shortcut icon" href="../Images/icons/Kalbis.ico" />-->
+
     <!-- jquery-->
     <script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>
 
@@ -44,7 +46,11 @@
     <!-- select2 css-->
     <link href="<?=base_url();?>assets/vendor/select2/select2.min.css" rel="stylesheet">
 
+    <!-- rupiah js -->
+    <link href="<?=base_url();?>assets/dist/js/rupiah.js" rel="stylesheet">
 
+    <!--jam js-->
+    <script type="text/javascript" src="<?=base_url();?>assets/dist/js/jam.js"></script>
 
     <style>
     body{

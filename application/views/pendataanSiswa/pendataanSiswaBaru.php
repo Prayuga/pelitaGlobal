@@ -379,7 +379,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <input type="Submit" class="btn btn-primary pull-right btn-lg" style="margin-bottom: 10px;" value="Submit">
+                      <input type="Submit" class="btn btn-primary pull-right btn-lg" id="alerts" style="margin-bottom: 10px;" value="Submit">
                     </div>
                   </div>  
                 </div>
@@ -430,6 +430,16 @@
                   }
               });
             }
+        });
+    </script>
+    <script type="text/javascript">
+        $('#alerts').click(function(){
+            swal({
+              title: "Success!",
+              text: "Harap melakukan pengukuran seragam.",
+              icon: "success",
+              button: "return to page",
+            });
         });
     </script>
 </div>
