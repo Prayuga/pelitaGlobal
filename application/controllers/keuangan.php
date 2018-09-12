@@ -81,6 +81,14 @@ class keuangan extends CI_Controller {
 
         redirect('keuangan/kasHarian');
     }
+    
+    public function pembayaranSiswa(){
+
+		$this->load->view('templates/header');
+		$this->load->view('keuangan/pembayaranSiswa');
+		$this->load->view('templates/footer');
+        
+    }
 
 }
 
