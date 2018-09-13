@@ -16,5 +16,11 @@ class PembayaranSiswa_model extends CI_Model {
             return $query->result_array();
         }
 
+        public function getHeaderJenis(){
+        	$str = "SELECT ID_HeaderJenisPembayaran, JenisPembayaran from msheaderjenispembayaran";
+            $query = $this->db->query($str);
+            return $query->result_array();
+        }
+
     
 }

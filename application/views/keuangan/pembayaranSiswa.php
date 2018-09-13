@@ -15,8 +15,8 @@
                     <div class="col-lg-6">
                         <form method="post" action="#" class="form-horizontal">
                             <div class="form-group">
-                                <label class="control-label col-sm-3">Siswa :</label>
-                                <div class="col-sm-9">
+                                <label class="control-label col-sm-4">Siswa :</label>
+                                <div class="col-sm-8">
                                     <select name="siswa" class="selectpicker form-control" data-live-search="true" id="siswa" title="Pilih Siswa" required>
                                         <?php foreach ($siswa as $siswaitem) { ?>
                                         <option value="<?php echo $siswaitem['NomorIndukSiswa'];?>"><?php echo $siswaitem['NomorIndukSiswa'];?> - <?php echo $siswaitem['NamaSiswa'];?></option>
@@ -25,15 +25,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-3">Jenis Pembayaran :</label>
-                                <div class="col-sm-9">
+                                <label class="control-label col-sm-4">Jenis Pembayaran :</label>
+                                <div class="col-sm-8">
                                     <select name="jenis" class="selectpicker form-control" data-live-search="true" id="siswa" title="Pilih jenis pembayaran" required>
-                                        <option value="">Pendaftaran</option>
+                                        <?php foreach ($jenis as $jenisitem) { ?>
+                                        <option value="<?php echo $jenisitem['ID_HeaderJenisPembayaran'];?>"><?php echo $jenisitem['JenisPembayaran'];?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                           
-                          <input class="pull-right col-sm-9 btn btn-primary" value="Submit" type="submit">
+                          <input class="pull-right col-sm-8 btn btn-primary" value="Submit" type="submit">
                         </form>
                     </div>
                 </div>

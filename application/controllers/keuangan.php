@@ -85,7 +85,8 @@ class keuangan extends CI_Controller {
     
     public function pembayaranSiswa(){
                 
-                $data['siswa'] = $this->pembayaransiswa_model->getSiswa();
+        $data['siswa'] = $this->pembayaransiswa_model->getSiswa();
+        $data['jenis'] = $this->pembayaransiswa_model->getHeaderJenis();
 		$this->load->view('templates/header');
 		$this->load->view('keuangan/pembayaranSiswa',$data);
 		$this->load->view('templates/footer');
