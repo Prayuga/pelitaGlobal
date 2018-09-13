@@ -7,6 +7,7 @@ class keuangan extends CI_Controller {
 	{
 		parent::__construct();
                 $this->load->model('kasrt_model');
+                $this->load->model('pembayaransiswa_model');
                 $this->Login_model->keamanan();
 	}
 
@@ -83,9 +84,10 @@ class keuangan extends CI_Controller {
     }
     
     public function pembayaranSiswa(){
-
+                
+                $data['siswa'] = $this->pembayaransiswa_model->getSiswa();
 		$this->load->view('templates/header');
-		$this->load->view('keuangan/pembayaranSiswa');
+		$this->load->view('keuangan/pembayaranSiswa',$data);
 		$this->load->view('templates/footer');
         
     }

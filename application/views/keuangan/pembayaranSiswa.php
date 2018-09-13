@@ -18,9 +18,9 @@
                                 <label class="control-label col-sm-3">Siswa :</label>
                                 <div class="col-sm-9">
                                     <select name="siswa" class="selectpicker form-control" data-live-search="true" id="siswa" title="Pilih Siswa" required>
-                                        <option value="">PGM-01 - Prayuga</option>
-                                        <option value="">PGM-02 - Prayuga</option>
-                                        <option value="">PGM-03 - Prayuga</option>
+                                        <?php foreach ($siswa as $siswaitem) { ?>
+                                        <option value="<?php echo $siswaitem['NomorIndukSiswa'];?>"><?php echo $siswaitem['NomorIndukSiswa'];?> - <?php echo $siswaitem['NamaSiswa'];?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
