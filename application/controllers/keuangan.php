@@ -109,6 +109,7 @@ class keuangan extends CI_Controller {
         foreach($list->result() as $sera) {
             $no ++;
             $row = array();
+            $row[] = $no;
             $row[] = $sera->DetailPembayaran;
             $row[] = $sera->Harga;
             $row[] = $sera->Saldo;
@@ -127,12 +128,14 @@ class keuangan extends CI_Controller {
 
     public function getPembayaranSiswaById(){
         $id = $_GET['id'];
-        $list = $this->pembayaransiswa_model->getPembayaranSiswa($id);
+        $jenis = $_GET['jenis'];
+        $list = $this->pembayaransiswa_model->getPembayaranSiswa($id,$jenis);
         $data = array();
         $no = 0;
         foreach($list->result() as $sera) {
             $no ++;
             $row = array();
+            $row[] = $no;
             $row[] = $sera->DetailPembayaran;
             $row[] = $sera->Harga;
             $row[] = $sera->Saldo;

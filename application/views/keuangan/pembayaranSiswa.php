@@ -9,8 +9,19 @@
             <div class="panel panel-default">
                 <div class="panel-body row">
                     <div class="col-lg-6">
-                        <label>Nomor Induk : PGM-01</label><br>
-                        <label>Nama Siswa : Prayuga</label><br><br><br>
+                        <div class="row" style="margin-top:5px">
+                            <b>
+                                <div class="col-md-4 text-right">Nomor Induk Siswa   : </div>
+                                <div class="col-md-5 text-primary" id="lblnis"></div>
+                            </b>
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <b>
+                                <div class="col-md-4 text-right">Nama Siswa       : </div>
+                                <div class="col-md-5 text-primary" id="lblnama"></div>
+                            </b><br><br><br>
+                        </div>
+                        
                         <button id="btTambah" class="col-sm-5 btn btn-success" data-toggle="modal" data-target="#tambah_i">Tambah Item</button>
                     </div>
                     <div class="col-lg-6">
@@ -47,6 +58,7 @@
    <table id="mytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>Nama Pembayaran</th>
                 <th>Harga</th>
                 <th>Sisa Tagihan</th>
@@ -70,6 +82,7 @@
              });
         $('#btSub').click(function(){
             $id = $('#jenis').val();
+            $nis = $('#siswa').val();
             // ajax get data 
             $.ajax({
                 url : "<?php echo base_url('keuangan/getItemPembayaran')?>/"+$id,
@@ -77,6 +90,7 @@
                 success: function(data)
                 {
                    //alert(data);
+                   $('#lblnis').html($nis);
                    $('#itemnya').html(data);
                     $('#btTambah').removeClass('disabled');
                 },
@@ -85,20 +99,16 @@
                     alert('Error Data');
                 }
             });
-            /*
-            $idx = $('#siswa').val();
-            var myTab = $('#mytable').DataTable({
-                    "ajax": {
-                        "url": "<?php echo base_url('keuangan/getPembayaranSiswaById')?>?id="+$idx,
-                        "type": "POST"
-                    }
-                 });*/
 
             $idx = $('#siswa').val();
-            var newUrl = "<?php echo base_url('keuangan/getPembayaranSiswaById')?>?id="+$idx;
+            var newUrl = "<?php echo base_url('keuangan/getPembayaranSiswaById')?>?id="+$idx+"&jenis="+$id;
             myTab.ajax.url( newUrl ).load();
         });
     });
+    
+    function update(){
+    
+    }
 
 </script>
 

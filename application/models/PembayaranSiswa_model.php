@@ -36,8 +36,8 @@ class PembayaranSiswa_model extends CI_Model {
             return $query;
         }
 
-        public function getPembayaranSiswa($id){
-            $str = "SELECT a.ID_HeaderPembayaran,b.DetailPembayaran,b.Harga,a.Saldo,a.StatusLunas from trheaderpembayaran a, msdetailjenispembayaran b where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and a.StatusLunas = 'N' and a.NomorIndukSiswa = '".$id."' ";
+        public function getPembayaranSiswa($id,$jenis){
+            $str = "SELECT b.DetailPembayaran,b.Harga,a.Saldo,a.StatusLunas from trheaderpembayaran a, msdetailjenispembayaran b, msheaderjenispembayaran c where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and b.ID_HeaderJenisPembayaran = c.ID_HeaderJenisPembayaran and a.StatusLunas = 'N' and a.NomorIndukSiswa = '".$id."' and c.ID_HeaderJenisPembayaran = ".$jenis." ";
             $query = $this->db->query($str);
             return $query;
         }
