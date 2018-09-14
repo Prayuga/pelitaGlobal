@@ -22,5 +22,25 @@ class PembayaranSiswa_model extends CI_Model {
             return $query->result_array();
         }
 
+        public function getItemPembayaran($id){
+            $this->db->select('ID_DetailJenisPembayaran, DetailPembayaran');
+            $this->db->where('flagactive','Y');
+            $this->db->where('ID_HeaderJenisPembayaran',$id);
+            $query = $this->db->get('msdetailjenispembayaran');
+            return $query;
+        }
+
+        public function getPembayaranSiswaAll(){
+            $str = "SELECT a.ID_HeaderPembayaran,b.DetailPembayaran,b.Harga,a.Saldo,a.StatusLunas from trheaderpembayaran a, msdetailjenispembayaran b where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and a.StatusLunas = 'N' ";
+            $query = $this->db->query($str);
+            return $query;
+        }
+
+        public function getPembayaranSiswa($id){
+            $str = "SELECT a.ID_HeaderPembayaran,b.DetailPembayaran,b.Harga,a.Saldo,a.StatusLunas from trheaderpembayaran a, msdetailjenispembayaran b where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and a.StatusLunas = 'N' and a.NomorIndukSiswa = '".$id."' ";
+            $query = $this->db->query($str);
+            return $query;
+        }
+
     
 }
