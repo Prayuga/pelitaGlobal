@@ -85,11 +85,70 @@ class keuangan extends CI_Controller {
     
     public function pembayaranSiswa(){
                 
-                $data['siswa'] = $this->pembayaransiswa_model->getSiswa();
+        $data['siswa'] = $this->pembayaransiswa_model->getSiswa();
+        $data['jenis'] = $this->pembayaransiswa_model->getHeaderJenis();
 		$this->load->view('templates/header');
 		$this->load->view('keuangan/pembayaranSiswa',$data);
 		$this->load->view('templates/footer');
         
+    }
+
+    public function getItemPembayaran($id){
+        $data = $this->pembayaransiswa_model->getItemPembayaran($id);
+        foreach($data->result() as $row) {
+            # code...
+            echo '<option value="'.$row->ID_DetailJenisPembayaran.'">'.$row->DetailPembayaran.'</option>';
+            
+        }
+    }
+
+    public function getPembayaranSiswa(){
+        $list = $this->pembayaransiswa_model->getPembayaranSiswaAll();
+        $data = array();
+        $no = 0;
+        foreach($list->result() as $sera) {
+            $no ++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $sera->DetailPembayaran;
+            $row[] = $sera->Harga;
+            $row[] = $sera->Saldo;
+            $row[] = $sera->StatusLunas;
+            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update()"><i class="glyphicon glyphicon-pencil"></i> Bayar</a>';
+
+            $data[] = $row;
+        }
+
+        $output = array (
+                "data" => $data,
+        );
+        echo json_encode($output);
+    }
+
+
+    public function getPembayaranSiswaById(){
+        $id = $_GET['id'];
+        $jenis = $_GET['jenis'];
+        $list = $this->pembayaransiswa_model->getPembayaranSiswa($id,$jenis);
+        $data = array();
+        $no = 0;
+        foreach($list->result() as $sera) {
+            $no ++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $sera->DetailPembayaran;
+            $row[] = $sera->Harga;
+            $row[] = $sera->Saldo;
+            $row[] = $sera->StatusLunas;
+            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update()"><i class="glyphicon glyphicon-pencil"></i> Bayar</a>';
+
+            $data[] = $row;
+        }
+
+        $output = array (
+                "data" => $data,
+        );
+        echo json_encode($output);
     }
 
 }
