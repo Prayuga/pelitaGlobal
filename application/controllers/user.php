@@ -68,7 +68,7 @@ class user extends CI_Controller {
 			echo "</thead><tbody>";
 			foreach ($menu as $menu_item) {
 				echo "<tr>";
-				echo "<td align='center'><input type='checkbox' name='menu[]' value='".$menu_item['ID_Menu']."'  id='".$menu_item['Menu']."_head' style='opacity:0;'";
+				echo "<td align='center'><input type='checkbox' name='menu[]' value='".$menu_item['ID_Menu']."'  id='".$menu_item['Menu']."_head''";
 				foreach ($a_menu as $a_menu_item) {
 					if($a_menu_item['ID_Menu']==$menu_item['ID_Menu']){
 						echo "checked='true'";
