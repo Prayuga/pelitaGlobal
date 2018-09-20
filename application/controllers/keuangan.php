@@ -107,14 +107,25 @@ class keuangan extends CI_Controller {
         $data = array();
         $no = 0;
         foreach($list->result() as $sera) {
+            $nama = "'".$sera->NamaSiswa."'";
+            $namaPem = "'".$sera->DetailPembayaran."'";
             $no ++;
             $row = array();
             $row[] = $no;
             $row[] = $sera->DetailPembayaran;
             $row[] = $sera->Harga;
+            if($sera->Jumlah>0){
+                $row[] = $sera->Jumlah;
+            }else{
+                $row[] = "-";
+            }
             $row[] = $sera->Saldo;
-            $row[] = $sera->StatusLunas;
-            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update()"><i class="glyphicon glyphicon-pencil"></i> Bayar</a>';
+            if($sera->StatusLunas=="Y"){
+                $row[] = "Lunas";
+            }else{
+                $row[] = "Belum Lunas";
+            }
+            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update('.$sera->ID_HeaderPembayaran.','.$nama.','.$namaPem.','.$sera->ID_DetailJenisPembayaran.')"><i class="glyphicon glyphicon-pencil"></i> Bayar</a>';
 
             $data[] = $row;
         }
@@ -133,14 +144,25 @@ class keuangan extends CI_Controller {
         $data = array();
         $no = 0;
         foreach($list->result() as $sera) {
+            $nama = "'".$sera->NamaSiswa."'";
+            $namaPem = "'".$sera->DetailPembayaran."'";
             $no ++;
             $row = array();
             $row[] = $no;
             $row[] = $sera->DetailPembayaran;
             $row[] = $sera->Harga;
+            if($sera->Jumlah>0){
+                $row[] = $sera->Jumlah;
+            }else{
+                $row[] = "-";
+            }
             $row[] = $sera->Saldo;
-            $row[] = $sera->StatusLunas;
-            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update()"><i class="glyphicon glyphicon-pencil"></i> Bayar</a>';
+            if($sera->StatusLunas=="Y"){
+                $row[] = "Lunas";
+            }else{
+                $row[] = "Belum Lunas";
+            }
+            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update('.$sera->ID_HeaderPembayaran.','.$nama.','.$namaPem.','.$sera->ID_DetailJenisPembayaran.')"><i class="glyphicon glyphicon-pencil"></i> Bayar</a>';
 
             $data[] = $row;
         }
@@ -149,6 +171,41 @@ class keuangan extends CI_Controller {
                 "data" => $data,
         );
         echo json_encode($output);
+    }
+    
+    public function addHeaderPembayaranSiswa(){
+        $nis = $this->input->post('nis');
+        $jenis = $this->input->post('jenis');
+        $diskon = $this->input->post('diskonStat');
+        $jmldiskon = $this->input->post('jmldiskon');
+        $user = $this->session->userdata('ID_User');
+        $res = $this->pembayaransiswa_model->addHeaderPembayaranSiswa($nis,$jenis,$diskon,$jmldiskon,$user);
+        if($res==true){
+            $this->session->set_flashdata('alert','alert-success');
+            $this->session->set_flashdata('msg','Sukses!');
+        }else{
+            $this->session->set_flashdata('alert','alert-danger');
+            $this->session->set_flashdata('msg','Gagal!');
+        }
+        redirect('keuangan/pembayaranSiswa');
+    }
+
+    public function addDetailPembayaranSiswa(){
+        $id_head = $this->input->post('id_head');
+        $id_det = $this->input->post('id_det');
+        $jml = $this->input->post('jml');
+        $ket = $this->input->post('ket');
+        $user = $this->session->userdata('ID_User');
+        $res = $this->pembayaransiswa_model->addDetailPembayaranSiswa($id_head,$jml,$ket,$user,$id_det);
+        if($res==true){
+            $this->session->set_flashdata('alert','alert-success');
+            $this->session->set_flashdata('msg','Sukses!');
+        }else{
+            $this->session->set_flashdata('alert','alert-danger');
+            $this->session->set_flashdata('msg','Gagal!');
+        }
+        redirect('keuangan/pembayaranSiswa');
+        
     }
 
 }

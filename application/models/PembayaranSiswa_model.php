@@ -31,16 +31,44 @@ class PembayaranSiswa_model extends CI_Model {
         }
 
         public function getPembayaranSiswaAll(){
-            $str = "SELECT a.ID_HeaderPembayaran,b.DetailPembayaran,b.Harga,a.Saldo,a.StatusLunas from trheaderpembayaran a, msdetailjenispembayaran b where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and a.StatusLunas = 'N' ";
+            $str = "SELECT a.ID_HeaderPembayaran,b.DetailPembayaran,CONCAT('Rp', FORMAT(b.Harga, 2)) as Harga,CONCAT('Rp', FORMAT((b.harga-a.Jumlah)-a.Saldo,2)) as Saldo,a.StatusLunas,a.Jumlah, c.NamaSiswa, a.ID_DetailJenisPembayaran from trheaderpembayaran a, msdetailjenispembayaran b,mssiswa c where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and a.NomorIndukSiswa = c.NomorIndukSiswa and a.StatusLunas = 'N' ";
             $query = $this->db->query($str);
             return $query;
         }
 
         public function getPembayaranSiswa($id,$jenis){
-            $str = "SELECT b.DetailPembayaran,b.Harga,a.Saldo,a.StatusLunas from trheaderpembayaran a, msdetailjenispembayaran b, msheaderjenispembayaran c where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and b.ID_HeaderJenisPembayaran = c.ID_HeaderJenisPembayaran and a.StatusLunas = 'N' and a.NomorIndukSiswa = '".$id."' and c.ID_HeaderJenisPembayaran = ".$jenis." ";
+            $str = "SELECT a.ID_HeaderPembayaran,b.DetailPembayaran,CONCAT('Rp', FORMAT(b.Harga, 2)) as Harga,CONCAT('Rp', FORMAT((b.harga-a.Jumlah)-a.Saldo,2)) as Saldo,a.StatusLunas,a.Jumlah, d.NamaSiswa, a.ID_DetailJenisPembayaran from trheaderpembayaran a, msdetailjenispembayaran b, msheaderjenispembayaran c, mssiswa d where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and b.ID_HeaderJenisPembayaran = c.ID_HeaderJenisPembayaran and a.NomorIndukSiswa = d.NomorIndukSiswa and a.StatusLunas = 'N' and a.NomorIndukSiswa = '".$id."' and c.ID_HeaderJenisPembayaran = ".$jenis." ";
             $query = $this->db->query($str);
             return $query;
         }
+        
+        public function addHeaderPembayaranSiswa($nis,$jenis,$diskon,$jmldiskon,$user){
+            if($diskon=='Y'){
+                $data = array(
+                  'NomorIndukSiswa' => $nis,
+                  'ID_DetailJenisPembayaran' => $jenis,
+                    'Discount' => $diskon,
+                    'Jumlah' =>$jmldiskon ,
+                    'ID_User' =>$user,
+                );
+            }else{
+                $data = array(
+                  'NomorIndukSiswa' => $nis,
+                  'ID_DetailJenisPembayaran' => $jenis,
+                    'ID_User' =>$user,
+                );
+            }
+            $this->db->insert('trheaderpembayaran', $data);
+        }
+
+        public function addDetailPembayaranSiswa($id_head,$jml,$ket,$user,$id_det){
+            $str = " CALL setTrDetailPembayaran('".$id_head."','".$jml."','".$ket."','".$user."','".$id_det."')";
+            $query = $this->db->query($str);
+            return $query;
+
+        }
+        
+        
 
     
 }

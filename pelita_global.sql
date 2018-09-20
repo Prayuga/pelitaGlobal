@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 14 Sep 2018 pada 05.47
+-- Generation Time: 20 Sep 2018 pada 18.57
 -- Versi Server: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -42,6 +42,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getUmur` (IN `tgl_p` VARCHAR(10), I
     ELSE
     SET STAT = "Y";
     SELECT tahun,bulan,stat;
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `setTrDetailPembayaran` (IN `id_head` INT(11), IN `jml` INT(11), IN `ket` VARCHAR(200), IN `usernya` CHAR(4), IN `id_det` INT(11))  BEGIN
+    DECLARE hargaNya int(11);
+    DECLARE saldoTotal int(11);
+    DECLARE jmlAkhir int(11);
+    SELECT (b.Harga-a.Jumlah) as Harga from trheaderpembayaran a, msdetailjenispembayaran b where a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran and a.ID_DetailJenisPembayaran = id_det and a.ID_HeaderPembayaran = id_head  into hargaNya;
+    SELECT (saldo+jml) from trheaderpembayaran where ID_HeaderPembayaran = id_head into saldoTotal;
+    SELECT (hargaNya-saldoTotal) into jmlAkhir;
+
+    IF(jmlAkhir<=0)THEN
+        INSERT INTO `trdetailpembayaran` (`ID_DetailPembayaran`, `ID_HeaderPembayaran`, `Jumlah`, `Keterangan`, `ID_User`, `TanggalPengisian`) VALUES (NULL, id_head, jml, ket, usernya, CURRENT_TIMESTAMP);
+        UPDATE trheaderpembayaran set StatusLunas = 'Y', Saldo = saldoTotal where ID_HeaderPembayaran = id_head;
+    ELSE
+     INSERT INTO `trdetailpembayaran` (`ID_DetailPembayaran`, `ID_HeaderPembayaran`, `Jumlah`, `Keterangan`, `ID_User`, `TanggalPengisian`) VALUES (NULL, id_head, jml, ket, usernya, CURRENT_TIMESTAMP);
+        UPDATE trheaderpembayaran set Saldo = saldoTotal where ID_HeaderPembayaran = id_head;
     END IF;
 END$$
 
@@ -557,7 +574,19 @@ INSERT INTO `trdetailpembayaran` (`ID_DetailPembayaran`, `ID_HeaderPembayaran`, 
 (2, 1, 150000, 'pembayaran kedua', '0000', '2018-09-10 10:27:12'),
 (3, 2, 20000, 'ke1', '0000', '2018-09-10 10:29:05'),
 (4, 2, 10000, 'ke2', '0000', '2018-09-10 10:29:05'),
-(5, 3, 10000, '', '0000', '2018-09-10 10:30:03');
+(5, 3, 10000, '', '0000', '2018-09-10 10:30:03'),
+(6, 1, 5000, 'bayar ketiga', '0000', '2018-09-19 08:57:57'),
+(7, 2, 1000, 'test', '0000', '2018-09-19 09:04:46'),
+(9, 3, 100000, 'test', '0000', '2018-09-19 09:15:57'),
+(10, 3, 40000, 'pelunasan', '0000', '2018-09-19 09:16:59'),
+(11, 1, 5000, 'test', '0000', '2018-09-20 23:02:50'),
+(12, 8, 100000, 'test1', '0000', '2018-09-20 23:08:20'),
+(13, 8, 150000, 'test2', '0000', '2018-09-20 23:08:39'),
+(14, 8, 50000, 'test 2', '0000', '2018-09-20 23:23:52'),
+(15, 8, 100000, 'test 3', '0000', '2018-09-20 23:28:18'),
+(16, 8, 60000, 'test 4', '0000', '2018-09-20 23:29:03'),
+(17, 1, 5000, 'coba ajah', '0000', '2018-09-20 23:49:27'),
+(18, 8, 40000, 'coba lagi\r\n', '0000', '2018-09-20 23:51:06');
 
 -- --------------------------------------------------------
 
@@ -610,9 +639,14 @@ CREATE TABLE `trheaderpembayaran` (
 --
 
 INSERT INTO `trheaderpembayaran` (`ID_HeaderPembayaran`, `NomorIndukSiswa`, `ID_DetailJenisPembayaran`, `Saldo`, `Discount`, `Jumlah`, `StatusLunas`, `ID_User`, `TanggalPengisian`, `FlagActive`) VALUES
-(1, '2017/KG-1/0005/P', 2, 200000, 'N', 0, 'N', '0000', '2018-09-10 10:26:29', 'Y'),
+(1, '2017/KG-1/0005/P', 2, 210000, 'N', 0, 'N', '0000', '2018-09-10 10:26:29', 'Y'),
 (2, '2017/KG-1/0005/P', 1, 30000, 'N', 0, 'N', '0000', '2018-09-10 10:28:19', 'Y'),
-(3, '2017/KG-1/0010/P', 1, 10000, 'N', 0, 'N', '0000', '2018-09-10 10:29:42', 'Y');
+(3, '2017/KG-1/0010/P', 1, 150000, 'N', 0, 'Y', '0000', '2018-09-10 10:29:42', 'Y'),
+(4, '2017/KG-1/0005/P', 2, 0, 'Y', 100000, 'N', '0000', '2018-09-14 23:17:35', 'Y'),
+(5, '2017/KG-1/0005/P', 2, 0, 'N', 0, 'N', '0000', '2018-09-14 23:21:21', 'Y'),
+(6, '2017/KG-1/0005/P', 1, 0, 'N', 0, 'N', '0000', '2018-09-16 07:51:41', 'Y'),
+(7, '2017/KG-1/0005/P', 3, 0, 'N', 0, 'N', '0000', '2018-09-20 23:05:22', 'Y'),
+(8, '2017/KG-1/0010/P', 2, 500000, 'N', 0, 'N', '0000', '2018-09-20 23:06:27', 'Y');
 
 -- --------------------------------------------------------
 
@@ -922,7 +956,7 @@ ALTER TABLE `trauthorizesubmenu`
 -- AUTO_INCREMENT for table `trdetailpembayaran`
 --
 ALTER TABLE `trdetailpembayaran`
-  MODIFY `ID_DetailPembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_DetailPembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `trdetailpengeluaran`
 --
@@ -932,7 +966,7 @@ ALTER TABLE `trdetailpengeluaran`
 -- AUTO_INCREMENT for table `trheaderpembayaran`
 --
 ALTER TABLE `trheaderpembayaran`
-  MODIFY `ID_HeaderPembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_HeaderPembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `trheaderpengeluaran`
 --

@@ -20,7 +20,7 @@
                 <div class="col-lg-4">
                     <select id="sel_thn" class="selectpicker form-group" title="Pilih Tahun Ajaran">
                         <?php foreach ($tahun as $tahun_item) { ?>
-                            <option value="<?php echo $tahun_item['TahunAjaran']; ?>"><?php echo $tahun_item['TahunAjaran']; ?></option>
+                            <option value="<?php echo $tahun_item['ID_TahunAjaran']; ?>"><?php echo $tahun_item['TahunAjaran']; ?></option>
                           <?php } ?>
                     </select>
                 </div>    
