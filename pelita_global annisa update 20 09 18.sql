@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2018 at 02:08 PM
+-- Generation Time: Sep 20, 2018 at 04:30 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.28
 
@@ -25,33 +25,29 @@ DELIMITER $$
 -- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getPembayaranGlobal`(IN `jenis` INT(11), IN `ta` INT(11), IN `lunas` CHAR(1))
-    NO SQL
 BEGIN
 
-DECLARE jenis int(2);
-DECLARE ta int(2);
-DECLARE lunas char(1);
-
 SET @sql_dinamis = (
-	SELECT GROUP_CONCAT( DISTINCT CONCAT('SUM( IF( ID_DetailJenisPembayaran = ' , ID_DetailJenisPembayaran , ', Saldo, 0) ) AS "' , (SELECT DetailPembayaran FROM msdetailjenispembayaran WHERE msdetailjenispembayaran.ID_DetailJenisPembayaran = trheaderpembayaran.ID_DetailJenisPembayaran ),'"' )) FROM trheaderpembayaran where ID_DetailJenisPembayaran IN (SELECT ID_DetailJenisPembayaran FROM msdetailjenispembayaran where ID_HeaderJenisPembayaran = '1')
+	SELECT GROUP_CONCAT( DISTINCT CONCAT('SUM( IF( a.ID_DetailJenisPembayaran = ' , ID_DetailJenisPembayaran , ', a.Saldo, 0) ) AS "' , /*(SELECT DetailPembayaran FROM msdetailjenispembayaran WHERE msdetailjenispembayaran.ID_DetailJenisPembayaran = trheaderpembayaran.ID_DetailJenisPembayaran )*/ ID_DetailJenisPembayaran,'"' )) FROM trheaderpembayaran where ID_DetailJenisPembayaran IN (SELECT ID_DetailJenisPembayaran FROM msdetailjenispembayaran where ID_HeaderJenisPembayaran = jenis)
 );
 
-SET @SQL = CONCAT('SELECT IFNULL(NomorIndukSiswa, "TOTAL") AS NomorIndukSiswa,', 
+SET @SQL = CONCAT('SELECT IFNULL(a.NomorIndukSiswa, "TOTAL") AS NomorIndukSiswa, b.NamaSiswa,', 
 			  @sql_dinamis, ' 
-		    ,SUM( IF(Discount = "Y", Jumlah, 0)) as diskon, 
-			SUM( Saldo) as saldo 
-			FROM trheaderpembayaran 
-            WHERE ID_TahunAjaran = "1"
-			AND StatusLunas = "N"
-            AND ID_DetailJenisPembayaran IN (SELECT ID_DetailJenisPembayaran FROM msdetailjenispembayaran WHERE ID_DetailJenisPembayaran ="1")
-			GROUP BY NomorIndukSiswa 
+		    ,SUM( IF(a.Discount = "Y", a.JumlahDiskon, 0)) as diskon, SUM( IF(a.Discount = "Y", a.KeteranganDiskon, "-")) as Keterangan, 
+			SUM( a.Saldo) as saldo 
+			FROM trheaderpembayaran as a, mssiswa as b 
+            WHERE a.NomorIndukSiswa = b.NomorIndukSiswa 
+            AND a.ID_TahunAjaran = "',ta,'"
+			AND a.StatusLunas = "',lunas,'"
+            AND a.ID_DetailJenisPembayaran IN (SELECT ID_DetailJenisPembayaran FROM msdetailjenispembayaran WHERE ID_DetailJenisPembayaran ="',jenis,'")
+			GROUP BY a.NomorIndukSiswa 
 			WITH ROLLUP'
 	   );
+
 
 PREPARE stmt FROM @SQL;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
-/*SELECT jenis, ta, lunas;*/
 
 END$$
 
@@ -99,13 +95,13 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `testttt`(IN `a` INT(1))
-    NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `testttt`(IN `b` INT(11))
 BEGIN
 
-DECLARE a int(1);
+DECLARE a int(11);
 
-select a;
+SELECT b into a;
+SELECT a;
 
 END$$
 
@@ -475,7 +471,7 @@ INSERT INTO `mssubmenu` (`ID_Submenu`, `ID_Menu`, `SubMenu`, `URL`, `FlagActive`
 (5, 3, 'Entri Data Kas Bulan Baru', 'keuangan/kasBulan', 'Y'),
 (6, 3, 'Entri Data Kas Harian', 'keuangan/KasHarian', 'Y'),
 (7, 4, 'Data Siswa Global', 'laporan/siswa_all', 'Y'),
-(8, 4, 'Pelunasan Biaya Sekolah', 'laporan/pembayaran', 'Y'),
+(8, 4, 'Laporan Pembayaran Global', 'laporan/pembayaran', 'Y'),
 (9, 4, 'Kas Rumah Tangga', 'laporan/kasRT', 'Y'),
 (10, 5, 'Tahun Ajaran, Kategori, dan Kelas', 'master/tahunAjaran', 'Y'),
 (11, 5, 'Seragam', 'master/seragam', 'Y'),
@@ -528,7 +524,7 @@ CREATE TABLE IF NOT EXISTS `msuser` (
 --
 
 INSERT INTO `msuser` (`ID_User`, `NamaUser`, `Password`, `LastUpdate`, `UpdatedBy`, `FlagActive`) VALUES
-('0000', 'Administrator', '1234', '2018-09-03 11:07:12', '', 'Y'),
+('0000', 'Administrator', '123456789', '2018-09-03 11:07:12', '', 'Y'),
 ('0001', 'miss yani', '1234', '2018-09-03 11:07:32', '0000', 'Y');
 
 -- --------------------------------------------------------
@@ -661,7 +657,8 @@ CREATE TABLE IF NOT EXISTS `trheaderpembayaran` (
   `ID_DetailJenisPembayaran` int(11) NOT NULL,
   `Saldo` int(11) NOT NULL DEFAULT '0',
   `Discount` char(1) NOT NULL DEFAULT 'N',
-  `Jumlah` int(11) NOT NULL,
+  `JumlahDiskon` int(11) DEFAULT NULL,
+  `KeteranganDiskon` text,
   `StatusLunas` char(1) NOT NULL DEFAULT 'N',
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -672,10 +669,10 @@ CREATE TABLE IF NOT EXISTS `trheaderpembayaran` (
 -- Dumping data for table `trheaderpembayaran`
 --
 
-INSERT INTO `trheaderpembayaran` (`ID_HeaderPembayaran`, `NomorIndukSiswa`, `ID_TahunAjaran`, `ID_DetailJenisPembayaran`, `Saldo`, `Discount`, `Jumlah`, `StatusLunas`, `ID_User`, `TanggalPengisian`, `FlagActive`) VALUES
-(1, '2017KG-1/002/PGM', 1, 2, 200000, 'N', 0, 'N', '0000', '2018-09-10 10:26:29', 'Y'),
-(2, '2017KG-1/002/PGM', 1, 1, 30000, 'N', 0, 'N', '0000', '2018-09-10 10:28:19', 'Y'),
-(3, '11/001/PGM', 1, 1, 10000, 'N', 0, 'N', '0000', '2018-09-10 10:29:42', 'Y');
+INSERT INTO `trheaderpembayaran` (`ID_HeaderPembayaran`, `NomorIndukSiswa`, `ID_TahunAjaran`, `ID_DetailJenisPembayaran`, `Saldo`, `Discount`, `JumlahDiskon`, `KeteranganDiskon`, `StatusLunas`, `ID_User`, `TanggalPengisian`, `FlagActive`) VALUES
+(1, '2017KG-1/002/PGM', 1, 2, 200000, 'N', 0, '', 'N', '0000', '2018-09-10 10:26:29', 'Y'),
+(2, '2017KG-1/002/PGM', 1, 1, 30000, 'N', 0, '', 'N', '0000', '2018-09-10 10:28:19', 'Y'),
+(3, '11/001/PGM', 1, 1, 10000, 'N', 0, '', 'N', '0000', '2018-09-10 10:29:42', 'Y');
 
 -- --------------------------------------------------------
 

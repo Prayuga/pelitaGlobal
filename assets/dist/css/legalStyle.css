@@ -12,6 +12,15 @@ page[size="legal"] {
   /*margin-bottom: 0.5cm;*/
   box-shadow: 0 0 0cm rgba(0,0,0,0.5);
 }
+page[size="legalLandscape"] {
+  background: white;
+  width: 330mm;
+  height: 210mm;
+  display: block;
+  margin: 0 auto;
+  /*margin-bottom: 0.5cm;*/
+  box-shadow: 0 0 0cm rgba(0,0,0,0.5);
+}
 @media print {
   body, page[size="legal"] {
     margin: 0;

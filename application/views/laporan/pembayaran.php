@@ -1,20 +1,20 @@
 <div id="page-wrapper">
-	<div class="row">
-		<div class="col-md-12">
-			<h1 class="page-header">Laporan Pembayaran Global</h1>
-		</div>
-	</div>
-	<div class="row">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Laporan Pembayaran Global</h1>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-            	<div class="panel-heading">
-					<div class="row">
-						
-					</div>
-				</div>
+                <div class="panel-heading">
+                    <div class="row">
+                        
+                    </div>
+                </div>
                 <div class="panel-body">
                     <?php echo form_open('laporan/pembayaran'); ?>
-                	<div class="row">
+                    <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Jenis Pembayaran</label>
@@ -25,7 +25,7 @@
                                 </select>
                             </div>
                         </div>
-                		<div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tahun Ajaran</label>
                                 <select id="sel_thn" class="form-control selectpicker" data-live-search="true" name="tahunAjaran" title="Pilih Tahun Ajaran">
@@ -50,40 +50,56 @@
                                 <input type="submit" class="form-control btn btn-primary cariSubmit" name="Cari" value="Cari">
                             </div>
                         </div>
-                	</div>
+                    </div>
                     <?php 
                         echo form_close(); 
-                        if($laporan != null){
+                        if($laporan != null || $laporan!= ""){
+                            echo form_open('pendataanSiswa/trx_seragam');
                     ?>
                     <br>
                     <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
+                        <div class="col-md-2">
+                            <a class="btn btn-success form-control" target="_blank" href="<?=base_url()?>laporan/printPembayaran/<?=$this->input->post('jenis')?>/<?=$this->input->post('tahunAjaran')?>/<?=$this->input->post('lunas')?>"><i class="fa fa-print fa-fw"> </i> Print</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
                             <table class="table table-striped table-bordered table-hover table-responsive">
                                 <thead>
                                     <tr>
                                         <td>No.</td>
                                         <td>Nama Siswa</td>
-                                        <td>Jenis Pembayaran</td>
-                                        <td>Jumlah Pembayaran</td>
+                                        <?php foreach ($header as $header_item) { ?>
+                                            <td><?php echo $header_item['DetailPembayaran']; ?></td>
+                                        <?php } ?>
                                         <td>Diskon</td>
-                                        <td>Status Lunas</td>
+                                        <td>Keterangan</td>
+                                        <td>Saldo</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
-                                    	$count = 1;
+                                    <?php
+                                        $count=1; 
                                         foreach ($laporan as $laporan_item) { 
+                                            if($laporan_item['NomorIndukSiswa']=='TOTAL'){
+                                                $siswa = "Total";
+                                            }else{
+                                                $siswa = $laporan_item['NamaSiswa']." (".$laporan_item['NomorIndukSiswa'].")";
+                                            }
                                     ?>
                                     <tr>
-                                        <td><?php echo $count;?></td>
-                                        <td><?php echo $laporan_item['NamaSiswa']; ?></td>
-                                        <td><?php echo $laporan_item['DetailPembayaran']; ?></td>
-                                        <td><?php echo $laporan_item['Saldo']; ?></td>
-                                        <td><?php echo $laporan_item['Jumlah']; ?></td>
-                                        <td><?php echo $laporan_item['StatusLunas']; ?></td>
+                                        <td><?=$count?></td>
+                                        <td><?=$siswa?></td>
+                                        <?php foreach ($header as $header_item) { ?>
+                                            <td><?php echo $laporan_item[$header_item['ID_DetailJenisPembayaran']]; ?></td>
+                                        <?php } ?>
+                                        <td><?=$laporan_item['diskon']?></td>
+                                        <td><?=$laporan_item['Keterangan']?></td>
+                                        <td><?=$laporan_item['saldo']?></td>
                                     </tr>
                                     <?php
-                                    		$count++;
+                                            $count++;
                                         } 
                                     ?>
                                 </tbody>

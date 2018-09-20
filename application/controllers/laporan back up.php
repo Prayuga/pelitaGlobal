@@ -24,33 +24,50 @@ class laporan extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function pembayaran($jenis=null, $ta=null, $lunas=null){
+    public function pembayaran(){
         $this->Login_model->keamanan();
         $data['jenis'] = $this->jenispembayaran_model->get_jenisPembayaran();
         $data['tahun_ajaran'] = $this->tahunajaran_model->get_TA();
         if($this->input->post('jenis')==null){
             $data['laporan'] = null;
         }else{
-            $data['laporan'] = $this->Laporan_model->getPembayaranGlobal($jenis, $ta, $lunas);
+            $data['laporan'] = $this->Laporan_model->getPembayaranGlobal();
         }
-        $data['header'] = $this->Laporan_model->getHeaderPembayaranGlobal($jenis);
+        $data['header'] = $this->Laporan_model->getHeaderPembayaranGlobal();
         // echo "select d.NamaSiswa, b.DetailPembayaran, a.Saldo, a.Jumlah, a.StatusLunas from trheaderpembayaran as a, msdetailjenispembayaran b, mstahunajaran as c, mssiswa as d WHERE a.ID_DetailJenisPembayaran in (SELECT f.ID_DetailJenisPembayaran FROM msdetailjenispembayaran as f WHERE f.ID_HeaderJenisPembayaran ='".$this->input->post('jenis')."') AND a.ID_TahunAjaran = '".$this->input->post('tahunAjaran')."' AND a.StatusLunas = '".$this->input->post('lunas')."' AND a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran AND a.ID_TahunAjaran = c.ID_TahunAjaran AND a.NomorIndukSiswa = d.NomorIndukSiswa";
         $this->load->view('templates/header');
         $this->load->view('laporan/pembayaran', $data);
         $this->load->view('templates/footer');
     }
 
-    public function printPembayaran($jenis, $ta, $lunas){
-        $this->Login_model->keamanan();
-        $data['ta']=$ta;
-        $data['tahun_ajaran'] = $this->tahunajaran_model->get_TA();
-        if($jenis==null){
-            $data['laporan'] = null;
-        }else{
-            $data['laporan'] = $this->Laporan_model->getPembayaranGlobal($jenis, $ta, $lunas);
+    public function getPembayaran($jenis, $ta, $lunas){
+        $laporan = $this->Laporan_model->getPembayaran($jenis, $ta, $lunas);
+        $header = $this->Laporan_model->getHeaderPembayaranGlobal();
+        $data = array();
+        $no = 1;
+        foreach ($laporan as $laporan_item){
+            $row = array();
+            $row[] = $no;
+            if($laporan_item['NomorIndukSiswa']=='TOTAL'){
+                $siswa = "Total";
+            }else{
+                $siswa = $laporan_item['NamaSiswa']." (".$laporan_item['NomorIndukSiswa'].")";
+            }
+            $row[] = $siswa;
+            foreach ($header as $header_item){
+                $row[] = $laporan_item[$header_item['ID_DetailJenisPembayaran']];
+            }
+            $row[] = $laporan_item['diskon'];
+            $row[] = $laporan_item['Keterangan'];
+            $row[] = $laporan_item['saldo'];
+            $no++;
+
+            $data[] = $row;
         }
-        $data['header'] = $this->Laporan_model->getHeaderPembayaranGlobal($jenis);
-        $this->load->view('laporan/printPembayaran', $data);
+        $output = array (
+            "data" => $data,
+        );
+        echo json_encode($output);
     }
 
     public function get_kasByJenis($bln,$jenis){
