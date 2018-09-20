@@ -13,7 +13,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Add Jenis Pengeluaran &nbsp; <i class="fa fa-plus fa-fw"></i></button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Tambah Jenis Pengeluaran &nbsp; <i class="fa fa-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <br><br>
@@ -60,7 +60,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Jenis Pengeluaran</h4>
+            <h4 class="modal-title" id="myModalLabel">Tambah Jenis Pengeluaran</h4>
           </div>
           <?php echo form_open('master/add_jenisKas'); ?>
               <div class="modal-body">
@@ -97,7 +97,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Jenis Pengeluaran</h4>
+                <h4 class="modal-title" id="myModalLabel">Hapus Jenis Pengeluaran</h4>
               </div>
               <?php echo form_open('master/delete_jenisKas/'.$jeniskas_item['ID_JenisPengeluaran']); ?>
                   <div class="modal-body">
@@ -110,7 +110,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <input type="submit" name="submit" class="btn btn-danger alerts" value="Delete">
+                    <input type="submit" name="submit" class="btn btn-danger alerts" value="Hapus">
                   </div>
                 <?php echo form_close(); ?>
             </div>
@@ -123,7 +123,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update Stationary</h4>
+                <h4 class="modal-title" id="myModalLabel">Ubah Jenis Pengeluaran</h4>
               </div>
               <?php echo form_open('master/update_jenisKas/'.$jeniskas_item['ID_JenisPengeluaran']); ?>
                   <div class="modal-body">
@@ -154,21 +154,22 @@
 <?php } ?>
 </div>
     <!-- /#page-wrapper -->
-<script type="text/javascript" src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+       <?php if($this->session->flashdata('alert') != null){ ?>
+        swal({
+          title: "Berhasil!",
+          text: "<?php echo $this->session->flashdata('msg'); ?>",
+          icon: "<?php echo $this->session->flashdata('alert'); ?>",
+          button: "Ok",
+        });
+       <?php } ?>
+    </script>
 <script>
 $(document).ready(function() {
     $('#dataTables-example').DataTable({
         responsive: true
     });
 });
-</script>
-<script type="text/javascript">
-    $('.alerts').click(function(){
-        swal({
-          title: "Success!",
-          text: "Successfully updated",
-          icon: "success",
-          button: "return to page",
-        });
-    });
 </script>

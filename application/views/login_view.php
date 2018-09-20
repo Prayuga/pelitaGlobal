@@ -35,6 +35,7 @@
 <body>
     <div class="loginbox">
         <img src="<?=base_url();?>assets/images/logo.png" class="logo">
+        <br><br><br>
             <h1>Login Here</h1>
             <form action="<?php echo site_url('login/ceklogin'); ?>" method="POST">
                 <p>Username</p>
@@ -43,12 +44,12 @@
                 <input type="password" name="password" placeholder="Enter Password">
                 <input type="submit" name="" value="Login">
             </form>
-            <center style="color: #d34141;"><?php  
+            <!--<center style="color: #d34141;"><?php  
                 $info = $this->session->flashdata('info');
                 if(!empty($info)){
-                    echo $info;
+                    //echo $info;
                 }
-            ?></center>
+            ?></center>-->
     </div>
 
     <!-- jQuery -->
@@ -62,6 +63,20 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="<?=base_url();?>assets/dist/js/sb-admin-2.js"></script>
+
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        
+        <?php if( $this->session->flashdata('info') != null){ ?>
+            swal({
+              title: "Gagal!",
+              text: "<?php echo $this->session->flashdata('info'); ?>",
+              icon: "error",
+              button: "Ok",
+            });
+        <?php } ?>
+    </script>
 
 </body>
 

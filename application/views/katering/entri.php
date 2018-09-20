@@ -62,6 +62,8 @@
 		<?php echo form_close(); ?>
     </div>
 </div>
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#tanggal').datetimepicker({
@@ -89,7 +91,7 @@
 	          title: "Success!",
 	          text: "<?php echo $this->session->flashdata('msg'); ?>",
 	          icon: "success",
-	          button: "return to page",
+	          button: "Ok",
 	        });
         <?php } ?>
 	});

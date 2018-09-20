@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2018 at 04:30 AM
+-- Generation Time: Sep 20, 2018 at 05:19 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.5.28
 
@@ -190,10 +190,10 @@ CREATE TABLE IF NOT EXISTS `msdetailseragam` (
 --
 
 INSERT INTO `msdetailseragam` (`ID_detailseragam`, `Id_seragam`, `ukuran`, `stok`, `flagactive`) VALUES
-(1, 1, 's', 21, 'y'),
+(1, 1, 's', 20, 'y'),
 (2, 1, 'm', 22, 'y'),
 (4, 3, 's', 50, 'y'),
-(5, 3, 'm', 49, 'y'),
+(5, 3, 'm', 48, 'y'),
 (6, 3, 'l', 50, 'y');
 
 -- --------------------------------------------------------
@@ -257,12 +257,12 @@ CREATE TABLE IF NOT EXISTS `msheaderseragam` (
 --
 
 INSERT INTO `msheaderseragam` (`Id_seragam`, `Nama_seragam`, `JK`, `FlagActive`) VALUES
-(1, 'Dress', 'Laki-laki', 'Y'),
-(2, 'Coba 2', 'Perempuan', 'Y'),
+(1, 'Dress', 'L', 'Y'),
+(2, 'Coba 2', 'P', 'Y'),
 (3, 'Coba 3', 'Campur', 'Y'),
-(11, 'Coba 5', 'Laki-laki', 'Y'),
-(12, 'Baju', 'Laki-laki', 'Y'),
-(13, 'Baju', 'Laki-laki', 'Y');
+(11, 'Coba 5', 'L', 'Y'),
+(12, 'Baju', 'L', 'Y'),
+(13, 'Baju', 'L', 'Y');
 
 -- --------------------------------------------------------
 
@@ -359,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `msorangtua` (
   `Alamat` varchar(100) DEFAULT NULL,
   `NoTelp` varchar(100) DEFAULT NULL,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `msorangtua`
@@ -367,7 +367,12 @@ CREATE TABLE IF NOT EXISTS `msorangtua` (
 
 INSERT INTO `msorangtua` (`ID_OrangTua`, `ID_Siswa`, `NamaAyah`, `TempatLahirAyah`, `TanggalLahirAyah`, `PekerjaanAyah`, `PendidikanAyah`, `NamaIbu`, `TempatLahirIbu`, `TanggalLahirIbu`, `PendidikanIbu`, `PekerjaanIbu`, `Alamat`, `NoTelp`, `FlagActive`) VALUES
 (1, '11/001/PGM', 'edy wardoyo', '', '1997-03-12', '', '', '', '', '1997-03-12', '', '', '', '', 'Y'),
-(2, '2017KG-1/002/PGM', 'Wardhani', 'Jakarta', '2018-08-09', 'Karyawan', 'D3', 'Wardhani', 'Jakarta', '2018-08-09', 'SMA', 'IRT', 'Jakarta', '0215487', 'Y');
+(2, '2017KG-1/002/PGM', 'Wardhani', 'Jakarta', '2018-08-09', 'Karyawan', 'D3', 'Wardhani', 'Jakarta', '2018-08-09', 'SMA', 'IRT', 'Jakarta', '0215487', 'Y'),
+(3, '2017PG/003/PGM', 'dedi s', 'Jakarta', '1996-01-08', 'Karyawan', 'D4', 'hardilah', 'Jakarta', '2018-09-20', 'S3', 'karyawan', 'utan kayu', '01245787963', 'Y'),
+(4, '2017KG-2/004/PGM', 'Edy', 'Jakarta', '1986-04-26', 'Karyawan', 'S1', 'Tri', 'Jakarta', '1986-04-26', 'S2', 'karyawan', 'tambun', '00214536987', 'Y'),
+(5, '2017PG/005/PGM', 'yy', 'Jakarta', '2018-09-20', 'Karyawan', 'D3', 'mm', 'Jakarta', '2018-09-20', 'D4', 'karyawan', 'ciakrang', '0214563987', 'Y'),
+(6, '2017KG-1/006/PGM', 'ddd', 'Jakarta', '2018-09-20', 'Karyawan', 'S2', 'ggg', 'Jakarta', '2018-09-20', 'D4', 'karyawan', 'pulogadung', '0213654789', 'Y'),
+(7, 'Pre-K/007/PGM', 'dedi', 'Jakarta', '2018-09-20', 'Karyawan', 'S1', 'hardilah', 'Jakarta', '2018-09-20', 'D4', 'karyawan', 'pulomas', '021453698', 'Y');
 
 -- --------------------------------------------------------
 
@@ -393,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `mssiswa` (
   `JumlahSaudaraTiri` int(11) DEFAULT '0',
   `TahunAjaranMasuk` char(9) NOT NULL,
   `ID_Kategori` int(11) NOT NULL,
-  `ID_Kelas` int(11) DEFAULT NULL,
+  `ID_Kelas` int(11) NOT NULL DEFAULT '0',
   `UmurSaatMendaftar` varchar(20) NOT NULL,
   `FlagSuratPernyataan` char(1) DEFAULT NULL,
   `BahasaSehariHari` varchar(50) DEFAULT NULL,
@@ -412,8 +417,13 @@ CREATE TABLE IF NOT EXISTS `mssiswa` (
 --
 
 INSERT INTO `mssiswa` (`NomorIndukSiswa`, `NamaSiswa`, `NamaPanggilan`, `TempatLahir`, `TanggalLahir`, `ID_Agama`, `Alamat`, `NoTelp`, `TinggalPada`, `JarakRumah`, `AnakKe`, `Dari`, `JumlahSaudaraKandung`, `JumlahSaudaraAngkat`, `JumlahSaudaraTiri`, `TahunAjaranMasuk`, `ID_Kategori`, `ID_Kelas`, `UmurSaatMendaftar`, `FlagSuratPernyataan`, `BahasaSehariHari`, `JenisKelamin`, `BeratBadan`, `TinggiBadan`, `GolonganDarah`, `RiwayatPenyakit`, `Alergi`, `PendidikanSebelumnya`, `FlagActive`) VALUES
-('11/001/PGM', 'Annisa Alifah', 'awewe', 'Jakarta', '2018-08-28', '3', 'Pulomas Jakarta Timur 13210', '0214782353561', 'Orang Tua', 1, 0, 0, 0, 0, NULL, '1', 1, NULL, '1 tahun 5 bulan', 'Y', 'Indonesia', '', 0, 0, '', '       Asma', 'mi goreng', '', 'Y'),
-('2017KG-1/002/PGM', 'Alifah', 'Annisa', 'Jakarta', '2018-08-09', '3', 'Jakarta', '0215478', 'Orang Tua', 1, 3, 3, 2, 0, NULL, '2017/2018', 0, NULL, '0 tahun 2 bulan', '-', 'Indonesia', 'P', 20, 140, 'B', '', NULL, '', 'Y');
+('11/001/PGM', 'Annisa Alifah', 'awewe', 'Jakarta', '2018-08-28', '3', 'Pulomas Jakarta Timur 13210', '0214782353561', 'Orang Tua', 1, 0, 0, 0, 0, NULL, '1', 1, 0, '1 tahun 5 bulan', 'Y', 'Indonesia', '', 0, 0, '', '       Asma', 'mi goreng', '', 'Y'),
+('2017KG-1/002/PGM', 'Alifah', 'Annisa', 'Jakarta', '2018-08-09', '3', 'Jakarta', '0215478', 'Orang Tua', 1, 3, 3, 2, 0, NULL, '2017/2018', 0, 0, '0 tahun 2 bulan', '-', 'Indonesia', 'P', 20, 140, 'B', '', NULL, '', 'Y'),
+('2017KG-1/006/PGM', 'Yugsky', 'yyy', 'Jakarta', '2018-09-20', '3', 'pulogadung', '0213654789', 'Orang Tua', 1, 1, 1, 1, 0, NULL, '2017/2018', 3, 0, '0 tahun 1 bulan', 'N', 'Indonesia', 'L', 55, 155, 'A', 'asma', 'buah', '', 'Y'),
+('2017KG-2/004/PGM', 'wardhani', 'www', 'Jakarta', '2014-06-26', '4', 'tambun', '0214578963', 'Orang Tua', 1, 1, 1, 1, 0, NULL, '2017/2018', 4, 0, '4 tahun 4 bulan', 'N', 'Indonesia', 'P', 50, 150, 'A', 'jus kiding', 'jus', '', 'Y'),
+('2017PG/003/PGM', 'Kurniadi ganteng', 'kurrrssss', 'Jakarta', '2018-09-20', '3', 'utan kayu', '0215478963', 'Orang Tua', 1, 1, 1, 1, 0, NULL, '2017/2018', 1, 0, '2 tahun 3 bulan', '-', 'Indonesia', 'L', 30, 130, 'A', ' batuks', 'ayam', '', 'Y'),
+('2017PG/005/PGM', 'yonglek', 'yong', 'Jakarta', '2013-05-15', '4', 'cikarang', '0213654789', 'Orang Tua', 1, 1, 1, 1, 0, NULL, '2017/2018', 1, 0, '5 tahun 5 bulan', '-', 'Indonesia', 'L', 33, 133, 'B', 'jus jas jus', 'jus', '', 'Y'),
+('Pre-K/007/PGM', 'kursss', 'kkk', 'Jakarta', '2018-09-19', '5', 'pulomas', '021456389', 'Orang Tua', 1, 1, 1, 1, 0, NULL, '', 2, 0, '0 tahun 1 bulan', 'N', 'Indonesia', 'L', 22, 122, 'B', 'xxx', 'xxx', '', 'Y');
 
 -- --------------------------------------------------------
 
@@ -457,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `mssubmenu` (
   `SubMenu` varchar(50) NOT NULL,
   `URL` varchar(100) NOT NULL,
   `FlagActive` char(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `mssubmenu`
@@ -480,7 +490,8 @@ INSERT INTO `mssubmenu` (`ID_Submenu`, `ID_Menu`, `SubMenu`, `URL`, `FlagActive`
 (14, 5, 'Jenis Pembayaran', 'master/jenisPembayaran', 'Y'),
 (15, 2, 'Pendataan Seragam', 'pendataanSiswa/seragam', 'Y'),
 (16, 6, 'Entri Data Katering', 'katering/entri', 'Y'),
-(17, 6, 'Print Data Katering', 'katering/prints', 'Y');
+(17, 6, 'Print Data Katering', 'katering/prints', 'Y'),
+(18, 2, 'Reset Status Kelas', 'pendataanSiswa/resetKelas', 'Y');
 
 -- --------------------------------------------------------
 
@@ -524,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `msuser` (
 --
 
 INSERT INTO `msuser` (`ID_User`, `NamaUser`, `Password`, `LastUpdate`, `UpdatedBy`, `FlagActive`) VALUES
-('0000', 'Administrator', '123456789', '2018-09-03 11:07:12', '', 'Y'),
+('0000', 'Administrator', '1234', '2018-09-03 11:07:12', '0000', 'Y'),
 ('0001', 'miss yani', '1234', '2018-09-03 11:07:32', '0000', 'Y');
 
 -- --------------------------------------------------------
@@ -538,19 +549,20 @@ CREATE TABLE IF NOT EXISTS `trauthorizemenu` (
   `ID_Menu` int(11) NOT NULL,
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trauthorizemenu`
 --
 
 INSERT INTO `trauthorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `ID_User`, `TanggalPengisian`) VALUES
-(9, 2, '0001', '2018-09-03 12:44:33'),
-(18, 2, '0000', '2018-09-12 21:13:22'),
-(19, 3, '0000', '2018-09-12 21:13:22'),
-(20, 4, '0000', '2018-09-12 21:13:22'),
-(21, 5, '0000', '2018-09-12 21:13:22'),
-(22, 6, '0000', '2018-09-12 21:13:22');
+(23, 2, '0000', '2018-09-20 14:06:07'),
+(24, 3, '0000', '2018-09-20 14:06:07'),
+(25, 4, '0000', '2018-09-20 14:06:07'),
+(26, 5, '0000', '2018-09-20 14:06:07'),
+(27, 6, '0000', '2018-09-20 14:06:07'),
+(32, 2, '0001', '2018-09-20 21:07:54'),
+(33, 3, '0001', '2018-09-20 21:07:54');
 
 -- --------------------------------------------------------
 
@@ -563,33 +575,38 @@ CREATE TABLE IF NOT EXISTS `trauthorizesubmenu` (
   `ID_Submenu` int(11) NOT NULL,
   `ID_User` char(4) NOT NULL,
   `TanggalPengisian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trauthorizesubmenu`
 --
 
 INSERT INTO `trauthorizesubmenu` (`ID_AuthorizeSubmenu`, `ID_Submenu`, `ID_User`, `TanggalPengisian`) VALUES
-(26, 1, '0001', '2018-09-03 12:44:33'),
-(27, 2, '0001', '2018-09-03 12:44:33'),
-(28, 3, '0001', '2018-09-03 12:44:33'),
-(58, 1, '0000', '2018-09-12 21:13:22'),
-(59, 2, '0000', '2018-09-12 21:13:22'),
-(60, 3, '0000', '2018-09-12 21:13:22'),
-(61, 15, '0000', '2018-09-12 21:13:22'),
-(62, 4, '0000', '2018-09-12 21:13:22'),
-(63, 5, '0000', '2018-09-12 21:13:22'),
-(64, 6, '0000', '2018-09-12 21:13:22'),
-(65, 7, '0000', '2018-09-12 21:13:22'),
-(66, 8, '0000', '2018-09-12 21:13:22'),
-(67, 9, '0000', '2018-09-12 21:13:22'),
-(68, 10, '0000', '2018-09-12 21:13:22'),
-(69, 11, '0000', '2018-09-12 21:13:22'),
-(70, 12, '0000', '2018-09-12 21:13:22'),
-(71, 13, '0000', '2018-09-12 21:13:22'),
-(72, 14, '0000', '2018-09-12 21:13:22'),
-(73, 16, '0000', '2018-09-12 21:13:22'),
-(74, 17, '0000', '2018-09-12 21:13:22');
+(75, 1, '0000', '2018-09-20 14:06:07'),
+(76, 2, '0000', '2018-09-20 14:06:07'),
+(77, 3, '0000', '2018-09-20 14:06:07'),
+(78, 15, '0000', '2018-09-20 14:06:07'),
+(79, 18, '0000', '2018-09-20 14:06:07'),
+(80, 4, '0000', '2018-09-20 14:06:07'),
+(81, 5, '0000', '2018-09-20 14:06:07'),
+(82, 6, '0000', '2018-09-20 14:06:07'),
+(83, 7, '0000', '2018-09-20 14:06:08'),
+(84, 8, '0000', '2018-09-20 14:06:08'),
+(85, 9, '0000', '2018-09-20 14:06:08'),
+(86, 10, '0000', '2018-09-20 14:06:08'),
+(87, 11, '0000', '2018-09-20 14:06:08'),
+(88, 12, '0000', '2018-09-20 14:06:08'),
+(89, 13, '0000', '2018-09-20 14:06:08'),
+(90, 14, '0000', '2018-09-20 14:06:08'),
+(91, 16, '0000', '2018-09-20 14:06:08'),
+(92, 17, '0000', '2018-09-20 14:06:08'),
+(108, 1, '0001', '2018-09-20 21:07:54'),
+(109, 2, '0001', '2018-09-20 21:07:54'),
+(110, 3, '0001', '2018-09-20 21:07:54'),
+(111, 15, '0001', '2018-09-20 21:07:54'),
+(112, 18, '0001', '2018-09-20 21:07:54'),
+(113, 4, '0001', '2018-09-20 21:07:54'),
+(114, 5, '0001', '2018-09-20 21:07:54');
 
 -- --------------------------------------------------------
 
@@ -633,7 +650,7 @@ CREATE TABLE IF NOT EXISTS `trdetailpengeluaran` (
   `Saldo` int(11) NOT NULL,
   `Tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trdetailpengeluaran`
@@ -642,7 +659,9 @@ CREATE TABLE IF NOT EXISTS `trdetailpengeluaran` (
 INSERT INTO `trdetailpengeluaran` (`ID_DetailPengeluaran`, `ID_HeaderPengeluaran`, `ID_JenisPengeluaran`, `Keterangan`, `Debit`, `Kredit`, `Saldo`, `Tanggal`, `FlagActive`) VALUES
 (1, 1, 1, 'air aqua gelas', 0, 10000, -10000, '2018-08-21 11:11:57', 'Y'),
 (2, 1, 2, 'income dari yayasan', 1000000, 0, 990000, '2018-08-21 11:12:59', 'Y'),
-(3, 1, 1, 'galonsky', 0, 10000, 980000, '2018-08-24 15:20:25', 'Y');
+(3, 1, 1, 'galonsky', 0, 10000, 980000, '2018-08-24 15:20:25', 'Y'),
+(4, 4, 2, 'ddd', 20000, 0, 20000, '2018-09-20 11:50:04', 'Y'),
+(5, 4, 2, 'sss', 120000, 0, 140000, '2018-09-20 11:50:56', 'Y');
 
 -- --------------------------------------------------------
 
@@ -688,14 +707,15 @@ CREATE TABLE IF NOT EXISTS `trheaderpengeluaran` (
   `EndDate` date NOT NULL,
   `Keterangan` text,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trheaderpengeluaran`
 --
 
 INSERT INTO `trheaderpengeluaran` (`ID_HeaderPengeluaran`, `Bulan`, `Tahun`, `StartDate`, `EndDate`, `Keterangan`, `FlagActive`) VALUES
-(1, 'Agustus', 2018, '2018-08-01', '2018-08-31', '', 'Y');
+(1, 'Agustus', 2018, '2018-08-01', '2018-08-31', '', 'Y'),
+(4, 'September', 2018, '2018-09-01', '2018-09-30', '', 'Y');
 
 -- --------------------------------------------------------
 
@@ -735,7 +755,7 @@ CREATE TABLE IF NOT EXISTS `trseragam` (
   `NomorIndukSiswa` varchar(20) NOT NULL,
   `ID_DetailSeragam` int(11) NOT NULL,
   `TanggalTransaksi` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `trseragam`
@@ -743,7 +763,9 @@ CREATE TABLE IF NOT EXISTS `trseragam` (
 
 INSERT INTO `trseragam` (`ID_Transaksi`, `NomorIndukSiswa`, `ID_DetailSeragam`, `TanggalTransaksi`) VALUES
 (4, '11/001/PGM', 1, '2018-09-12 20:49:26'),
-(5, '11/001/PGM', 5, '2018-09-12 20:49:27');
+(5, '11/001/PGM', 5, '2018-09-12 20:49:27'),
+(6, '2017PG/003/PGM', 1, '2018-09-20 11:33:04'),
+(7, '2017KG-2/004/PGM', 5, '2018-09-20 11:46:08');
 
 -- --------------------------------------------------------
 
@@ -985,7 +1007,7 @@ ALTER TABLE `msmenu`
 -- AUTO_INCREMENT for table `msorangtua`
 --
 ALTER TABLE `msorangtua`
-  MODIFY `ID_OrangTua` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `ID_OrangTua` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `msstationary`
 --
@@ -995,7 +1017,7 @@ ALTER TABLE `msstationary`
 -- AUTO_INCREMENT for table `mssubmenu`
 --
 ALTER TABLE `mssubmenu`
-  MODIFY `ID_Submenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `ID_Submenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `mstahunajaran`
 --
@@ -1005,12 +1027,12 @@ ALTER TABLE `mstahunajaran`
 -- AUTO_INCREMENT for table `trauthorizemenu`
 --
 ALTER TABLE `trauthorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `trauthorizesubmenu`
 --
 ALTER TABLE `trauthorizesubmenu`
-  MODIFY `ID_AuthorizeSubmenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=75;
+  MODIFY `ID_AuthorizeSubmenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=115;
 --
 -- AUTO_INCREMENT for table `trdetailpembayaran`
 --
@@ -1020,7 +1042,7 @@ ALTER TABLE `trdetailpembayaran`
 -- AUTO_INCREMENT for table `trdetailpengeluaran`
 --
 ALTER TABLE `trdetailpengeluaran`
-  MODIFY `ID_DetailPengeluaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID_DetailPengeluaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `trheaderpembayaran`
 --
@@ -1030,7 +1052,7 @@ ALTER TABLE `trheaderpembayaran`
 -- AUTO_INCREMENT for table `trheaderpengeluaran`
 --
 ALTER TABLE `trheaderpengeluaran`
-  MODIFY `ID_HeaderPengeluaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `ID_HeaderPengeluaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `trkatering`
 --
@@ -1040,7 +1062,7 @@ ALTER TABLE `trkatering`
 -- AUTO_INCREMENT for table `trseragam`
 --
 ALTER TABLE `trseragam`
-  MODIFY `ID_Transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `ID_Transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `trstationary`
 --

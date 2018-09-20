@@ -83,7 +83,7 @@ class pendataanSiswa extends CI_Controller {
         }
         $data['siswa'] = $this->pendataansiswa_model->get_siswa($idsiswa);
         $data['kategori'] = $this->pendataansiswa_model->get_Kategori();
-        $data['seragam_h'] = $this->seragam_model->getSeragam_siswa();
+        $data['seragam_h'] = $this->seragam_model->getSeragam_siswa($idsiswa);
         $this->load->view('templates/header');
         $this->load->view('pendataanSiswa/pendataanSeragam', $data);
         $this->load->view('templates/footer');
@@ -98,6 +98,12 @@ class pendataanSiswa extends CI_Controller {
 		$this->load->view('pendataanSiswa/pendataanKelas', $data);
 		$this->load->view('templates/footer');
 	}
+    
+    public function resetKelas(){
+        $this->load->view('templates/header');
+        $this->load->view('pendataanSiswa/resetKelas');
+        $this->load->view('templates/footer');
+    }
         
     public function getSiswa_seragam($kat){
         $list = $this->seragam_model->getSiswa_seragam($kat);
@@ -115,8 +121,17 @@ class pendataanSiswa extends CI_Controller {
             foreach ($var as $key) {
                 $final = $key['stok'] -1;
             }
-            $this->seragam_model->update_trx($final, $det_s);
+            $res=$this->seragam_model->update_trx($final, $det_s);
         }
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil melakukan pendataan seragam!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal melakukan pendataan seragam!');
+        }
+
         redirect('pendataanSiswa/seragam/'.$idsiswa);
     }
         
@@ -149,23 +164,73 @@ class pendataanSiswa extends CI_Controller {
         }
     }
     
+    public function do_resetKelas(){
+
+        $res = $this->pendataansiswa_model->reset_kelas();
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil me-reset status kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal me-reset status kelas');
+        }
+        
+        redirect('pendataanSiswa/resetKelas/');
+    }
+    
     public function updateSiswa($idsiswa){
-        $this->pendataansiswa_model->update_sw($idsiswa);
+
+        $res = $this->pendataansiswa_model->update_sw($idsiswa);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah data siswa!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah data siswa!');
+        }
+        
         redirect('pendataanSiswa/editSiswa/'.$idsiswa);
     }
     
     public function updateOrtu($idsiswa){
-        $this->pendataansiswa_model->update_ortu($idsiswa);
+
+        $res = $this->pendataansiswa_model->update_ortu($idsiswa);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah data orang tua!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah data orang tua!');
+        }
+        
         redirect('pendataanSiswa/editSiswa/'.$idsiswa);
     }
     
     public function updateSurat($idsiswa){
-        $this->pendataansiswa_model->update_surat($idsiswa);
+
+        $res = $this->pendataansiswa_model->update_surat($idsiswa);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah data!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah data!');
+        }
+        
         redirect('pendataanSiswa/editSiswa/'.$idsiswa);
     }
     
     public function updateAktivasi($idsiswa){
-        $this->pendataansiswa_model->update_aktivasi($idsiswa);
+
+        $res = $this->pendataansiswa_model->update_aktivasi($idsiswa);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah data!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah data!');
+        }
+        
         redirect('pendataanSiswa/editSiswa/'.$idsiswa);
     }
     
@@ -216,7 +281,15 @@ class pendataanSiswa extends CI_Controller {
             $count = $row_s['jumlah']+1;
         }
 
-        $this->pendataansiswa_model->add_sw($umur, $count, $surat, $kategori_k);
+        $res = $this->pendataansiswa_model->add_sw($umur, $count, $surat, $kategori_k);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan data siswa! <b>Harap melakukan pengukuran seragam!</b>');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan data siswa!');
+        }
+        
         redirect('pendataanSiswa/siswabaru');
     }
     

@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Add Tahun Ajaran&nbsp; <i class="fa fa-plus fa-fw"></i></button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Tambah Tahun Ajaran&nbsp; <i class="fa fa-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <br>
@@ -34,6 +34,8 @@
                                         <td style="text-align: center;"><?php echo $tahunAjaran_item['Start']; ?></td>
                                         <td style="text-align: center;"><?php echo $tahunAjaran_item['Keterangan']; ?></td>
                                         <td align="center">
+                                            <a href="#" style="font-style: none; font-size: 15pt; color: red;"><i class="fa fa-trash fa-fw" data-toggle="modal" data-target="#modalDelete<?php echo $tahunAjaran_item['ID_TahunAjaran']; ?>"></i></a>
+                                            &nbsp;
                                             <a href="#" style="font-style: none; font-size: 15pt; color: blue;" data-toggle="modal" data-target="#modalUpdate"><i class="fa fa-edit fa-fw"></i></a>
                                         </td>
                                     </tr>
@@ -64,7 +66,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAddKategori">Add Kategori Kelas&nbsp; <i class="fa fa-plus fa-fw"></i></button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAddKategori">Tambah Kategori Kelas&nbsp; <i class="fa fa-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <br>
@@ -117,7 +119,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAddKelas">Add Kelas&nbsp; <i class="fa fa-plus fa-fw"></i></button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#modalAddKelas">Tambah Kelas&nbsp; <i class="fa fa-plus fa-fw"></i></button>
                         </div>
                     </div>
                     <br>
@@ -162,7 +164,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Tahun Ajaran</h4>
+            <h4 class="modal-title" id="myModalLabel">Tambah Tahun Ajaran</h4>
           </div>
           <?php echo form_open('master/add_tahunAjaran'); ?>
               <div class="modal-body">
@@ -200,13 +202,39 @@
     </div>
     <!--//INI KAN AKUUU-->
 <?php foreach ($tahunAjaran as $tahunAjaran_item) { ?>
+    <!-- Modal delete-->
+    <div class="modal fade" id="modalDelete<?php echo $tahunAjaran_item['ID_TahunAjaran']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Hapus Tahun Ajaran</h4>
+          </div>
+          <?php echo form_open('master/delete_tahunAjaran/'.$tahunAjaran_item['ID_TahunAjaran']); ?>
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <input type="hidden" name="ID_Stationary" value="<?php echo $tahunAjaran_item['ID_TahunAjaran']; ?>">
+                        <h4 style="font-weight: bold;">Anda yakin ingin menghapusnya?</h4>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <input type="submit" name="submit" class="btn btn-danger alert" value="Hapus">
+              </div>
+            <?php echo form_close(); ?>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal update-->
     <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Update Tahun Ajaran Berjalan</h4>
+            <h4 class="modal-title" id="myModalLabel">Ubah Tahun Ajaran</h4>
           </div>
           <?php echo form_open('master/update_tahunAjaran/'.$tahunAjaran_item['ID_TahunAjaran']); ?>
               <div class="modal-body">
@@ -249,7 +277,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Kategori Kelas</h4>
+            <h4 class="modal-title" id="myModalLabel">Tambah Kategori Kelas</h4>
           </div>
           <?php echo form_open('master/add_kategorikelas'); ?>
               <div class="modal-body">
@@ -292,7 +320,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Kelas</h4>
+            <h4 class="modal-title" id="myModalLabel">Tambah Kelas</h4>
           </div>
           <?php echo form_open('master/add_kelas'); ?>
               <div class="modal-body">
@@ -348,30 +376,30 @@
     </div>
 <?php foreach ($kategorikelas as $kategorikelas_item) { ?>
     <!-- Modal delete-->
-        <div class="modal fade" id="modalDelete<?php echo $kategorikelas_item['ID_Kategori']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Stationary</h4>
-              </div>
-              <?php echo form_open('master/delete_kategorikelas/'.$kategorikelas_item['ID_Kategori']); ?>
-                  <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12" align="center">
-                            <input type="hidden" name="ID_Stationary" value="<?php echo $kategorikelas_item['ID_Kategori']; ?>">
-                            <h4 style="font-weight: bold;">Are you sure want to delete?</h4>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <input type="submit" name="submit" class="btn btn-danger alert" value="Delete">
-                  </div>
-                <?php echo form_close(); ?>
-            </div>
+    <div class="modal fade" id="modalDelete<?php echo $kategorikelas_item['ID_Kategori']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Hapus Stationary</h4>
           </div>
+          <?php echo form_open('master/delete_kategorikelas/'.$kategorikelas_item['ID_Kategori']); ?>
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <input type="hidden" name="ID_Stationary" value="<?php echo $kategorikelas_item['ID_Kategori']; ?>">
+                        <h4 style="font-weight: bold;">Anda yakin ingin menghapusnya?</h4>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <input type="submit" name="submit" class="btn btn-danger alert" value="Hapus">
+              </div>
+            <?php echo form_close(); ?>
         </div>
+      </div>
+    </div>
 
     <!-- Modal update kategori-->
     <div class="modal fade" id="modalUpdateKategori<?php echo $kategorikelas_item['ID_Kategori']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -379,7 +407,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Update Kategori Kelas</h4>
+            <h4 class="modal-title" id="myModalLabel">Ubah Kategori Kelas</h4>
           </div>
           <?php echo form_open('master/update_kategorikelas/'.$kategorikelas_item['ID_Kategori']); ?>
               <div class="modal-body">
@@ -436,20 +464,20 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Stationary</h4>
+                <h4 class="modal-title" id="myModalLabel">Hapus Stationary</h4>
               </div>
               <?php echo form_open('master/delete_kelas/'.$kelas_item['ID_Kelas']); ?>
                   <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" align="center">
                             <input type="hidden" name="ID_Stationary" value="<?php echo $kelas_item['ID_Kelas']; ?>">
-                            <h4 style="font-weight: bold;">Are you sure want to delete?</h4>
+                            <h4 style="font-weight: bold;">Anda yakin ingin menghapusnya?</h4>
                         </div>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <input type="submit" name="submit" class="btn btn-danger alert" value="Delete">
+                    <input type="submit" name="submit" class="btn btn-danger alert" value="Hapus">
                   </div>
                 <?php echo form_close(); ?>
             </div>
@@ -462,7 +490,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Update Kategori Kelas</h4>
+            <h4 class="modal-title" id="myModalLabel">Ubah Kategori Kelas</h4>
           </div>
           <?php echo form_open('master/update_kelas/'.$kelas_item['ID_Kelas']); ?>
               <div class="modal-body">
@@ -517,6 +545,18 @@
       </div>
     </div>
 <?php } ?>
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+       <?php if($this->session->flashdata('alert') != null){ ?>
+        swal({
+          title: "Berhasil!",
+          text: "<?php echo $this->session->flashdata('msg'); ?>",
+          icon: "<?php echo $this->session->flashdata('alert'); ?>",
+          button: "Ok",
+        });
+       <?php } ?>
+    </script>
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
@@ -532,17 +572,6 @@
            $('#tgl_l').datetimepicker({
                 format: 'YYYY-MM-DD',
                 maxDate: $.now()
-            });
-        });
-    </script>
-    <script type="text/javascript" src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
-    <script type="text/javascript">
-        $('.alerts').click(function(){
-            swal({
-              title: "Success!",
-              text: "Successfully updated",
-              icon: "success",
-              button: "return to page",
             });
         });
     </script>

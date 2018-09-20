@@ -52,6 +52,7 @@
     <!--jam js-->
     <script type="text/javascript" src="<?=base_url();?>assets/dist/js/jam.js"></script>
 
+
     <style>
     body{
         overflow-x: hidden;
@@ -84,11 +85,6 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">  
-                <li>
-                    <a href="#"><i class="fa fa-bell fa-fw "></i> Ultah Siswa</a>
-                    <!--fa-spin color:red-->
-                </li>
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
