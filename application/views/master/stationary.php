@@ -1,7 +1,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Stationary</h1>
+                    <h1 class="page-header">ATK</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -13,7 +13,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Add Stationary &nbsp; <i class="fa fa-plus fa-fw"></i></button>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAdd">Tambah ATK &nbsp; <i class="fa fa-plus fa-fw"></i></button>
                                 </div>
                             </div>
                             <br><br>
@@ -21,7 +21,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Stationary</th>
+                                        <th>Nama ATK</th>
                                         <th>Stok</th>
                                         <th>Last Update</th>
                                         <th>Action</th>
@@ -64,13 +64,13 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add Stationary</h4>
+                <h4 class="modal-title" id="myModalLabel">Tambah ATK</h4>
               </div>
               <?php echo form_open('master/add_stationary'); ?>
                   <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4" align="right">
-                            <h5 style="font-weight: bold;">Nama Stationary :</h5>
+                            <h5 style="font-weight: bold;">Nama ATK :</h5>
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="nama" required>
@@ -109,20 +109,20 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Stationary</h4>
+                <h4 class="modal-title" id="myModalLabel">Hapus ATK</h4>
               </div>
               <?php echo form_open('master/delete_stationary/'.$stationary_item['ID_Stationary']); ?>
                   <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12" align="center">
                             <input type="hidden" name="ID_Stationary" value="<?php echo $stationary_item['ID_Stationary']; ?>">
-                            <h4 style="font-weight: bold;">Are you sure want to delete?</h4>
+                            <h4 style="font-weight: bold;">Anda yakin ingin menghapusnya?</h4>
                         </div>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <input type="submit" name="submit" class="btn btn-danger alert" value="Delete">
+                    <input type="submit" name="submit" class="btn btn-danger alert" value="Hapus">
                   </div>
                 <?php echo form_close(); ?>
             </div>
@@ -135,7 +135,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update Stationary</h4>
+                <h4 class="modal-title" id="myModalLabel">Ubah ATK</h4>
               </div>
               <?php echo form_open('master/update_stationary/'.$stationary_item['ID_Stationary']); ?>
                   <div class="modal-body">
@@ -166,7 +166,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <input type="submit" name="submit" class="btn btn-primary alert" value="Update">
+                    <input type="submit" name="submit" class="btn btn-primary alert" value="Ubah">
                   </div>
                 <?php echo form_close(); ?>
             </div>
@@ -175,22 +175,23 @@
 <?php } ?>
 
     </div>
-    <!-- /#wrapper -->
-    <script type="text/javascript" src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <!-- /#page-wrapper -->
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+       <?php if($this->session->flashdata('alert') != null){ ?>
+        swal({
+          title: "Berhasil!",
+          text: "<?php echo $this->session->flashdata('msg'); ?>",
+          icon: "<?php echo $this->session->flashdata('alert'); ?>",
+          button: "Ok",
+        });
+       <?php } ?>
+    </script>
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
             responsive: true
         });
     });
-    </script>
-    <script type="text/javascript">
-        $('.alert').click(function(){
-            swal({
-              title: "Success!",
-              text: "Successfully updated",
-              icon: "success",
-              button: "return to page",
-            });
-        });
     </script>

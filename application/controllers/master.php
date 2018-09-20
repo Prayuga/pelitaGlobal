@@ -46,53 +46,126 @@ class master extends CI_Controller {
 
 	public function add_jenisPembayaran(){
 		$res = $this->jenispembayaran_model->add_jenis();
-		if($res==true){
-            $this->session->set_flashdata('alert','alert-success');
-            $this->session->set_flashdata('msg','Sukses!');
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan jenis pembayaran!');
         }else{
-            $this->session->set_flashdata('alert','alert-danger');
-            $this->session->set_flashdata('msg','Gagal!');
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan jenis pembayaran!');
         }
 		redirect('master/jenisPembayaran');
 	}
 
 	public function add_jenisKas(){
-		$this->kasrt_model->add_jenis();
+		$res = $this->kasrt_model->add_jenis();
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan jenis pengeluaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan jenis pengeluaran!');
+        }
+		
 		redirect('master/kasRT');
 	}
 
 	public function add_stationary(){
-		$this->stationary_model->add_s();
+		$res = $this->stationary_model->add_s();
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan ATK!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan ATK!');
+        }
+		
 		redirect('master/stationary');
 	}
 
 	public function update_jenisPembayaran($id_detail){
-		$this->jenispembayaran_model->update_jenisPembayaran($id_detail);
+		$res = $this->jenispembayaran_model->update_jenisPembayaran($id_detail);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah jenis pembayaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah jenis pembayaran!');
+        }
+		
 		redirect('master/jenisPembayaran');
 	}
 
 	public function update_stationary($id_stationary){
-		$this->stationary_model->update_s($id_stationary);
+		$res = $this->stationary_model->update_s($id_stationary);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah ATK!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah ATK!');
+        }
+		
 		redirect('master/stationary');
 	}
 
 	public function update_jenisKas($id_jenis){
-		$this->kasrt_model->update_jenis($id_jenis);
+		$res = $this->kasrt_model->update_jenis($id_jenis);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah jenis pengeluaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah jenis pengeluaran!');
+        }
+		
 		redirect('master/kasRT');
 	}
 
 	public function delete_jenisPembayaran($id_detail){
-		$this->jenispembayaran_model->delete_jenisPembayaran($id_detail);
+		$res = $this->jenispembayaran_model->delete_jenisPembayaran($id_detail);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus jenis pembayaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus jenis pembayaran!');
+        }
+		
 		redirect('master/jenisPembayaran');
 	}
 
 	public function delete_stationary($id_stationary){
-		$this->stationary_model->delete_s($id_stationary);
+		$res = $this->stationary_model->delete_s($id_stationary);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus ATK!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus ATK!');
+        }
+		
 		redirect('master/stationary');
 	}
 
 	public function delete_jenisKas($id_jenis){
-		$this->kasrt_model->delete_jenis($id_jenis);
+		$res = $this->kasrt_model->delete_jenis($id_jenis);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus jenis pengeluaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus jenis pengeluaran!');
+        }
+		
 		redirect('master/kasRT');
 	}
 
@@ -113,43 +186,129 @@ class master extends CI_Controller {
 	}
 
 	public function add_tahunAjaran(){
-		$this->tahunajaran_model->add_TA();
+		$res = $this->tahunajaran_model->add_TA();
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan tahun ajaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan tahun ajaran!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 	public function add_kategorikelas(){
-		$this->tahunajaran_model->add_KK();
+		$res = $this->tahunajaran_model->add_KK();
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan kategori kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan kategori kelas!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 	public function add_kelas(){
-		$this->tahunajaran_model->add_KLS();
+		$res = $this->tahunajaran_model->add_KLS();
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan kelas!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 	public function update_tahunAjaran($id_tahunAjaran){
-		$this->tahunajaran_model->update_TA($id_tahunAjaran);
+		$res = $this->tahunajaran_model->update_TA($id_tahunAjaran);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah tahun ajaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah tahun ajaran!');
+        }
+		
+		redirect('master/tahunAjaran');
+	}
+
+	public function delete_tahunAjaran($id_tahunAjaran){
+		$res = $this->tahunajaran_model->delete_TA($id_tahunAjaran);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus tahun ajaran!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus tahun ajaran!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 	public function delete_kategorikelas($id_kategorikelas){
-		$this->tahunajaran_model->delete_KK($id_kategorikelas);
+		$res = $this->tahunajaran_model->delete_KK($id_kategorikelas);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus kategori kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus kategori kelas!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 	public function update_kelas($id_kelas){
-		$this->tahunajaran_model->update_KLS($id_kelas);
+		$res = $this->tahunajaran_model->update_KLS($id_kelas);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah kelas!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 	public function delete_kelas($id_kelas){
-		$this->tahunajaran_model->delete_KLS($id_kelas);
+		$res = $this->tahunajaran_model->delete_KLS($id_kelas);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus kelas!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
 
 	public function update_kategorikelas($id_kategorikelas){
-		$this->tahunajaran_model->update_KK($id_kategorikelas);
+		$res = $this->tahunajaran_model->update_KK($id_kategorikelas);
+
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah kategori kelas!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah kategori kelas!');
+        }
+		
 		redirect('master/tahunAjaran');
 	}
 
@@ -165,9 +324,9 @@ class master extends CI_Controller {
 	public function addseragam(){
 		$jenis = $this->input->post('jk');
 		if ($jenis=='1') {
-			$jenis='Laki-laki';
+			$jenis='L';
 		}else if ($jenis=='2') {
-			$jenis='Perempuan';
+			$jenis='P';
 		}else if ($jenis=='3') {
 			$jenis='Campur';
 		}else{
@@ -179,7 +338,7 @@ class master extends CI_Controller {
 			'JK' => $jenis,
 		);
 		$insert = $this->seragam_model->add($data);
-		$this->session->set_flashdata('alert','alert-success');
+		$this->session->set_flashdata('alert','success');
 		$this->session->set_flashdata('msg','Sukses menambah seragam');
 		$this->load->view('templates/header');
 		$this->load->view('master/seragam');
@@ -193,7 +352,7 @@ class master extends CI_Controller {
 		$ukuran = array();
 		$ukuran = $this->input->post('cb');
 		$this->seragam_model->addUkuran($id,$ukuran,$stok);
-		$this->session->set_flashdata('alert','alert-success');
+		$this->session->set_flashdata('alert','success');
 		$this->session->set_flashdata('msg','Sukses menambah ukuran');
 		$this->load->view('templates/header');
 		$this->load->view('master/seragam');
@@ -220,8 +379,8 @@ class master extends CI_Controller {
 			$row[] = $sera->JK;
 			$row[] = $sera->ukuran;
 			$row[] = $sera->stok;
-			$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update_sera('."'".$sera->ID_detailseragam."'".')"><i class="glyphicon glyphicon-pencil"></i> Update Stok</a>
-				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="Delete_sera('."'".$sera->ID_detailseragam."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+			$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Update" onclick="Update_sera('."'".$sera->ID_detailseragam."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah Stok</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="Delete_sera('."'".$sera->ID_detailseragam."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 
 			$data[] = $row;
 		}
@@ -241,7 +400,7 @@ class master extends CI_Controller {
 		$id = $this->input->post('id');
 		$stok = $this->input->post('Stok');
 		$this->seragam_model->updateStok($id, $stok);
-		$this->session->set_flashdata('alert','alert-success');
+		$this->session->set_flashdata('alert','success');
 		$this->session->set_flashdata('msg','Sukses update stok');
 		$this->load->view('templates/header');
 		$this->load->view('master/seragam');

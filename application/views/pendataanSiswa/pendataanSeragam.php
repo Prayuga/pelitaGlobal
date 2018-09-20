@@ -124,6 +124,20 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--swal-->
+	<script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+	<script type="text/javascript">
+       <?php if($this->session->flashdata('alert') != null){ ?>
+        swal({
+          title: "Berhasil!",
+          text: "<?php echo $this->session->flashdata('msg'); ?>",
+          icon: "<?php echo $this->session->flashdata('alert'); ?>",
+          button: "Ok",
+        });
+       <?php } ?>
+	</script>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 

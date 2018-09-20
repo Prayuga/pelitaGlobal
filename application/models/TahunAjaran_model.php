@@ -84,6 +84,16 @@ class TahunAjaran_model extends CI_Model {
 		$this->db->where('ID_Kelas', $id_kelas);
 		return $this->db->update('msheaderkelas', $data);
 	}
+
+	public function delete_TA($id_tahunAjaran){
+		$data = array(
+			'flagactive' => 'N'
+		);
+
+		$this->db->where('ID_TahunAjaran', $id_tahunAjaran);
+		return $this->db->update('mstahunajaran', $data);
+	}
+
 	public function delete_KLS($id_kelas){
 		$data = array(
 			'flagactive' => 'N'
@@ -92,7 +102,6 @@ class TahunAjaran_model extends CI_Model {
 		$this->db->where('ID_Kelas', $id_kelas);
 		return $this->db->update('msheaderkelas', $data);
 	}
-
 
 	public function update_KK($id_kategorikelas){
 		$data = array(

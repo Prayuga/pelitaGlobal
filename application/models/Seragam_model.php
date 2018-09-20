@@ -34,10 +34,9 @@ class Seragam_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function getSeragam_siswa(){
-		$this->db->select('Id_seragam, Nama_seragam');
-		$this->db->where('flagactive','Y');
-		$query = $this->db->get('msheaderseragam');
+	public function getSeragam_siswa($idsiswa){
+		$str="SELECT a.Id_seragam, a.Nama_seragam FROM msheaderseragam as a, mssiswa as b WHERE a.JK = 'Campur' UNION SELECT a.Id_seragam, a.Nama_seragam FROM msheaderseragam as a, mssiswa as b WHERE a.JK = b.JenisKelamin AND b.NomorIndukSiswa = '".$idsiswa."' ";
+		$query = $this->db->query($str);
 		return $query->result_array();
 	}
 

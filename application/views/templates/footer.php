@@ -32,6 +32,7 @@
     <!-- select2-->
     <script src="<?=base_url();?>assets/vendor/select2/select2.min.js"></script>
 
+
 </body>
 
 </html>

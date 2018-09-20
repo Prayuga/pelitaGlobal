@@ -3,16 +3,16 @@
             <h3 class="page-header" align="center">Master Seragam</h3> 
         </div>
         
-        <!-- notif crud-->
-       <div class="msg alert <?php echo $this->session->flashdata('alert');?>">
+        <!-- notif crud
+       <div class="msg alert <?php //echo $this->session->flashdata('alert');?>">
    			<center>
-       			<?php echo $this->session->flashdata('msg'); ?>
+       			<?php// echo $this->session->flashdata('msg'); ?>
        		</center>
        	</div>
         <script>
             $(".alert-success").delay(4000).fadeOut(1000, function () { $(this).remove(); });
         </script>  
-        <!-- end notif crud -->
+         end notif crud -->
         <center>
 	        <div class="btn-group btn-group-lg">
 	        <button class="btn btn-primary" data-toggle="modal" data-target="#tambah_s">
@@ -135,7 +135,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">Update Stok Seragam</h4>
+		        <h4 class="modal-title">Ubah Stok Seragam</h4>
 		      </div>
 		      <div class="modal-body">
 
@@ -170,6 +170,19 @@
 		  </div>
 		</div>
 		<!-- end modal tambah seragam -->
+    <!-- /#page-wrapper -->
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+       <?php if($this->session->flashdata('alert') != null){ ?>
+        swal({
+          title: "Berhasil!",
+          text: "<?php echo $this->session->flashdata('msg'); ?>",
+          icon: "<?php echo $this->session->flashdata('alert'); ?>",
+          button: "Ok",
+        });
+       <?php } ?>
+    </script>
 		<script type="text/javascript">
 			var myTab;
 

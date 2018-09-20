@@ -84,6 +84,18 @@
                
 </div>
 
+<!--swal-->
+<script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+<script type="text/javascript">
+   <?php if( $this->session->flashdata('alert') != null){ ?>
+   swal({
+      title: "Berhasil!",
+      text: "<?php echo $this->session->flashdata('msg'); ?>",
+      icon: "<?php echo $this->session->flashdata('alert'); ?>",
+      button: "Ok",
+    });
+   <?php } ?>
+</script>
 <script>
     $(document).ready(function (){
        $('#thn').datetimepicker({
@@ -97,13 +109,5 @@
        $('#end').datetimepicker({
                 format: 'YYYY-MM-DD'
             });
-       <?php if( $this->session->flashdata('alert') != null){ ?>
-       swal({
-          title: "Success!",
-          text: "<?php echo $this->session->flashdata('alert'); ?>",
-          icon: "success",
-          button: "return to page",
-        });
-       <?php } ?>
     });
 </script>

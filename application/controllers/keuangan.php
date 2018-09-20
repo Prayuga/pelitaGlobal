@@ -43,11 +43,11 @@ class keuangan extends CI_Controller {
         $res = $this->kasrt_model->add_kasBulan();
         
         if($res==true){
-            $this->session->set_flashdata('alert','alert-success');
-            $this->session->set_flashdata('msg','Sukses!');
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan data!');
         }else{
-            $this->session->set_flashdata('alert','alert-danger');
-            $this->session->set_flashdata('msg','Gagal!');
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan data!');
         }
         redirect('keuangan/kasBulan');
     }
@@ -73,11 +73,11 @@ class keuangan extends CI_Controller {
     	$res = $this->kasrt_model->add_kasHarian($saldo_akhir);
         
         if($res==true){
-            $this->session->set_flashdata('alert','alert-success');
-            $this->session->set_flashdata('msg','Sukses!');
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan data!');
         }else{
-            $this->session->set_flashdata('alert','alert-danger');
-            $this->session->set_flashdata('msg','Gagal!');
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan data!');
         }
 
         redirect('keuangan/kasHarian');

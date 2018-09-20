@@ -25,14 +25,14 @@
                       <label class="control-label col-sm-4" for="nama_s">Nama Siswa :</label>
                       <div class="col-sm-8">
                         <!-- nama_s -->
-                        <input type="text" class="form-control" id="nama_s" name="nama_s">
+                        <input type="text" class="form-control" id="nama_s" name="nama_s" required="required">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="jk">Jenis Kelamin:</label>
                       <div class="col-sm-8">
                         <!-- jk-->
-                          <select name="jk" class="selectpicker form-control" id="jk" title="Select Gender">
+                          <select name="jk" class="selectpicker form-control" id="jk" title="Select Gender" required="required">
                               <option value="L">Laki-Laki</option>
                               <option value="P">Perempuan</option>
                           </select>
@@ -51,7 +51,7 @@
                     <label class="control-label col-sm-4" for="tempat_l">Tempat Lahir :</label>
                     <div class="col-sm-8">
                       <!-- tempat_l-->
-                      <input type="text" class="form-control" id="tempat_l" name="tempat_l">
+                      <input type="text" class="form-control" id="tempat_l" name="tempat_l" required="required">
                     </div>
                   </div>
                 </div><div class="row">
@@ -59,7 +59,7 @@
                       <label class="control-label col-sm-4" for="tahun_ajaran">Thn Ajaran Masuk :</label>
                       <div class="col-sm-8">
                         <!-- tahun_ajaran-->
-                          <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran">
+                          <select name="tahun_ajaran" class="selectpicker form-control" id="tahun_ajaran" title="Select Tahun Ajaran" required="required">
                             <?php foreach ($tahun_ajaran as $ta_item) { ?>
                               <option value="<?php echo $ta_item['TahunAjaran']; ?>"><?php echo $ta_item['TahunAjaran']; ?></option>
                             <?php } ?>
@@ -70,7 +70,7 @@
                       <label class="control-label col-sm-4" for="kategori">Kategori Masuk :</label>
                       <div class="col-sm-8">
                         <!-- kategori-->
-                          <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori">
+                          <select name="kategori" class="selectpicker form-control" id="kategori" title="Select Kategori" required="required">
                             <?php foreach ($kategori as $kategori_item) { ?>
                               <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
                             <?php } ?>
@@ -83,7 +83,7 @@
                       <label class="control-label col-sm-4" for="tgl_l">Tanggal Lahir :</label>
                       <div class="col-sm-8">
                         <!-- tgl_l-->
-                        <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_l" name="tgl_l">
+                        <input type="text" class="form-control" placeholder="MM-DD-YYYY" id="tgl_l" name="tgl_l" required="required">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
@@ -107,7 +107,7 @@
                       <label class="control-label col-sm-4" for="agama">Agama :</label>
                       <div class="col-sm-8">
                         <!-- agama-->
-                          <select name="agama" class="selectpicker form-control" id="agama" title="Select Agama">
+                          <select name="agama" class="selectpicker form-control" id="agama" title="Select Agama" required="required">
                             <?php foreach ($agama as $agama_item) { ?>
                               <option value="<?php echo $agama_item['ID_Agama']; ?>"><?php echo $agama_item['Agama']; ?></option>
                             <?php } ?>
@@ -213,14 +213,14 @@
                       <label class="control-label col-sm-4" for="tinggalPada">Tinggal Pada :</label>
                       <div class="col-sm-8">
                         <!-- tinggalPada-->
-                        <input type="text" class="form-control" id="tinggalPada" name="tinggalPada">
+                        <input type="text" class="form-control" id="tinggalPada" name="tinggalPada" required="required">
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
                       <label class="control-label col-sm-4" for="telp">Nomor Telp :</label>
                       <div class="col-sm-8">
                         <!-- telp-->
-                        <input type="text" class="form-control" id="telp" name="telp">
+                        <input type="text" class="form-control" id="telp" name="telp" required="required">
                       </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
                       <label class="control-label col-sm-4" for="alamat">Alamat :</label>
                       <div class="col-sm-8">
                         <!-- alamat-->
-                        <textarea type="text" class="form-control" id="alamat" name="alamat" rows="2"></textarea>
+                        <textarea type="text" class="form-control" id="alamat" name="alamat" rows="2" required="required"></textarea>
                       </div>
                     </div>
                     <div class="form-group col-lg-6">
@@ -378,8 +378,8 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <input type="Submit" class="btn btn-primary pull-right btn-lg" id="alerts" style="margin-bottom: 10px;" value="Submit">
+                    <div class="col-sm-12">
+                      <input type="Submit" class="btn btn-primary pull-right form-control" id="alerts" style="margin-bottom: 10px;" value="Submit">
                     </div>
                   </div>  
                 </div>
@@ -390,6 +390,19 @@
     </div>
   </div>
 <?php echo form_close(); ?>
+
+    <!--swal-->
+    <script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
+    <script type="text/javascript">
+       <?php if($this->session->flashdata('alert') != null){ ?>
+        swal({
+          title: "Berhasil!",
+          text: "<?php echo $this->session->flashdata('msg'); ?>",
+          icon: "<?php echo $this->session->flashdata('alert'); ?>",
+          button: "Ok",
+        });
+       <?php } ?>
+    </script>
 
     <script>
          $(document).ready(function () {
@@ -430,16 +443,6 @@
                   }
               });
             }
-        });
-    </script>
-    <script type="text/javascript">
-        $('#alerts').click(function(){
-            swal({
-              title: "Success!",
-              text: "Harap melakukan pengukuran seragam.",
-              icon: "success",
-              button: "return to page",
-            });
         });
     </script>
 </div>

@@ -12,7 +12,7 @@
 	height: 420px;
 	background: #0000;
 	color: black;
-	top: 50%;
+	top: 57%;
 	left: 50%;
 	position: absolute;
 	transform: translate(-50%, -50%);
@@ -21,12 +21,12 @@
 }
 
 .logo{
-	width: 100px;
-	height: 100px;
+	width: 130px;
+	height: 160px;
 	border-radius: 20px;
 	position: absolute;
 	top: -50px;
-	left: calc(50% - 50px);
+	left: calc(50% - 65px);
 }
 
 h1{

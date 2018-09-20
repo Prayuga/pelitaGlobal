@@ -256,6 +256,16 @@ class PendataanSiswa_model extends CI_Model {
 
     }
 
+    public function reset_kelas(){
+        $data = array(
+            'ID_Kelas' => '0'
+        );
+
+        $this->db->where('FlagActive', 'Y');
+        return $this->db->update('mssiswa', $data);
+
+    }
+
     public function update_surat($idsiswa){
         $idsiswa = str_ireplace("&","/",$idsiswa);
 

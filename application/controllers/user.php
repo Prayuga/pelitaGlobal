@@ -27,22 +27,58 @@ class user extends CI_Controller {
 	}
 
 	public function add_user(){
-		$this->user_model->add_user();
+
+        $res = $this->user_model->add_user();
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menambahkan user!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menambahkan user!');
+        }
+		
 		redirect('user/masterUser');
 	}
 
 	public function delete_user($idUser){
-		$this->user_model->delete_user($idUser);
+
+        $res = $this->user_model->delete_user($idUser);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil menghapus user!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal menghapus user!');
+        }
+		
 		redirect('user/masterUser');
 	}
 
 	public function update_user($idUser){
-		$this->user_model->update_user($idUser);
+
+        $res = $this->user_model->update_user($idUser);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil mengubah data user!');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah data user!');
+        }
+		
 		redirect('user/masterUser');
 	}
 
 	public function reset_passUser($idUser){
-		$this->user_model->reset_passUser($idUser);
+
+        $res = $this->user_model->reset_passUser($idUser);
+        if($res==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil reset password user! (password default : 1234)');
+        }else{
+            $this->session->set_flashdata('alert','error');
+            $this->session->set_flashdata('msg','Gagal mengubah data user!');
+        }
+		
 		redirect('user/masterUser');
 	}
 
@@ -68,7 +104,7 @@ class user extends CI_Controller {
 			echo "</thead><tbody>";
 			foreach ($menu as $menu_item) {
 				echo "<tr>";
-				echo "<td align='center'><input type='checkbox' name='menu[]' value='".$menu_item['ID_Menu']."'  id='".$menu_item['Menu']."_head' style='opacity:0;'";
+				echo "<td align='center'><input type='checkbox' name='menu[]' value='".$menu_item['ID_Menu']."'  id='".$menu_item['Menu']."_head' style='opacity:0;' ";
 				foreach ($a_menu as $a_menu_item) {
 					if($a_menu_item['ID_Menu']==$menu_item['ID_Menu']){
 						echo "checked='true'";
@@ -110,9 +146,17 @@ class user extends CI_Controller {
 	}
 
 	public function authorize(){
-        $this->user_model->delete_auth($_POST['idUser']);
-        $this->user_model->insert_auth();
 
+        $res1 = $this->user_model->delete_auth($this->input->post('idUser'));
+        $res2 = $this->user_model->insert_auth();
+        //if($res1==true || $res2==true){
+            $this->session->set_flashdata('alert','success');
+            $this->session->set_flashdata('msg','Berhasil memberikan hak akses user!');
+        //}else{
+            //$this->session->set_flashdata('alert','error');
+            //$this->session->set_flashdata('msg','Gagal memberikan hak akses user!');
+        //}
+      
         redirect('user/hakAkses/');
         //foreach ($_POST['menu'] as $pId)
 		//{
@@ -121,36 +165,33 @@ class user extends CI_Controller {
 		//}
 	}
         
-        public function changePassword(){
-            $this->load->view('templates/header');
-            $this->load->view('user/changePassword');
-            $this->load->view('templates/footer');
-        }
-        
-        public function doChangePassword(){
-            $id =  $this->session->userdata('ID_User');
-            $oldPass = $this->session->userdata('Password');
-            $oldPass2 = $this->input->post('oldPass');
-            $newPass = $this->input->post('newPass');
-            if($oldPass==$oldPass2){
-                $this->db->set('Password', $newPass);
-                $this->db->where('ID_User', $id);
-                $this->db->where('FlagActive', 'Y');
-                $this->db->update('msuser'); 
-                
-                $this->session->set_flashdata('alert','alert-success');
-		$this->session->set_flashdata('msg','Sukses mengganti password');
-                $this->load->view('templates/header');
-                $this->load->view('user/changePassword');
-                $this->load->view('templates/footer');
-            }else{
-                
-                $this->session->set_flashdata('alert','alert-danger');
-		$this->session->set_flashdata('msg','Gagal merubah password');
-                $this->load->view('templates/header');
-                $this->load->view('user/changePassword');
-                $this->load->view('templates/footer');
-            }
+    public function changePassword(){
+        $this->load->view('templates/header');
+        $this->load->view('user/changePassword');
+        $this->load->view('templates/footer');
+    }
+    
+    public function doChangePassword(){
+        $id =  $this->session->userdata('ID_User');
+        $oldPass = $this->session->userdata('Password');
+        $oldPass2 = $this->input->post('oldPass');
+        $newPass = $this->input->post('newPass');
+        if($oldPass==$oldPass2){
+            $this->db->set('Password', $newPass);
+            $this->db->where('ID_User', $id);
+            $this->db->where('FlagActive', 'Y');
+            $this->db->update('msuser'); 
             
+            $this->session->set_flashdata('alert','success');
+			$this->session->set_flashdata('msg','Sukses mengganti password');
+        }else{
+            
+            $this->session->set_flashdata('alert','error');
+			$this->session->set_flashdata('msg','Gagal merubah password');
         }
+
+        $this->load->view('templates/header');
+        $this->load->view('user/changePassword');
+        $this->load->view('templates/footer');
+    }
 }

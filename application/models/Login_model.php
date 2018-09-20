@@ -24,7 +24,7 @@ class Login_model extends CI_Model {
 		}
 		else{
 			$this->session->set_flashdata('info', 'Wrong password or user ID!');
-			redirect('home');//--?--
+			redirect('login');//--?--
 		}
 
 	}
