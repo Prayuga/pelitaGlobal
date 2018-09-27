@@ -1,7 +1,7 @@
 <div id="page-wrapper">
 <!-- ini isi halamannya -->
         <div class="col-lg-12">
-            <h3 class="page-header">Cetak Kwitansi</h3> 
+            <h3 class="page-header" align="center">Entri Kwitansi</h3> 
 				
              <form class="form-horizontal" method="post" action="">
 

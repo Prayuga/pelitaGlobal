@@ -70,7 +70,7 @@
                             foreach ($surat as $surat_item) {
                                 $nis = str_ireplace("/","&",$surat_item['NomorIndukSiswa']); 
                     ?>
-                        <div class="alert alert-success alert-dismissible" role="alert">
+                        <div class="alert alert-danger alert-dismissible" role="alert">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <b><?php echo $surat_item['NamaSiswa']." | ".$surat_item['NomorIndukSiswa']; ?> |</b> &nbsp;  <a href="<?=base_url();?>pendataanSiswa/editSiswa/<?php echo $nis; ?>" class="btn btn-success" style="font-style: none; text-align: right;" data-toggle='tooltip' data-placement='bottom' title='Lihat Data Siswa'><i class="fa fa-clipboard fa-fw"></i></a>
                         </div>

@@ -67,6 +67,8 @@ class Seragam_model extends CI_Model {
 		$query = "update msdetailseragam set flagactive = 'N' where Id_detailseragam = ".$id."";
 		$this->db->query($query);
 	}
+
+	//gak masalah karena dia untuk pas daftar doang juga
     public function getSiswa_seragam($kat){
         $query = $this->db->get_where('mssiswa', array('ID_Kategori' => $kat, 'FlagActive' => 'Y'));
         return $query;

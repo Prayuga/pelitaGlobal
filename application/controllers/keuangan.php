@@ -37,6 +37,14 @@ class keuangan extends CI_Controller {
 		$this->load->view('keuangan/kasBulan'/*, $data*/);
 		$this->load->view('templates/footer');
 	}
+
+    public function kwitansi(){
+        
+        //$data['jeniskas'] = $this->kasrt_model->get_jenis();
+        $this->load->view('templates/header');
+        $this->load->view('keuangan/entriKwitansi'/*, $data*/);
+        $this->load->view('templates/footer');
+    }
         
         
     public function addKasBulan(){

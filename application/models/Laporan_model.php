@@ -87,6 +87,18 @@ class Laporan_model extends CI_Model {
 	        	return $query->result_array();
         }
 
+        public function getPembayaranKelas($jenis, $ta, $lunas, $kategori){
+                if($jenis==null){
+                    $str="CALL `getPembayaranKelas`('".$this->input->post('jenis')."', '".$this->input->post('tahunAjaran')."', '".$this->input->post('lunas')."', '".$this->input->post('kategori')."')";
+                }else{
+                    $str="CALL `getPembayaranKelas`('".$jenis."', '".$ta."', '".$lunas."', '".$kategori."')";
+                }
+                
+                //$str="select d.NamaSiswa, b.DetailPembayaran, a.Saldo, a.Jumlah, a.StatusLunas from trheaderpembayaran as a, msdetailjenispembayaran b, mstahunajaran as c, mssiswa as d WHERE a.ID_DetailJenisPembayaran in (SELECT f.ID_DetailJenisPembayaran FROM msdetailjenispembayaran as f WHERE f.ID_HeaderJenisPembayaran ='".$this->input->post('jenis')."') AND a.ID_TahunAjaran = '".$this->input->post('tahunAjaran')."' AND a.StatusLunas = '".$this->input->post('lunas')."' AND a.ID_DetailJenisPembayaran = b.ID_DetailJenisPembayaran AND a.ID_TahunAjaran = c.ID_TahunAjaran AND a.NomorIndukSiswa = d.NomorIndukSiswa";
+                $query = $this->db->query($str);
+                return $query->result_array();
+        }
+
         public function getHeaderPembayaranGlobal($jenis){
         	if($jenis==null){
         		$str="SELECT ID_DetailJenisPembayaran, DetailPembayaran FROM msdetailjenispembayaran where ID_HeaderJenisPembayaran = '".$this->input->post('jenis')."' ";

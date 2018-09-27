@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Print Laporan Pembayaran</title>
+	<title>Print Laporan Pembayaran Per-kelas</title>
 
     <!-- Custom CSS -->
     <link href="<?=base_url();?>assets/dist/css/legalStyle.css" rel="stylesheet">
@@ -29,7 +29,11 @@
 			<div class="col-md-12" style="padding:40px;">
 				<?php foreach ($tahun_ajaran as $ta_item) {
 					if($ta==$ta_item['ID_TahunAjaran']){
-						echo "<h1>Laporan Pembayaran Tahun Ajaran ".$ta_item['TahunAjaran']."</h1>";
+                        foreach ($kategoris as $k_item) {
+                            if($kategori==$k_item['ID_Kategori']){
+                                echo "<h1>Laporan Pembayaran Kelas ".$k_item['NamaKategori']." Tahun Ajaran ".$ta_item['TahunAjaran']."</h1>";
+                            }
+                        }
 					}
 				} ?>
 				<hr>

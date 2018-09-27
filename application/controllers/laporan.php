@@ -24,6 +24,22 @@ class laporan extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function pembayaranKelas($jenis=null, $ta=null, $lunas=null, $kategori=null){
+        $this->Login_model->keamanan();
+        $data['jenis'] = $this->jenispembayaran_model->get_jenisPembayaran();
+        $data['tahun_ajaran'] = $this->tahunajaran_model->get_TA();
+        $data['kategori'] = $this->tahunajaran_model->get_KK();
+        if($this->input->post('jenis')==null){
+            $data['laporan'] = null;
+        }else{
+            $data['laporan'] = $this->Laporan_model->getPembayaranKelas($jenis, $ta, $lunas, $kategori);
+        }
+        $data['header'] = $this->Laporan_model->getHeaderPembayaranGlobal($jenis);
+        $this->load->view('templates/header');
+        $this->load->view('laporan/pembayaranKelas', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function pembayaran($jenis=null, $ta=null, $lunas=null){
         $this->Login_model->keamanan();
         $data['jenis'] = $this->jenispembayaran_model->get_jenisPembayaran();
@@ -51,6 +67,22 @@ class laporan extends CI_Controller {
         }
         $data['header'] = $this->Laporan_model->getHeaderPembayaranGlobal($jenis);
         $this->load->view('laporan/printPembayaran', $data);
+    }
+
+    public function printPembayaranKelas($jenis=null, $ta=null, $lunas=null, $kategori=null){
+        $this->Login_model->keamanan();
+        $data['ta']=$ta;
+        $data['kategori']=$kategori;
+        $data['jenis'] = $this->jenispembayaran_model->get_jenisPembayaran();
+        $data['tahun_ajaran'] = $this->tahunajaran_model->get_TA();
+        $data['kategoris'] = $this->tahunajaran_model->get_KK();
+        if($this->input->post('jenis')==null){
+            $data['laporan'] = null;
+        }else{
+            $data['laporan'] = $this->Laporan_model->getPembayaranKelas($jenis, $ta, $lunas, $kategori);
+        }
+        $data['header'] = $this->Laporan_model->getHeaderPembayaranGlobal($jenis);
+        $this->load->view('laporan/printPembayaranKelas', $data);
     }
 
     public function get_kasByJenis($bln,$jenis){

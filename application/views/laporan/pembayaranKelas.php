@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Laporan Pembayaran Global</h1>
+            <h1 class="page-header">Laporan Pembayaran Per-kelas</h1>
         </div>
     </div>
     <div class="row">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <?php echo form_open('laporan/pembayaran'); ?>
+                    <?php echo form_open('laporan/pembayaranKelas'); ?>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -37,6 +37,16 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label>Kategori Kelas</label>
+                                <select id="sel_thn" class="form-control selectpicker" data-live-search="true" name="kategori" title="Pilih Tahun Ajaran">
+                                    <?php foreach ($kategori as $kategori_item) { ?>
+                                        <option value="<?php echo $kategori_item['ID_Kategori']; ?>"><?php echo $kategori_item['NamaKategori']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label>Status Lunas</label>
                                 <select id="lunas" class="form-control selectpicker" data-live-search="true" name="lunas" title="Pilih Status Lunas ">
                                         <option value="Y">Lunas</option>
@@ -46,7 +56,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label style="opacity: 0;">Tombol</label>
+                                <!--<label style="opacity: 0;">Tombol</label>-->
                                 <input type="submit" class="form-control btn btn-primary cariSubmit" name="Cari" value="Cari">
                             </div>
                         </div>
@@ -58,7 +68,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-2">
-                            <a class="btn btn-success form-control" target="_blank" href="<?=base_url()?>laporan/printPembayaran/<?=$this->input->post('jenis')?>/<?=$this->input->post('tahunAjaran')?>/<?=$this->input->post('lunas')?>"><i class="fa fa-print fa-fw"> </i> Print</a>
+                            <a class="btn btn-success form-control" target="_blank" href="<?=base_url()?>laporan/printPembayaranKelas/<?=$this->input->post('jenis')?>/<?=$this->input->post('tahunAjaran')?>/<?=$this->input->post('lunas')?>/<?=$this->input->post('kategori')?>"><i class="fa fa-print fa-fw"> </i> Print</a>
                         </div>
                     </div>
                     <br>
