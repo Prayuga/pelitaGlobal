@@ -25,7 +25,7 @@ class PendataanSiswa_model extends CI_Model {
     }
         
     public function getSiswaBaru(){
-        $str = "Select NomorIndukSiswa,NamaSiswa FROM `mssiswa` where ID_Kelas is NULL";
+        $str = "Select NomorIndukSiswa,NamaSiswa FROM `mssiswa` where ID_Kelas = '0' ";
         $query = $this->db->query($str);
         return $query;
     }
