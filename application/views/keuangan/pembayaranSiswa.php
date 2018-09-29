@@ -76,10 +76,6 @@
     $(document).ready(function(){
         $('#btTambah').addClass('disabled');
         var myTab = $('#mytable').DataTable({
-                "ajax": {
-                    "url": "<?php echo base_url('keuangan/getPembayaranSiswa')?>",
-                    "type": "POST"
-                }
              });
         $('#btSub').click(function(){
             $id = $('#jenis').val();
