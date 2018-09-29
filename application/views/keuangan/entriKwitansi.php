@@ -3,23 +3,40 @@
         <div class="col-lg-12">
             <h3 class="page-header">Cetak Kwitansi</h3> 
 				
-             <form class="form-horizontal" method="post" action="">
-
+                <?php echo form_open('keuangan/printKwitansi'); ?>
                 <div class="row">
                   <div class="form-group col-lg-6">
                     <label class="control-label col-sm-4" for="no_k">No Kwitansi :</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" id="no_k" name="no_k" value="C-001" readonly disabled>
+                      <input type="text" class="form-control" id="no_k" name="no_k" value="" >
                     </div>
                   </div>
                   <div class="form-group col-lg-6">
                     <label class="control-label col-sm-4" for="tgl">Tanggal :</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" id="tgl" placeholder="YYYY-MM-DD" name="tgl">
+                      <input type="text" class="form-control" id="tgl" placeholder="YYYY-MM-DD" name="tanggal">
                     </div>
                   </div>
               </div>
-
+              <div class="row">
+                  <div class="form-group col-lg-6">
+                    <label class="control-label col-sm-4" for="no_k">Pilih Siswa:</label>
+                    <div class="col-sm-8">
+                      <select class="selectpicker form-control" name="siswa" title="Pilih Siswa">
+                        <?php foreach ($siswa as $siswai) {
+                          echo "<option value='".$siswai['NomorIndukSiswa']."'>".$siswai['NamaSiswa']."</option>";
+                        } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <div class="col-sm-8 col-sm-offset-4">
+                      <input target='_blank'  type="submit" name="" value="Print" class="btn btn-primary form-control">
+                    </div>
+                  </div>
+              </div>
+              <<?php echo form_close(); ?>
+                <!--
                 <div class="row">
                   <div class="form-group col-lg-6">
                     <label class="control-label col-sm-4" for="dari">Terima dari :</label>
@@ -86,7 +103,8 @@
                 </div>
               </div>
 
-            </form>     
+            </form>   
+            -->  
         </div>
 
         <script>

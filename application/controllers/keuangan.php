@@ -40,10 +40,20 @@ class keuangan extends CI_Controller {
 
     public function kwitansi(){
         
-        //$data['jeniskas'] = $this->kasrt_model->get_jenis();
+        $data['siswa'] = $this->pembayaransiswa_model->getSiswa();
         $this->load->view('templates/header');
-        $this->load->view('keuangan/entriKwitansi'/*, $data*/);
+        $this->load->view('keuangan/entriKwitansi', $data);
         $this->load->view('templates/footer');
+    }
+
+
+
+    public function printKwitansi(){
+        
+        $data['NoKwitansi'] = $this->input->post('no_k');
+        $data['kwitansi'] = $this->pembayaransiswa_model->getPrintKwitansi();
+        $data['siswa'] = $this->pembayaransiswa_model->getSiswaWhere();
+        $this->load->view('keuangan/printKwitansi', $data);
     }
         
         

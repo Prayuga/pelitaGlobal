@@ -15,6 +15,18 @@ class PembayaranSiswa_model extends CI_Model {
             $query = $this->db->query($str);
             return $query->result_array();
         }
+        public function getSiswaWhere(){
+            $str = "SELECT NomorIndukSiswa, NamaSiswa from mssiswa where FlagActive = 'Y' and NomorIndukSiswa = '".$this->input->post('siswa')."' ";
+            $query = $this->db->query($str);
+            return $query->result_array();
+        }
+
+        public function getPrintKwitansi(){
+            $str="select x.*, y.* FROM ( select c.NomorIndukSiswa, c.NamaSiswa, a.*, b.ID_DetailJenisPembayaran from trdetailpembayaran as a, trheaderpembayaran as b, mssiswa as c where c.NomorIndukSiswa = b.NomorIndukSiswa and b.ID_HeaderPembayaran = a.ID_HeaderPembayaran and b.`NomorIndukSiswa` = '".$this->input->post('siswa')."' AND month(a.TanggalPengisian) = month('".$this->input->post('tanggal')."') and date(a.TanggalPengisian) = date('".$this->input->post('tanggal')."') AND year(a.TanggalPengisian) = year('".$this->input->post('tanggal')."')) x left JOIN ( select ID_DetailJEnisPembayaran, DetailPembayaran FROM msdetailjenispembayaran where ID_DetailJenisPembayaran = '1' )y on x.ID_DetailJenisPembayaran = y.ID_DetailJenisPembayaran ";
+            //$str = "select c.NomorIndukSiswa, c.NamaSiswa, a.* from trdetailpembayaran as a, trheaderpembayaran as b, mssiswa as c where c.NomorIndukSiswa = b.NomorIndukSiswa and b.ID_HeaderPembayaran = a.ID_HeaderPembayaran and b.`NomorIndukSiswa` = '".$this->input->post('siswa')."' AND month(a.TanggalPengisian) = month('".$this->input->post('tanggal')."') and date(a.TanggalPengisian) = date('".$this->input->post('tanggal')."') AND year(a.TanggalPengisian) = year('".$this->input->post('tanggal')."')";
+            $query = $this->db->query($str);
+            return $query->result_array();
+        }
 
         public function getHeaderJenis(){
         	$str = "SELECT ID_HeaderJenisPembayaran, JenisPembayaran from msheaderjenispembayaran";
