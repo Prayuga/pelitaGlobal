@@ -4,6 +4,10 @@
 	<title>Print Kwitansi</title>
     <!-- Custom CSS -->
     <link href="<?=base_url();?>assets/dist/css/legalStyle.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- bootstrap tabel css-->
+    <link href="<?=base_url();?>assets/vendor/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
     	@page { 
 			size: 215mm 330mm; /* LANDSCAPE */
@@ -29,7 +33,7 @@
 					echo "<h3>Nomor Induk Siswa : ".$siswa_item['NomorIndukSiswa']."</h3>";
 					echo "<h3>Nama Siswa : ".$siswa_item['NamaSiswa']."</h3>";
 				} ?>
-				<table style="margin:20px; font-size: 11pt" border="1" class="table">
+				<table style="margin:20px; font-size: 11pt" border="1" class="table table-striped table-bordered table-hover table-responsive">
 					<thead>
 						<tr>
 							<td>Untuk Pembayaran</td>
