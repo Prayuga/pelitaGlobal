@@ -60,6 +60,7 @@
     </div>
 </div>
 <!-- /#page-wrapper -->
+<script src="<?=base_url();?>assets/js/sweetalert.min.js"></script>
 <script>
     $(document).ready(function (){
         $('.msg').hide();
@@ -110,6 +111,7 @@
                     array.push(chxval);
                 }
             }
+            //alert(array);
             $.ajax({
                 url : "<?php echo base_url('pendataanSiswa/updateKelas')?>",
                 type: "POST",
@@ -125,9 +127,10 @@
                     {
                        //alert(data);
                        table.ajax.reload();
-                       $('.msg').show();
+                       /*$('.msg').show();
                        $('.msg').addClass('alert-success');
-                       $('#notif').html("Berhasil Update");
+                       $('#notif').html("Berhasil Update");*/
+                       swalNotif();
                        $('#loading').hide();
                     },
                 error: function (jqXHR, textStatus, errorThrown)
@@ -139,7 +142,13 @@
 
     });
         
-       function masukKelas(){
+       function swalNotif(){
+        swal({
+          title: "Berhasil!",
+          text: "Berhasil menambahkan siswa ke kelas!",
+          icon: "success",
+          button: "Ok",
+        });
         }
     
 </script>

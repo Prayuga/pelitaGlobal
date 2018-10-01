@@ -144,7 +144,7 @@ class pendataanSiswa extends CI_Controller {
 		$row = array();
 		$row[] = $siswa->NomorIndukSiswa;
 		$row[] = $siswa->NamaSiswa;
-		$row[] = '<input type="checkbox" id="cx-'.$siswa->NomorIndukSiswa.'" name="chbox[]"
+		$row[] = '<input type="checkbox" id="cx-'.$no.'" name="chbox[]"
            value="'.$siswa->NomorIndukSiswa.'" />';
 
 		$data[] = $row;

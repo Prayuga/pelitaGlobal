@@ -305,9 +305,13 @@ class PendataanSiswa_model extends CI_Model {
         
     public function updateKelas($id, $ar){
         $str = "update mssiswa set ID_Kelas = ".$id." where NomorIndukSiswa = '".$ar."'";
-        $str2 = "insert into msdetailkelas values (NULL,".$id.",".$ar.",'Y')";
+        $data = array(
+            'ID_Kelas'=>$id,
+            'ID_Siswa'=>$ar,
+            'FlagActive'=>'Y',
+        );
         $this->db->query($str);
-        $this->db->query($str2);
+        $this->db->insert('msdetailkelas', $data);
         return $this->db->last_query();
     }
 
